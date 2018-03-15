@@ -11,6 +11,8 @@ Welcome to chinese character recognition with convolutional neural network's doc
    :caption: Contents:
 
    pages/introduction.rst
+   pages/chinese_character.rst
+   pages/ANNandCNN.rst
 
 
 
