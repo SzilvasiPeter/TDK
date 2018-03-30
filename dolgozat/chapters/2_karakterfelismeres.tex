@@ -40,9 +40,11 @@ A kínai írásjegyek különböző számú alapvonásokból épülhetnek fel. E
 人
 \end{CJK*} zsen „ember” stb. A hagyományos írásjegyek zöme 15–30 vonásból épül fel (átlagosan 9 vonásból). Esetenként azonban ennél jóval több vonásból álló írásjegyek is előfordulhatnak, melyek tulajdonképpen már több önálló írásjegy összevonásának is tekinthetők. Ritkák ugyan, de léteznek 50 vagy akár 80 vonásból álló írásjegyek is.\\
 
+\begin{flushleft}
 {\Large OCR megvalósítások}\\
 
-Az optikai karakterfelismerés feladata\\
+\textit{\textbf{{\large Az optikai karakterfelismerés feladata}}}
+\end{flushleft}
 
 A különböző formátumú dokumentumok kezelésének egyik speciális esete, amikor a kezelendő dokumentumok még nem állnak rendelkezésre elektronikus formában. Ebben az esetben szinte mindig arról van szó, hogy a dokumentumok kinyomtatva, papír alapú hordozón jelennek meg. Szövegbányászati tevékenység végzéséhez értelemszerűen digitalizálni kell a még nem digitalizált, papíron, nyomtatásban vagy írásban meglévő dokumentumokat, azaz a képként érzékelt dokumentumot szövegfájl formátumba kell átalakítani, hogy abban az után elektronikusan szerkeszthető és feldolgozható legyen. Ebben a szituációban kap szerepet az optikai karakterfelismerés (optical character recognition, OCR), amely így szövegbányászati előfeldolgozásnak tekinthető. Az optikai karakterfelismerés a mesterséges intelligencia jelfeldolgozó és generalizációs képességeit kiaknázva képes magas hatékonysággal nyomtatott, papír alapú dokumentumokon lévő karaktereket felismerni.\\
 
@@ -54,7 +56,9 @@ Az OCR-rendszerek alapvetően két részből állnak: egyrészt a szkennelő fej
 \includegraphics[scale=0.65]{ocr}
 \end{center}
 
-Szegmentáció\\
+\begin{flushleft}
+\textit{\textbf{{\large Szegmentáció\\}}}
+\end{flushleft}
 
 A szegmentáció során a karakterek közötti éles határ megtalálása a cél annak érdekében, hogy téves minták ne kerüljenek osztályozásra (pl. két fél karakter). A szegmentáció feladata lehet az is, hogy a karakter-dőlésszögeket, karakterméreteket normalizálja. Sok esetben a szöveges dokumentumokban nem csak karakterek vannak, hanem képek és egyéb, a felismerés szempontjából nem lényeges szimbólumok. A szegmentáció további feladata tehát az is, hogy az ilyen, számunkra nem releváns grafikus objektumok közül kiszűrje a csak karaktereket tartalmazó szöveges részeket.\\
 
@@ -62,7 +66,9 @@ A szegmentáció során a karakterek közötti éles határ megtalálása a cél
 \includegraphics[scale=1.0]{ocr_segmentation}
 \end{center}
 
-Optikai előfeldolgozás\\
+\begin{flushleft}
+\textit{\textbf{{\large Optikai előfeldolgozás\\}}}
+\end{flushleft}
 
 Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál, és annak legjellemzőbb vonásait elemi ki. Különösen nagy jelentősége van a kézírás felismerésekor, ugyanis az írott betűk jóval komplexebb mintákat alkothatnak, mint a nyomtatott betűk. A jellemzőkiemelés során a komplexitás úgy csökken, hogy közben a legjellemzőbb információk megmaradnak és ezáltal a későbbi feldolgozás számításigényét redukálhatjuk. Ez a folyamat tulajdonképpen egy komplexitáscsökkentéssel járó digitalizáció. Az alábbi ábra egy egyszerű digitalizálási módszert mutat, amikor az analóg jelre egy mátrixot reprezentáló rácshálót illesztünk, és amelyik cellán átmegy az analóg karakter, az az elem a mátrixban 1 értéket vesz fel (fekete), egyéb esetben pedig 0-t (fehér).\\
 
@@ -70,11 +76,19 @@ Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál
 \includegraphics[scale=0.65]{ocr_preprocess}
 \end{center}
 
-Felismerés\\
+\begin{flushleft}
+\textit{\textbf{{\large Felismerés\\}}}
+\end{flushleft}
 
 Az osztályozás során történik meg a tényleges karakterfelismerés. A karakterfelismerő módszer a bemeneti jellemzővektor alapján dönti el, hogy az ismert karakterek közül melyikre hasonlít a legjobban a bemeneti vektor. Így a karakterfelismerési probléma egy asszociatív memóriát igénylő feladat, amelynek során a tárolt memóriaelemek közül kell előhívni azt, amely a bemeneti mintának legjobban megfelel.\\
 
-Kínai karakter felismerés\\
+\begin{flushleft}
+{\Large Kínai karakter felismerés}
+\end{flushleft}
+
+\begin{flushleft}
+\textit{\textbf{{\large Bevezetés}}}
+\end{flushleft}
 
 A számítógépek képesek felismerni a karaktereket, beszélik és megértik az emberi nyelveket, kommunikálnak az emberi nyelven egyre elterjedtebb számítógépes iparban. Karakterfelismerés óriási időt takaríthat meg az adatok és üzenetek számítógépekbe történő írásához. Azonban, a kínai karakterek felismerése a számítógépen sokkal nagyobb kihívást jelent, mint a többi nyelveknél, mert hatalmas mennyiségű karakterkészlettel rendelkezik (27484 karakter).\\
 
@@ -106,11 +120,13 @@ Rengeteg mód van a jellemzők kivonására, például lehet alapozni az él det
 
 Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
 
-Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karakter tévesen osztályoz. Ez javítható a bemeneti képek növelésével.\\
+Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karaktert tévesen osztályoz. Ez javítható a különböző bemeneti minták növelésével.
 
-Implementálás\\
+\begin{flushleft}
+\textit{\textbf{{\large Implementálás\\}}}
+\end{flushleft}
 
-Egy olyan algoritmust mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szotárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.
+Egy olyan algoritmust mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szótárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.\\
 
 \begin{tabular}{ c c }
 \includegraphics[scale=0.35]{chinese_fonts1} & \includegraphics[scale=0.35]{chinese_fonts2}
@@ -126,9 +142,9 @@ ahol i = 1, ..., 8, és $l_i$ a csatlakoztatott fekete képpontok száma i-edik 
 \end{tabular}
 \end{center}
 
-Az OCR rendszereknél, a felismerési algoritmusok két szakaszból állnak: tanítás és tesztelés. A hálózat súlyait a képzés során határozák meg. A képzés után a rendszer átkapcsol a tesztelési fázisra, és a szótárak szerint meghatározza a legvalószínűbb karakterindexet.
+Az OCR rendszereknél, a felismerési algoritmusok két szakaszból állnak: tanítás és tesztelés. A hálózat súlyait a képzés során határozzák meg. A képzés után a rendszer átkapcsol a tesztelési fázisra, és a szótárak szerint meghatározza a legvalószínűbb karakterindexet.\\
 
-A hierarchikus illeszkedés három szintből áll. Az első szint egy osztályozó, ami felhasználja a transzformált jellemzőket. Ezután a jellemzőket egy második szintű osztályozónak adják át. Az osztályozó több elemet is kiemel (kisebb számú kimenet). A harmadik szint az összes elemet használni fogja, a karaktert a végső felismerés eredményeként kiválasztja.
+A hierarchikus illeszkedés három szintből áll. Az első szint egy osztályozó, ami felhasználja a transzformált jellemzőket. Ezután a jellemzőket egy második szintű osztályozónak adják át. Az osztályozó több elemet is kiemel (kisebb számú kimenet). A harmadik szint az összes elemet használni fogja, a karaktert a végső felismerés eredményeként kiválasztja.\\
 
 A 3 szintű hierarchikus struktúra nem csak csökkenti a számítási komplexitást, hanem figyelembe veszi a jellemzők összetevőit. Az utóbbi növeli felismerési pontosság. A 3-szintű struktúra hatékonysága a felismerési arány, a sebesség és a memória használat.\\
 
