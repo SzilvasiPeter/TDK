@@ -5,7 +5,7 @@
 Az írásjegyek felépítésének következő lényeges szabálya az írásjegy vonásainak sorrendje. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. Az alábbi képen az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.\\
 
 \begin{center}
-	\includegraphics[width=0.4\linewidth]{chinese_strokes}
+	\includegraphics[scale=0.5]{chinese_strokes}
 \end{center}
 
 Minden egyes vonásnak megvan a felépítési szabálya: az ecsetvonásoknak meghatározott sorrendben kell követniük egymást, még pedig általános elvként az írásjegyek határait alkotó virtuális négyszög bal felső sarkából lefelé és jobbra haladva. Az írásjegy gerincét, fő szerkezeti elemét adó nagyobb vonást, ha az egész írásjegyet átjárja, legutoljára húzzák.\\
@@ -78,7 +78,7 @@ Kínai karakter felismerés\\
 
 A számítógépek képesek felismerni a karaktereket, beszélik és megértik az emberi nyelveket, kommunikálnak az emberi nyelven egyre elterjedtebb számítógépes iparban. Karakterfelismerés óriási időt takaríthat meg az adatok és üzenetek számítógépekbe történő írásához. Azonban, a kínai karakterek felismerése a számítógépen sokkal nagyobb kihívást jelent, mint a többi nyelveknél, mert hatalmas mennyiségű karakterkészlettel rendelkezik (27484 karakter).\\
 
-A karakterek felismerése lehet online és offline karakterfelismerés. A fő különbség az, hogy az online karakterfelismerés rögzíti az ecset vonások mozgását, míg az offline karakterfelismerés pusztán a karakter geometriai alakján alapul.\\
+A karakterek felismerése lehet online és offline karakterfelismerés. A fő különbség az, hogy az online karakterfelismerés rögzíti az ecsetvonások mozgását, míg az offline karakterfelismerés pusztán a karakter geometriai alakján alapul.\\
 
 \begin{center}
 \includegraphics[scale=0.75]{ocr_online_offline}
@@ -90,7 +90,7 @@ Az előfeldolgozás során a következők jöhetnek szóba:
 \begin{itemize}
 \item karakterek szétosztása a bemenetek függvényébe
 \item a zaj megszüntetése
-\item normalizálni a betűméretet és pozíciónálni a filtert (kernel-t)
+\item normalizálni a betűméretet és pozícionálni a filtert (kernel-t)
 \item stroke váz generálása (thinning)
 \end{itemize}
 
@@ -104,17 +104,48 @@ Rengeteg mód van a jellemzők kivonására, például lehet alapozni az él det
 \includegraphics[scale=0.8]{ocr_features}
 \end{center}
 
-Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges hogy különböző felismerési rendszereket állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
+Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
 
 Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karakter tévesen osztályoz. Ez javítható a bemeneti képek növelésével.\\
 
 Implementálás\\
 
-\begin{enumerate}
-\item Data-set: fonts, difference etc..
-\item Classifier: features finding
-\item Discussion and implementation: pre-pro, segmentation, binaries(gray-scale), noise reduction, thinning, normalizitation
-\item Processing: similiar character, moment inv. classifier, 2level classifier, further feature extraction
-\item Point to ANN
-\item Result
-\end{enumerate}
+Egy olyan algoritmust mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szotárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.
+
+\begin{tabular}{ c c }
+\includegraphics[scale=0.35]{chinese_fonts1} & \includegraphics[scale=0.35]{chinese_fonts2}
+\end{tabular}
+
+A funkciókivonás fontos eleme az OCR-nek. Az algoritmus egy 8-dimenziós vektor tartozik [d1, d2, ... d8]. Kiszámítása: \( d_i = l_i / \sqrt{\sum_{k=1}^8 l_k^2} \)
+
+ahol i = 1, ..., 8, és $l_i$ a csatlakoztatott fekete képpontok száma i-edik irányban.
+
+\begin{center}
+\begin{tabular}{ c c }
+\includegraphics[scale=0.6]{8direction} & \includegraphics[scale=0.6]{ocr_PDC}
+\end{tabular}
+\end{center}
+
+Az OCR rendszereknél, a felismerési algoritmusok két szakaszból állnak: tanítás és tesztelés. A hálózat súlyait a képzés során határozák meg. A képzés után a rendszer átkapcsol a tesztelési fázisra, és a szótárak szerint meghatározza a legvalószínűbb karakterindexet.
+
+A hierarchikus illeszkedés három szintből áll. Az első szint egy osztályozó, ami felhasználja a transzformált jellemzőket. Ezután a jellemzőket egy második szintű osztályozónak adják át. Az osztályozó több elemet is kiemel (kisebb számú kimenet). A harmadik szint az összes elemet használni fogja, a karaktert a végső felismerés eredményeként kiválasztja.
+
+A 3 szintű hierarchikus struktúra nem csak csökkenti a számítási komplexitást, hanem figyelembe veszi a jellemzők összetevőit. Az utóbbi növeli felismerési pontosság. A 3-szintű struktúra hatékonysága a felismerési arány, a sebesség és a memória használat.\\
+
+Minden tesztet két kínai mintán végzik, összesen 7510 karakterrel. Ezek az eredmények azt mutatják, hogy a 8 betűtípus átlagos felismerési aránya 99,32\% a képzési minták esetében, pedig 98,96\%.\\
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c|c|c|c|c|}
+\hline
+Font & Song & Fang & Kai & Hei & Yuan & Lishu & Weibei & Xingkai & Average\\
+\hline
+Train & 99.82 & 99.64 & 99.81 & 99.57 & 98.77 & 98.75 & 99.35 & 98.82 & 99.32\\
+\hline
+Test & 99.71 & 99.50 & 99.80 & 99.09 & 98.43 & 98.15 & 98.78 & 98.19 & 98.96\\
+\hline
+\end{tabular}
+\end{center}
+
+A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyorsan és pontosan felismerni a karaktereket akár 8 különböző betűtípussal is. Az algoritmus kiváló felismerési teljesítményt nyújt a 4 leggyakrabban használt betűtípusnál.\\
+
+!Kiegészíteni lehet CCR HANDWIRTTEN CHAR!
