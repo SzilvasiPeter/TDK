@@ -1,1 +1,32 @@
 \Chapter{Minták generálása}
+
+Tanító mintapontok előállítása
+
+A megvalósító neurális hálózat betanítása felügyelt tanulás módszerrel történik. A minták alapján történő tanulás lényege, hogy az eljárás során a be és kimeneti mintapárokból igyekszünk megfelelő ismereteket kinyerni és ezzel a rendszer viselkedését módosítani. A hálózat feladata, hogy megtanulja a rendelkezésre álló mintapont párok által reprezentált bemenet-kimenet leképezést. Ehhez elő kell állítani a megfelelő adathalmazt.
+
+\begin{itemize}
+\item Ecset dinamika
+	\begin{itemize}
+	\item \(P_1 = (x_1, y_1, d_{x_1}, d_{y_1}, s_1)\) \(P_2 = (x_2, y_2, d_{x_2}, d_{y_2}, s_2)\)
+	\item Ecset szín (átmenetesség)
+	\end{itemize}
+\item Karakter kirajzolás
+	\begin{itemize}
+	\item Poligonos közelítés
+	\item Procedurális rajzolás
+	\item Pontonkénti színszámítás (fekete-szürke árnyalat-fehér)
+	\item \textit{Görbék kirajzolása (Hermit)}
+	\end{itemize}
+\item Ideális karakter megjelenítés
+\item Ideális karakter zajosítássa
+	\begin{itemize}
+	\item Különböző zajok
+	\item Hálózat robosztussága
+	\end{itemize}
+\end{itemize}
+
+\begin{comment}{Dolgozok a Hermit-es részen.}
+\end{comment}
+
+\begin{comment}{Ezek így vázlatnak jók, viszont az egyes pontokból legalább külön-külön szakaszoknak kellene majd lenni!}
+\end{comment}
