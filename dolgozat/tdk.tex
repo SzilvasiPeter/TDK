@@ -16,7 +16,7 @@
 
 \usepackage{color}
 \usepackage{soulutf8}
-\definecolor{comment}{rgb}{0,0.6,0.2}
+% \definecolor{comment}{rgb}{0,0.6,0.2}
 
 \usepackage{CJKutf8}
 \usepackage{graphicx}
@@ -69,18 +69,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {ö}{{\"o}}1 {ő}{{\H{o}}}1 {ó}{{\'o}}1,
 \usepackage{cpp}
 \usepackage{python}
 
-% Colors
-\usepackage{color}
-
-% Task
-\newenvironment{comment}[1]
-{\color{green}\noindent{$\circ$ \textit{#1}}
-
-\smallskip
-
-\color{gray}
-
-}{\bigskip}
+% Indicators
+\usepackage{indicators}
 
 \begin{document}
 
