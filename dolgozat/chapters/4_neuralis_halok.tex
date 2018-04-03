@@ -42,12 +42,10 @@ Az egyszerűség kedvéért vizsgáljunk meg egy olyan neurális hálózatot, am
 	\includegraphics[scale=0.6]{images/ANNParts.png}
 \end{center}
 
-\marginnote{\textit{Mi lenne ha az összes generált súly 0 értékű?}}[-0.66cm]
-
 \begin{comment}{A generált súlyok lehetnek 0 értékűek, de általában a random inicializálás jobb konvergenciát eredményez.}
 \end{comment}
 
-A képen láthatunk egy \(b_n\) változot másnéven bias, amit most nem részleteznék. Alapvetően arra való hogy aktiváljon egy neuront. A \(b(n)\)-hez tartozó súly (\(w_b\)) általában -1 vagy 1.
+A képen láthatunk egy \(b_n\) változót másnéven bias. Valójában a bias érték lehetővé teszi egy neuron aktiválódását, ami kritikus lehet a sikeres tanuláshoz. Tegyük fel hogy a neurális hálózat egy függvény: \(y = mx\). A fenti függvény az origót metszi, ami nem minden esetben add jó eredményeket. A bias definiálásával a függvényünk kap egy konstans paramétert \(y = mx + b\). A \(b(n)\)-hez tartozó súly (\(w_b\)) általában -1 vagy 1.
 
 \begin{comment}{A \textit{most nem részleteznék} jellegű észrevételeket kerülni kellene. Egy fél mondatban elég belemenni, nagyon valóban nem kell részletezni.}
 \end{comment}
@@ -155,40 +153,61 @@ Végül frissítjük az összes súlyunkat! Amikor eredetileg a 0.05 és a 0.1 b
 
 \section{Konvolúciós neurális hálózat}
 
-A konvolúciós neurális hálózat hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége.
+A konvolúciós neurális hálózat hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkbe a bemenet a kínai karakter pixel értékei, a kimenet pedig valószíűségek a karakterekből adódóan.
 
-A hagyományos neurális hálózatok nem skálázzák a teljes képet. Ha példaként vesszük egy 32 pixel széles, 32 pixel magas színes képet és ezt bevezetnénk egy teljesen összekapcsolt rejtett rétegbe, akkor az neurononként 32x32x3 = 3072 súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket. Ha példaként megnézünk egy 200x200 méretű színes képet, akkor neurononként 120 000 súly paramétert kapunk. Ha végig gondoljuk, hogy az hány paramétert jelent még egy kis neuronszámú kevés rejtett rétegből álló hálózat esetében, akkor rájöhetünk, hogy nagyobb méretű képen fellelhető minták felismeréséhez a tisztán hagyományos neurális hálózatok alkalmazása nem célravezető, emiatt a kép elő feldolgozására, szűrésére konvolúciós rétegeket vezetnek be.
+A hagyományos neurális hálózatok nem skálázzák a teljes képet. A kínai (különösen a hagyományos) több száz karaktert nem lehet megjeleníteni egy 16x16 pixeles rácsban. A megfelelő méret valószínűleg körülbelül 24x24 képpontot tartalmaz. Neurononként 24x24 = 526 súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket.
+
+Ha végig gondoljuk, hogy az hány paramétert jelent még egy kis neuronszámú kevés rejtett rétegből álló hálózat esetében, akkor rájöhetünk, hogy nagyobb méretű képen fellelhető minták felismeréséhez a tisztán hagyományos neurális hálózatok alkalmazása nem célravezető, emiatt a kép elő feldolgozására, szűrésére konvolúciós rétegeket vezetnek be.
 
 \subsection{Felépítés}
 
-A konvolúciós neurális hálózatokban szereplő rétegeket funkció alapján alapvetően két csoportra lehet bontani. Az elsőbe sorolhatók a konvolúciós rétegek, amik - mint paraméterezhető szűrők - előfeldolgozást végeznek a képen. Ezáltal a kép mérete lecsökken, a hordozott információtartalom kiemeltté válik, és a hagyományos neurális hálózat (második csoport) számára feldolgozható lesz, az osztályozást el tudja végezni. Egy konvolúciós neurális hálózat tehát konvolúciós és hagyományos rejtett rétegekből épül fel.
+A konvolúciós neurális hálózatokban szereplő rétegeket funkció alapján alapvetően két csoportra lehet bontani.
+
+\begin{enumerate}
+\item A konvolúciós rétegek, amik - mint paraméterezhető szűrők - előfeldolgozást végeznek a képen. Ezáltal a kép mérete lecsökken, a hordozott információtartalom kiemeltté válik.
+\item A hagyományos neurális hálózat (második csoport) számára feldolgozható lesz, az osztályozást el tudja végezni. Egy konvolúciós neurális hálózat tehát konvolúciós és hagyományos rejtett rétegekből épül fel.
+\end{enumerate}
 
 A konvolúciós rétegek alapjában véve színes képek feldolgozására lettek kifejlesztve, ezért a neuronjaik három dimenzióban (szélesség, magasság, színcsatornák) vannak elrendezve.
 
+A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fehér akkor 0-át, ha fekete akkor 1-et rendelünk hozzá.
+
 \begin{center}
-\includegraphics[scale=0.65]{CNN_neuron_channel}
+\includegraphics[scale=0.65]{chinese_char_pixel}
 \end{center}
 
 A következő felsorolásban - a tipikus, de nem kizárólagos sorrendre ügyelve - bemutatnám a konvolúciós hálózat rétegtípusait:
+
+\textit{Ezeket mind kiegészíteni a megfelelő CCR-el részletes leírás}
+
 \begin{itemize}
-\item bemeneti réteg: Tartalmazza a kép nyers pixel értékeit, jellemzően R, G, B csatorna szerint rendezve.
+\item bemeneti réteg: Tartalmazza a kép nyers pixel értékeit. Az értékeket sorba állítjuk és azokat egy 1 dimenziós vektor reprezentálja, ami 0 és 1 értékeket tartalmaz.
 \item konvolúciós réteg: Adott képpont csoportokra konvolúció matematikai műveletet alkalmazunk. A konvolúció eredménye egy skalár (a skaláris szorzata a kép egy adott részének és a szűrőnek). Ha minden képpont csoportra elvégezzük a konvolúciót, akkor egy aktivációs térképet kapunk. Általában több szűrő paraméterrel is elvégezzük a konvolúciót és aktivációs térképeket egymásra rakjuk. Az aktivációs térkép, a művelet tulajdonsága miatt, kisebb
 méretű lesz.
 
 \begin{center}
-\includegraphics[scale=0.6]{convolution_layer}
+\includegraphics[scale=0.3]{convolution}
 \end{center}
+
+Konkrétan mártix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet különböző szűröt használni,  
 
 \item RELU réteg: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: \(f(x) = max(x, 0)\). Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel.
-\item összevonó réteg (pooling layer): Az aktivációs térképekre alkalmazzuk. Csökkenti a reprezentáció méretét, így kezelhetőbbé téve azt. Leskálázza a képet.
-\item teljesen összekötött réteg (fully connected, FC): Utolsó rétegekként szokták használni, hagyományos réteg. 
-\end{itemize}
-
-A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható, hogy ez egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
+\item összevonó réteg (pooling layer): A Pooling Layer függetlenül működik minden egyes feature map-nél. A MAX művelet segítségével kinyeri a legfontosabb vonásokat, csökkentve a dimenzióját. A leggyakoribb forma egy 2x2-es méretű szűrő, melyet 2 lépéssel kell felvinni minden szeletre. A bemenetben 2 szélesség és magasság mellett, az aktiválások 75\% -át eldobja. Minden MAX művelet ebben az esetben 4 számot vesz igénybe.
 
 \begin{center}
-\includegraphics[scale=0.35]{CNN_working}
+\includegraphics[scale=0.3]{maxpool}
 \end{center}
+
+\item teljesen összekötött réteg (fully connected, FC): Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
+\end{itemize}
+
+A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
+
+\begin{center}
+\includegraphics[scale=0.65]{CNN_CCR_working}
+\end{center}
+
+\textit{Ide jöhet hogy milyen hálózat paramétereket jöhetnek szóba a CCR-nél (konvolúciós rétegek, kimeneti neuronok száma). Megemlítenni a paraméterek változásának függvényébe a hálózat teljesítményét.}
 
 \subsection{Tanítás}
 
@@ -201,6 +220,8 @@ A backpropagation négy különböző szakaszra osztható
 \item Hiba visszaterjesztés (backward pass)
 \item Súly frissítés (weight update)
 \end{itemize}
+
+\textit{A szakaszoknál taglalni a CCR példákat}
 
 Az előre terjesztés során egy képet (pl. 32x32x3) továbbítunk az egész hálózaton. Az első leképzésnél, mivel minden súly és szűrőérték véletlenszerűen van inicializálva, így a kimenet is valószínűleg véletlenszerű lesz, ezért a hálózat nem add pontos osztályozást. A hálózat jelenlegi súlyaival nem tudja keresni az alacsony szintű jellemzőket. Emiatt tovább lépünk a veszteség számítás részre. Ne felejtsük el, hogy a tanító mintának van egy címkéje. A veszteségfüggvény többféle módon definiálható, de gyakori az MSE (átlagos négyzetes hiba) \(E_{total} = \sum 1/2(target - output)^2\).
 
@@ -226,11 +247,15 @@ Az előre terjesztés, a veszteség számítás, a visszaterjesztés és a param
 
 \subsection{Tesztelés}
 
+\textit{CCR-re lehet tesztelés adatot táblázatot is nézni}
+
 Végül megnézzük, hogy működik-e a hálózat vagy sem. Különböző (még nem látott) képeket továbbíthatunk a CNN-en keresztül. Összehasonlítjuk a kimeneteket a címkékkel, és megnézzük a hibát. Ha alacsony hibát kapunk a hálózat jól dolgozott.
 
 \subsection{Transfer learning}
 
 A konvolúciós hálózatok betanításához nagyszámú mintára és nagyteljesítményű számítógépekre van szükség. Amennyiben nem áll rendelkezésünkre nagyjából egymillió képkockából álló tanító adathalmaz, akkor kisszámú mintáról beszélünk. Ha nincs lehetőségünk vagy erőforrásunk nagy adathalmazzal tanítani, akkor is megvalósíthatjuk a kívánt leképezést. A transfer learning (tanulás átadása) módszer segítségével egy előre betanított hálózatot veszünk alapul, és annak utolsó pár rétegét lecserélve végezzük a tanítást. Ilyenkor a megmaradt rétegek betanított tulajdonság érzékelő funkciója segítségével a lecserélt rétegek által megvalósítandó leképezés könnyebbé vállhat. A konvolúciós neurális hálózatok tanítása esetében ez egy gyakori eljárás. A weben számos előre betanított hálózat található.
+
+\textit{Ide jöhet pár létező CCR-re specializált betanított hálózat}
 
 \begin{comment}{Az egész fejezetnek arról kell szólnia, hogy hogy lehetett a konvolúciós neurális hálót alkalmazni a konkrét, karakterfelismerési problémára. Az általános részeket ennek megfelelően érdemes lehet átírni, vagy csak egy rövid áttekintésnek tekinteni a fejezet elején.}
 \end{comment}

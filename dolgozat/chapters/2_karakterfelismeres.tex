@@ -48,14 +48,60 @@ A különböző formátumú dokumentumok kezelésének egyik speciális esete, a
 
 Az alap probléma itt az, hogy a nyomtatott papír alapú dokumentumok esetében nagy zajaránnyal kell megküzdeni annak érdekében, hogy a releváns információt kihámozzuk az érzékelt képi jelek és minták közül. Nyomtatott dokumentum esetében ilyen zajnak tekinthető például egy apró folt a papíron, tintaelmosódás, tintahiány, homályos háttér, apró gyűrodés a papíron, túl közeli vagy egybeolvadó betűk, betű dőlésszögének ingadozása stb. Kézírás esetén a kihívás még nagyobb, hiszen itt a személyiségjegyek sokszínűségéből adódó írásminták kavalkádjából kell kihámozni a karaktereket. Mind a nyomtatott, mind pedig a kézírásos esetben az optikai karakterfelismerő rendszer egy tanulási fázist követően képes olyanmintákat is osztályozni (a megfelelő karaktert felismerni), amelyekkel a tanulási fázisban nem találkozott, tehát megvan a szükséges generalizációs képessége.
 
-Az OCR-rendszerek alapvetően két részből állnak: egyrészt a szkennelő fejből, amely a dokumentum egészét vagy részeit beszkenneli, másrészt pedig magából a mesterséges intelligencia szoftverből, ami elvégzi a beérkezett minták osztályozását, azaz magát a karakterfelismerést.
+Az OCR-rendszerek alapvetően két részből állnak
+\begin{enumerate}
+\item A szkennelő fejből, amely a dokumentum egészét vagy részeit beszkenneli. Hardverről van szó, ami elvégezi a digitalizálást. Két fizikai jelenségen alapszik fényvisszaverődésen és a fényelnyelésen.
+\item  A mesterséges intelligencia szoftverből, ami elvégezi a beérkezett minták osztályozását, azaz magát a karakterfelismerést.
+\end{enumerate}
 
 \begin{comment}{A szkennelő fej itt hardvert jelentene?}
 \end{comment}
 
-\begin{center}
+\begin{figure}[h]
 \includegraphics[scale=0.65]{ocr}
-\end{center}
+\centering
+\caption[caption]{\texttt{http://www.tankonyvtar.hu/hu/tartalom/\\\hspace{\textwidth}tamop412A/2011-0063\_15\_gepi\_latas/ch02.html}}
+\end{figure}
+
+A három feldolgozási szint
+
+\begin{enumerate}
+\item Alacsony szintű (low-level) feldolgozás
+	\begin{itemize}
+	\item Mind az input mind az output kép (zajos kép -> javított kép)
+	\item Sztenderd eljárások alkalmazása a kép minőségének 			javítása
+	\item Jellemző előfeldolgozások: \textit{zajszűrés, 			élesítés, finomítás, világosítás, maszkolás}
+	\end{itemize}
+\item Középső szintű (intermediate-level) feldolgozás
+	\begin{itemize}
+	\item Az inputok képek, de az outputok a képekből nyert jellemzők 
+	\item A kép komponenseinek kiemelése (szegmentálás) és azok jellemzése
+	\item Bizonyos mértékű mesterséges intelligencia szükséges
+	\end{itemize}
+\item Magas szintű (high-level) feldolgozás
+	\begin{itemize}
+	\item A felismert objektumok együttesének érzékelése (osztályozás)
+	\item Felismerés és értelmezés (interpretáció)
+	\item Mesterséges intelligencia módszerek használata
+	\end{itemize}
+\end{enumerate}
+
+Adatbázis
+\begin{itemize}
+\item A felismerni kivánt képek halmaza. A képekhez címkék tartoznak, ami szükséges a mesterséges intelligencia tanulás során.
+\item A feldolgozott képek
+	\begin{itemize}
+	\item visszakerülnek az adatbázisba vagy
+	\item továbbítják azt egy magasabb szintre
+	\end{itemize}	  
+\item Az interneten rengeteg adatbázis található: \textit{mnist, imagenet, kaggle, CASIA}
+\item !Kiegészíthető! Az adatok előkészítése:
+	\begin{enumerate}
+	\item Kiválasztás, feldolgozás, transzformálás
+	\item Publikus adatbázis vagy saját adatbázis
+	\item Konvertálás vektorra a gépi feldolgozás érdekébe
+	\end{enumerate}
+\end{itemize}
 
 \begin{comment}{Be kell majd hivatkozni, hogy honnan van!}
 \end{comment}
@@ -91,6 +137,16 @@ Az osztályozás során történik meg a tényleges karakterfelismerés. A karak
 A számítógépek képesek felismerni a karaktereket, beszélik és megértik az emberi nyelveket, kommunikálnak az emberi nyelven egyre elterjedtebb számítógépes iparban. Karakterfelismerés óriási időt takaríthat meg az adatok és üzenetek számítógépekbe történő írásához. Azonban, a kínai karakterek felismerése a számítógépen sokkal nagyobb kihívást jelent, mint a többi nyelveknél, mert hatalmas mennyiségű karakterkészlettel rendelkezik (27484 karakter).
 
 A karakterek felismerése lehet online és offline karakterfelismerés. A fő különbség az, hogy az online karakterfelismerés rögzíti az ecsetvonások mozgását, míg az offline karakterfelismerés pusztán a karakter geometriai alakján alapul.
+
+Az online karakterfelismerés során lehetőségünk van zaj generálására. Az ecsetvonások mozgása során véletlenszerű zajokat adhatunk hozzá. A zajos képekkel való betanítás a rendszerünk robusztusságát éri el.
+
+Zaj hozzáadás:
+\begin{itemize}
+\item Pontszerű zajok: véletlenszerű fekete pixeltartomány hozzáadása
+\item Elmosódások: Gauss elmosás alkalmazása
+\item Forgatás: affin, perspektív transzformáció vagy forgatás origó körül 
+\item Alacsony kontraszt: pixel megfelelő értékeinek szorzása
+\end{itemize}
 
 \begin{center}
 \includegraphics[scale=0.75]{ocr_online_offline}
@@ -165,5 +221,7 @@ A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyors
 
 \begin{comment}{Ez a rész így kicsit a levegőben van. Ha korábbi módszerek bemutatásáról van szó, akkor be kell őket hivatkozni, ha pedig új módszer/ötlet, akkor azt hangsúlyozni kell.}
 \end{comment}
+
+Forrás:\href{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.93.64&rep=rep1&type=pdf}{Chinese Character Recognition in Diverse Fonts}
 
 !Kiegészíteni lehet CCR HANDWIRTTEN CHAR!
