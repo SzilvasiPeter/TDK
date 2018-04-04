@@ -28,22 +28,31 @@ A következőkben részletezném a vonal vastagság változását a stroke-ok ra
 \subsection{A vastagság implementálásának módjai}
 
 \begin{itemize}
-\item Súlyok 
+\item Súlyok
 
 \item Sebesség 
 
 \item Szín átmenet 
 
-
 \end{itemize}
 
 \subsection{Környezet}
 \begin{itemize}
-\item Papír -> Képernyő
-\item Ecset -> Ellipszis és azokat összekötő poligonok (OpenCV példa)
+\item A kínai karakterek festése papíron történik. A mi esetünkbe ez a képernyő. A karakterek fekete(0)-fehér(255) színüek. A szürke árnyalatokat [0,255] pixel értékek reprezentálják. A képernyő teljesen fehér, de a zaj generálásánál lehet hozzáadni fekete/szürke színt. 
+\begin{lstlisting}[language=Python]
+img = np.zeros((512, 512, 3), np.uint8)
+img[0:512] = (255, 255, 255)
+\end{lstlisting}
+\item A festés alapvető eszköze az ecset. Az ecset lenyomássa egy ellipszis alakot hozz létre. A festés során az ecset elfordul (megfigyelésünk szerint 45fokban). Az ellipszis területe megnő, ha a festés gyorsasága csökken, ellenkező esetben csökken. Az ellipszist könnyedén lehet rajzolni OpenCV-be:
+\begin{lstlisting}
+cv2.ellipse(img, center, axes, angle, start_angle, 
+	end_angle, color, thickness=1, lineType=8, shift=0) 
+\end{lstlisting}
 \item Karakter kombinációk (stroke sorrend) -> Lehet számozással, tömben deklarálva, mátrix térkép szerint stb..
 \item Elrendezés, karakterek közötti távolság -> Viszony párokkal, láncolt lista (stroke párokkal).
 \end{itemize}
+
+
 
 \textit{Line break}\\\\
 
