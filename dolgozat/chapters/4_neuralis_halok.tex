@@ -170,7 +170,7 @@ A konvolúciós neurális hálózatokban szereplő rétegeket funkció alapján 
 
 A konvolúciós rétegek alapjában véve színes képek feldolgozására lettek kifejlesztve, ezért a neuronjaik három dimenzióban (szélesség, magasság, színcsatornák) vannak elrendezve.
 
-A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fehér akkor 0-át, ha fekete akkor 1-et rendelünk hozzá.
+A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fekete akkor 0-át, ha fehér akkor 255-et rendelünk hozzá. A szürke színt [0, 255] közötti értékekkel definiáljuk.
 
 \begin{center}
 \includegraphics[scale=0.65]{chinese_char_pixel}
@@ -180,6 +180,7 @@ A következő felsorolásban - a tipikus, de nem kizárólagos sorrendre ügyelv
 
 \begin{itemize}
 \item bemeneti réteg: Tartalmazza a kép nyers pixel értékeit. Az értékeket sorba állítjuk és azokat egy 1 dimenziós vektor reprezentálja, ami 0 és 1 értékeket tartalmaz.
+
 \item konvolúciós réteg: Adott képpont csoportokra konvolúció matematikai műveletet alkalmazunk. A konvolúció eredménye egy skalár (a skaláris szorzata a kép egy adott részének és a szűrőnek). Ha minden képpont csoportra elvégezzük a konvolúciót, akkor egy aktivációs térképet kapunk. Általában több szűrő paraméterrel is elvégezzük a konvolúciót és aktivációs térképeket egymásra rakjuk. Az aktivációs térkép, a művelet tulajdonsága miatt, kisebb
 méretű lesz.
 
@@ -187,16 +188,36 @@ méretű lesz.
 \includegraphics[scale=0.3]{convolution}
 \end{center}
 
-Konkrétan mártix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet különböző szűröt használni,  
+Konkrétan mátrix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet különböző szűröt használni.
+\begin{lstlisting}[language=Python]
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten
+from keras.layers import Conv2D, MaxPooling2D
 
-\item RELU réteg: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: \(f(x) = max(x, 0)\). Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel. A konvolúciós hálóknál a RELU sokkal gyorsabb más aktivációs függvényeknél mint például a sigmoid vagy a tanh.
+model = Sequential()
+model.add(Conv2D(64, (3, 3),
+	weights=[np.random.normal(0, 0.01,
+	size=(3, 3, 1, 64)), np.zeros(64)],
+	activation='relu', padding='same',
+	strides=(1, 1),
+	input_shape=(1, 64, 64)))
+\end{lstlisting}
+
+\item RELU réteg: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: \(f(x) = max(x, 0)\). Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel. A konvolúciós hálóknál a RELU sokkal gyorsabb más aktivációs függvényeknél, mint például a sigmoid vagy a tanh.
 \item összevonó réteg (pooling layer): A Pooling Layer függetlenül működik minden egyes feature map-nél. A MAX művelet segítségével kinyeri a legfontosabb vonásokat, csökkentve a dimenzióját. A leggyakoribb forma egy 2x2-es méretű szűrő, melyet 2 lépéssel kell felvinni minden szeletre. A bemenetben 2 szélesség és magasság mellett, az aktiválások 75\% -át eldobja. Minden MAX művelet ebben az esetben 4 számot vesz igénybe.
+
+\begin{lstlisting}[language=Python]
+model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+\end{lstlisting}
 
 \begin{center}
 \includegraphics[scale=0.3]{maxpool}
 \end{center}
 
 \item teljesen összekötött réteg (fully connected, FC): Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
+\begin{lstlisting}[language=Python]
+model.add(Dense(200, activation='softmax'))
+\end{lstlisting}
 \end{itemize}
 
 A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
@@ -209,7 +230,7 @@ A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve
 
 nagyon fontos a tervezés szakasznál. Egy 2013 kutatási papírt mutatnék be, miszerint a rétegek és a bennük lévő neuronok számával csökkenthető a hibaarány.
 
-Elöször vessünk pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek 48x48 pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
+Először vessünk pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek 48x48 pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
 
 Nyolc hálózaton történt tanítás. Minden hálózatnak 11 rétege van, beleértve a bemeneti és kimeneti réteget. A jellemzők kinyerés fázisánál 100-450 darabszámú neuront használ. Végezetül két egymást követő teljesen összekötött (fully-connected) hálózat végzi el az osztályozást.
 
@@ -232,9 +253,15 @@ Tehát 48x48 bemeneti réteg, xCy konvolúciós réteg, ahol 'x' neuronok (maps)
 \end{tabular}
 \end{table}
 
-Észrevehető hogy a rétegekben a neuronok növelése csökkenti a hibaarányt. Bizonyítható hogy a pontosságot és a robusztusságot növelni lehet a neuronok számával.
+Észrevehető, hogy a rétegekben a neuronok növelése csökkenti a hibaarányt. Bizonyítható, hogy a pontosság és a robusztusság növekszik, ha neuronok száma nő.
 
-A bonyolult hálózatok gyakran hajlamosak az overfitting-re. Az overfitting azt jelenti hogy a hálózat túl jól illeszkedik a tanitó mintára, ezért az nem fog jól teljesíteni a teszt mintára. Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent hogy véletlenszerűen deaktivál neuronokat, hogy a hálózat más útvonalakon haladva máshogy fog tanulni.
+A bonyolult hálózatok gyakran hajlamosak az overfitting-re. Az overfitting azt jelenti, hogy a hálózat túl jól illeszkedik a tanitó mintára, ezért az nem fog jól teljesíteni a teszt mintára.
+
+\begin{lstlisting}[language=Python]
+model.add(Dropout(0.5))
+\end{lstlisting}
+
+Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent, hogy véletlenszerűen deaktivál neuronokat, hogy a hálózat más útvonalakon haladva máshogy fog tanulni.
 
 \begin{center}
 \includegraphics[scale=0.7]{dropout}
@@ -252,11 +279,24 @@ A backpropagation négy különböző szakaszra osztható
 \item Súly frissítés (weight update)
 \end{itemize}
 
-Az előre terjesztés során egy Kínai karakter képét (pl. 48x48) továbbítunk az egész hálózaton. Az első leképzésnél, mivel minden súly és szűrőérték véletlenszerűen van inicializálva, így a kimenet is valószínűleg véletlenszerű lesz, ezért a hálózat nem add pontos osztályozást. A hálózat jelenlegi súlyaival nem tudja keresni az alacsony szintű jellemzőket, ilyenek például a stroke-ok. Emiatt tovább lépünk a veszteség számítás részre. Ne felejtsük el, hogy a tanító mintának van egy címkéje. A veszteségfüggvény többféle módon definiálható, de gyakori az MSE (átlagos négyzetes hiba) \(E_{total} = \sum 1/2(target - output)^2\). 
+Az előre terjesztés során egy kínai karakter képét (pl. 48x48) továbbítunk az egész hálózaton. Az első leképzésnél, mivel minden súly és szűrőérték véletlenszerűen van inicializálva, így a kimenet is valószínűleg véletlenszerű lesz, ezért a hálózat nem add pontos osztályozást. A hálózat jelenlegi súlyaival nem tudja keresni az alacsony szintű jellemzőket, ilyenek például a stroke-ok. Emiatt tovább lépünk a veszteség számítás részre. Ne felejtsük el, hogy a tanító mintának van egy címkéje. A veszteségfüggvény többféle módon definiálható, de gyakori az MSE (átlagos négyzetes hiba) \(E_{total} = \sum 1/2(target - output)^2\). 
 
 A target egy vektor, ami a képzési címke, ami a karakterek valószínűségét tárolja (0->nem megfelelő karakter, 1->megfelelő karakter). Ezt kell kivonni az előre jelzett címke (véletlenszerű szám [0,1] között). Majd venni a négyzetét és elosztani 1/2-el. Ezt a folyamatot meg ismételjük minden egyes vizsgálandó kínai karakterre és összegezük őket.
 
+\begin{lstlisting}[language=Python]
+model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
+\end{lstlisting}
+
 A veszteség rendkívül magas az első képzésnél. Olyan pontra akarunk jutni, ahol az előre jelzett címke megegyezik a képzési címkével. Ahhoz, hogy odaérjünk, minimálisra csökkentjük a veszteségünket. Azt szeretnénk megtudni, hogy mely bemenetek (súlyok a mi esetünkben) leginkább hozzájárultak a hálózat veszteségéhez (vagy hibájához).
+
+\textit{Ide a model.fit}
+
+\begin{lstlisting}[language=Python]
+model.fit(f['trn/x'], f['trn/y'],	
+	validation_data=(f['vld/x'], f['vld/y']),
+	epochs=15, batch_size=128,
+	shuffle='batch', verbose=1)
+\end{lstlisting}
 
 \begin{center}
 \includegraphics[scale=0.3]{CNN_loss}
