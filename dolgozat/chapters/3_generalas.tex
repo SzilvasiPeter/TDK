@@ -10,6 +10,8 @@ Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját.
 \includegraphics[scale=0.8]{calligraphy}
 \end{center}
 
+\subsection{Vonal vastagság}
+
 A következőkben részletezném a vonal vastagság változását a stroke-ok rajzolásának függvényébe. 
 
 \begin{itemize}
@@ -25,17 +27,6 @@ A következőkben részletezném a vonal vastagság változását a stroke-ok ra
 \item A további stroke-ok általában állandó vonal vastagsággal (ecset gyorsaság állandó). A kézzel írás és festés egyén függő.
 \end{itemize}
 
-\subsection{A vastagság implementálásának módjai}
-
-\begin{itemize}
-\item Súlyok
-
-\item Sebesség 
-
-\item Szín átmenet 
-
-\end{itemize}
-
 \subsection{Környezet}
 \begin{itemize}
 \item A kínai karakterek festése papíron történik. A mi esetünkbe ez a képernyő. A karakterek fekete(0)-fehér(255) színüek. A szürke árnyalatokat [0,255] pixel értékek reprezentálják. A képernyő teljesen fehér, de a zaj generálásánál lehet hozzáadni fekete/szürke színt. 
@@ -48,11 +39,41 @@ img[0:512] = (255, 255, 255)
 cv2.ellipse(img, center, axes, angle, start_angle, 
 	end_angle, color, thickness=1, lineType=8, shift=0) 
 \end{lstlisting}
-\item Karakter kombinációk (stroke sorrend) -> Lehet számozással, tömben deklarálva, mátrix térkép szerint stb..
-\item Elrendezés, karakterek közötti távolság -> Viszony párokkal, láncolt lista (stroke párokkal).
+...
 \end{itemize}
 
+\subsection{Karakterek kirajzolása}
+\begin{enumerate}
+\item Poligonos közelítés: A kínai karakter ebben az esetben pontok halmaza és az ezeket összekötő poligonok. Minnél több ponttal definiáljuk a karaktert annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
+\item Procedurális rajzolás: Ellipsziseket rajzolunk a képernyőre a kínai karakternek megfelelően. Az ellipsziseket érintő egyenesekkel összekötjük. Az ellipszisek tengelyeinek mérete különbözhetnek egymástól.
+\begin{center}
+\begin{tabular}{ c c }
+\includegraphics[scale=0.25]{proc_draw1} & \includegraphics[scale=0.5]{ren}
+\end{tabular}
+\end{center}
+Az ellipszisek koordinátáit egy 5 dimenziós vektorral adhatjuk meg \(P_1 = (x_1, y_1, d_{x_1}, d_{y_1}, s_1)\) \(P_2 = (x_2, y_2, d_{x_2}, d_{y_2}, s_2)\). Az 'x' és 'y' koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ az ellipszis irányvektorai, amit majd a görbe kirajzolásnál lesz számunkra fontos. Az 's' az ellipszis területét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás (lassú->nagy terület, gyors->kis terület).
+\begin{center}
+\includegraphics[scale=0.5]{image/proc_draw2}
+\end{center}
+\item Pontonkénti színszámítás: A képernyőt fellehet fogni mint egy n*m méretű mátix (képernyő szélessége: n, magassága: m). Az algoritmus pixelről pixelre haladva meghatározza annak értéket (0-255). A felbontás növekedés teljesítmény romláshoz vezet.
+\end{enumerate}
 
+A három karakter kirajzolás közül a procedurális rajzolás a legeffektívebb.
+
+\subsection{Görbék}
+\textit{Ide jöhet a Hermit}
+
+\subsection{Karakter zajosítás}
+\begin{itemize}
+\item Pontszerű zajok
+\item Elmosódások
+\item Takarás
+\item Vágás
+\item Forgatás
+\item Gyűrődés (textúrázás)
+\item Alacsony kontraszt
+\item Gradiens
+\end{itemize}
 
 \textit{Line break}\\\\
 
