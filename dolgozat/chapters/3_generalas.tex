@@ -53,7 +53,7 @@ cv2.ellipse(img, center, axes, angle, start_angle,
 \end{center}
 Az ellipszisek koordinátáit egy 5 dimenziós vektorral adhatjuk meg \(P_1 = (x_1, y_1, d_{x_1}, d_{y_1}, s_1)\) \(P_2 = (x_2, y_2, d_{x_2}, d_{y_2}, s_2)\). Az 'x' és 'y' koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ az ellipszis irányvektorai, amit majd a görbe kirajzolásnál lesz számunkra fontos. Az 's' az ellipszis területét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás (lassú->nagy terület, gyors->kis terület).
 \begin{center}
-\includegraphics[scale=0.5]{image/proc_draw2}
+\includegraphics[scale=0.5]{images/proc_draw2}
 \end{center}
 \item Pontonkénti színszámítás: A képernyőt fellehet fogni mint egy n*m méretű mátix (képernyő szélessége: n, magassága: m). Az algoritmus pixelről pixelre haladva meghatározza annak értéket (0-255). A felbontás növekedés teljesítmény romláshoz vezet.
 \end{enumerate}
@@ -66,13 +66,71 @@ A három karakter kirajzolás közül a procedurális rajzolás a legeffektíveb
 \subsection{Karakter zajosítás}
 \begin{itemize}
 \item Pontszerű zajok
+
+Tételezzük fel hogy a karakterünk mátrixa $M$ és zaj mátrixunk $N$ van. A két mátrix sor és oszlop száma megegyezik.
+
+\begin{center}
+\includegraphics[scale=0.6]{images/noise_matrix}
+\end{center}
+
+M $\oplus$ N (a bináris operátor $\oplus$ később kerül meghatározásra). Fizikailag a zaj helytelen nyomtatási folyamatot jelent, vagy olyan helyzetet, amikor a felismerési rendszerben lévő gépi zaj torzítja a mintát. Feltételezzük továbbá, hogy minden egyes cellához tartozik zaj.
+Ha egy adott cella (i, j) zajszintje nagyobb, mint az "1" vagy "fekete", akkor "1"-re kvantálódik. Más szavakkal, minden cella végül "1" vagy "0" besorolásnak kell alávetni. Megállapíthatjuk tehát, hogy a fent említett bináris művelet a következőket jelenti: 0 $\oplus$ 0 = 0,0 $\oplus$ 1 = 1, 1 ~ 0 = 1, és 1 $\oplus$ 1 = 1.
+A zaj mátrix elemeinek megválasztásával különböző pontszerű zajokat tudunk létrehozni.
 \item Elmosódások
-\item Takarás
-\item Vágás
+
+Az elmosódás, amit símitásnak is neveznek, egyszerű és gyakran használt képfeldolgozási művelet. A simításnak sok oka van. A zaj növelése érdekében a elmosódás összpontosítunk.
+
+Az elmosódás művelet végrehajtásához szűrőt alkalmazunk a képünkre. A szűrők legáltalánosabb típusa lineáris, amelyben a bemeneti pixelértékek (azaz $f(i+k, j+l)$) súlyozott összegével határozzák meg a kimeneti pixel értékét (azaz $g(i, j)$):
+
+\[g (i, j) = \ sum_ {k, l} f (i + k, j + l) h (k, l)\]
+
+$h(k, l)$ a kernelnek nevezik, ami nem más, mint a szűrő együtthatói. Segít megjeleníteni egy szűrőt, mint a képen csúsztatható együtthatók ablakát.
+
+Sokféle szűrő létezik, mint például: Normalizált szűrő, gauss szűrő, medián szűrő.
+
+A normalizált szűrő a legegyszerűbb. Minden kimeneti pixel a kernel szomszédainak átlaga (mindegyik egyenlő súlyokkal jár)
+
+A kernel az alábbi:
+
+\[K = \dfrac{1}{K_{szélesség} \cdot K_{magasság}}
+\begin{matrix}
+    1 & 1 & 1 & ... & 1 \\
+    1 & 1 & 1 & ... & 1 \\
+    . &. &. & ... & 1 \\
+    . &. &. & ... & 1 \\
+    1 & 1 & 1 & ... & 1   
+\end{matrix}
+\]
 \item Forgatás
-\item Gyűrődés (textúrázás)
-\item Alacsony kontraszt
-\item Gradiens
+Forgatás
+Egy kép elforgatását a szög $\theta$ értéket az alak átalakító mátrixával érjük el
+
+$$M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta   \end{bmatrix}$$
+
+Az OpenCV azonban skálázható elforgatással rendelkezik, állítható forgó centrummal, így tetszőleges helyre forgatható. A módosított transzformációs mátrixot a
+
+$$\begin{bmatrix}
+\alpha &  \beta & (1- \alpha )  \cdot center.x -  \beta \cdot center.y \\ - \beta &  \alpha &  \beta \cdot center.x + (1- \alpha )  \cdot center.y
+\end{bmatrix}$$
+
+ahol:
+
+$$\begin{array}{l}
+\alpha =  scale \cdot \cos \theta , \\ \beta =  scale \cdot \sin \theta
+\end{array}$$
+
+Ennek az átalakulási mátrixnak a megtalálásához az OpenCV egy getRotationMatrix2D függvényt biztosít.
+
+\begin{lstlisting}[language=Python]
+img = cv2.imread('messi5.jpg',0)
+rows,cols = img.shape
+
+M = cv2.getRotationMatrix2D((cols/2,rows/2),90,1)
+dst = cv2.warpAffine(img,M,(cols,rows))
+\end{lstlisting}
+
+\item Vágás
+\item Takarás
 \end{itemize}
 
 \textit{Line break}\\\\
