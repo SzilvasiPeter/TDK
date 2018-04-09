@@ -1,21 +1,27 @@
 \Chapter{Minták generálása}
 
+\begin{comment}{Az alkalmazandó módszernél majd érdemes jobban részletezni, hogy ANN-el fog történni.}
+\end{comment}
+
 \section{Tanító mintapontok előállítása}
 
-A megvalósító neurális hálózat betanítása felügyelt tanulás módszerrel történik. A minták alapján történő tanulás lényege, hogy az eljárás során a be és kimeneti mintapárokból igyekszünk megfelelő ismereteket kinyerni és ezzel a rendszer viselkedését módosítani. A hálózat feladata, hogy megtanulja a rendelkezésre álló mintapont párok által reprezentált bemenet-kimenet leképezést. Ehhez elő kell állítani a megfelelő adathalmazt.
+A megvalósító neurális hálózat betanítása felügyelt tanulás módszerrel történik. A minták alapján történő tanulás lényege, hogy az eljárás során a be- és kimeneti mintapárokból igyekszünk megfelelő ismereteket kinyerni és ezzel a rendszer viselkedését módosítani. A hálózat feladata, hogy megtanulja a rendelkezésre álló mintapont párok által reprezentált bemenet-kimenet leképezést. Ehhez elő kell állítani a megfelelő adathalmazt.
 
-Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját. A vonal kirajzolás sorrendje mellet fontos a vonal vastagsága is. Az kézírás ugyan sokat változott, de az alapjai megmaradtak. A stroke-ok vastagsága az ecset gyorsaságától, az ecsetre ható nyomás nagyságától függ. A megfelelően rajzolt vonalakat nagyon fontosnak tartják a kínaiak, mivel a kultúrájukhoz tartozik. A kalligráfia elárulhatja az ember nemét, korát, személyességét és így tovább.
+Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját. A vonal kirajzolás sorrendje mellet fontos a vonal vastagsága is. Az kézírás ugyan sokat változott, de az alapjai megmaradtak. A stroke-ok vastagsága az ecset gyorsaságától, az ecsetre ható nyomás nagyságától függ. A megfelelően rajzolt vonalakat nagyon fontosnak tartják a kínaiak, mivel a kultúrájukhoz tartozik. A kalligráfia elárulhatja az ember nemét, korát, személyességét. Kézzel írott karakterekre láthatunk néhány példát \aref{fig:calligraph}. ábrán.
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.8]{calligraphy}
-\end{center}
+\caption{Példa néhány kézzel írott kínai karakterre}
+\label{fig:calligraphy}
+\end{figure}
 
 \subsection{Vonal vastagság}
 
 A következőkben részletezném a vonal vastagság változását a stroke-ok rajzolásának függvényébe. 
 
 \begin{itemize}
-\item A stroke-ok vége elvékonyul, ezt a valóságban az ecset hirtelen felemelésével érik el. (\textit{Van néhány kivétel: right fally} \includegraphics[scale=1.0]{right_fally}) 
+\item A stroke-ok vége elvékonyul, ezt a valóságban az ecset hirtelen felemelésével érik el. (Van néhány kivétel, mint például a \textit{right fally} \includegraphics[scale=1.0]{right_fally}) 
 \item Ha egy stroke végéből kezdődik egy másik stroke, akkor azok találkozásánál a vonalvastagság növekszik.
 \item A horizontális vonalak közepe elvékonyul majd a végén újra vastagabb lesz. A vastagságot súlyokkal könnyedén lehet definiálni.
 
@@ -27,31 +33,40 @@ A következőkben részletezném a vonal vastagság változását a stroke-ok ra
 \item A további stroke-ok általában állandó vonal vastagsággal (ecset gyorsaság állandó). A kézzel írás és festés egyén függő.
 \end{itemize}
 
-\subsection{Környezet}
+\subsection{Környezet a karakterek kirajzolásához}
+
 \begin{itemize}
-\item A kínai karakterek festése papíron történik. A mi esetünkbe ez a képernyő. A karakterek fekete(0)-fehér(255) színüek. A szürke árnyalatokat [0,255] pixel értékek reprezentálják. A képernyő teljesen fehér, de a zaj generálásánál lehet hozzáadni fekete/szürke színt. 
-\begin{lstlisting}[language=Python]
+\item A kínai karakterek festése papíron történik. A mi esetünkben ez a képernyő. A karakterek fekete-fehér színüek. A szürke árnyalatokat $[0, 255]$ intervallumon vett egész értékek reprezentálják. Az ideálisan kirajzolt karakter fekete-fehér színű, és ahhoz a generálás során adhatunk hozzá szürke pixelek formájában zajt.
+
+A karakterek rajzolásához a Python programozási nyelv és a hozzá elérhető eszközök tüntek megfelelőnek. Egy $512 \times 512$ pixelből álló fehér kép kirajzolása az alábbi módon történik a segítségével.
+\begin{python}
 img = np.zeros((512, 512, 3), np.uint8)
 img[0:512] = (255, 255, 255)
-\end{lstlisting}
-\item A festés alapvető eszköze az ecset. Az ecset lenyomássa egy ellipszis alakot hozz létre. A festés során az ecset elfordul (megfigyelésünk szerint 45fokban). Az ellipszis területe megnő, ha a festés gyorsasága csökken, ellenkező esetben csökken. Az ellipszist könnyedén lehet rajzolni OpenCV-be:
-\begin{lstlisting}
+\end{python}
+
+\item A festés alapvető eszköze az ecset. Az ecset lenyomássa egy ellipszis alakot hozz létre. A festés során az ecset elfordul (megfigyelésünk szerint 45fokban). Az ellipszis területe megnő, ha a festés gyorsasága csökken, ellenkező esetben csökken. Az ellipszist könnyedén lehet rajzolni az OpenCV \texttt{ellipse} függvénye segítségével, amelynek a paraméterezése a következő.
+\begin{python}
 cv2.ellipse(img, center, axes, angle, start_angle, 
 	end_angle, color, thickness=1, lineType=8, shift=0) 
-\end{lstlisting}
-...
+\end{python}
 \end{itemize}
 
 \subsection{Karakterek kirajzolása}
+
 \begin{enumerate}
-\item Poligonos közelítés: A kínai karakter ebben az esetben pontok halmaza és az ezeket összekötő poligonok. Minnél több ponttal definiáljuk a karaktert annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
+\item Poligonos közelítés: A kínai karakter ebben az esetben pontok halmaza és az ezeket összekötő poligonok. Minél több ponttal definiáljuk a karaktert annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
 \item Procedurális rajzolás: Ellipsziseket rajzolunk a képernyőre a kínai karakternek megfelelően. Az ellipsziseket érintő egyenesekkel összekötjük. Az ellipszisek tengelyeinek mérete különbözhetnek egymástól.
 \begin{center}
 \begin{tabular}{ c c }
 \includegraphics[scale=0.25]{proc_draw1} & \includegraphics[scale=0.5]{ren}
 \end{tabular}
 \end{center}
-Az ellipszisek koordinátáit egy 5 dimenziós vektorral adhatjuk meg \(P_1 = (x_1, y_1, d_{x_1}, d_{y_1}, s_1)\) \(P_2 = (x_2, y_2, d_{x_2}, d_{y_2}, s_2)\). Az 'x' és 'y' koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ az ellipszis irányvektorai, amit majd a görbe kirajzolásnál lesz számunkra fontos. Az 's' az ellipszis területét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás (lassú->nagy terület, gyors->kis terület).
+Az ellipszisek koordinátáit egy-egy 5 dimenziós vektorral adhatjuk meg
+\begin{align*}
+P_1 &= (x_1, y_1, d_{x_1}, d_{y_1}, s_1) \\
+P_2 &= (x_2, y_2, d_{x_2}, d_{y_2}, s_2).
+\end{align*}
+Az 'x' és 'y' koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ az ellipszis irányvektorai, amit majd a görbe kirajzolásnál lesz számunkra fontos. Az 's' az ellipszis területét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás (lassú->nagy terület, gyors->kis terület).
 \begin{center}
 \includegraphics[scale=0.5]{images/proc_draw2}
 \end{center}
