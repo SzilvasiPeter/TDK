@@ -189,7 +189,7 @@ méretű lesz.
 \end{center}
 
 Konkrétan mátrix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet különböző szűröt használni.
-\begin{lstlisting}[language=Python]
+\begin{python}
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
@@ -201,23 +201,23 @@ model.add(Conv2D(64, (3, 3),
 	activation='relu', padding='same',
 	strides=(1, 1),
 	input_shape=(1, 64, 64)))
-\end{lstlisting}
+\end{python}
 
 \item RELU réteg: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: \(f(x) = max(x, 0)\). Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel. A konvolúciós hálóknál a RELU sokkal gyorsabb más aktivációs függvényeknél, mint például a sigmoid vagy a tanh.
 \item összevonó réteg (pooling layer): A Pooling Layer függetlenül működik minden egyes feature map-nél. A MAX művelet segítségével kinyeri a legfontosabb vonásokat, csökkentve a dimenzióját. A leggyakoribb forma egy 2x2-es méretű szűrő, melyet 2 lépéssel kell felvinni minden szeletre. A bemenetben 2 szélesség és magasság mellett, az aktiválások 75\% -át eldobja. Minden MAX művelet ebben az esetben 4 számot vesz igénybe.
 
-\begin{lstlisting}[language=Python]
+\begin{python}
 model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-\end{lstlisting}
+\end{python}
 
 \begin{center}
 \includegraphics[scale=0.3]{maxpool}
 \end{center}
 
 \item teljesen összekötött réteg (fully connected, FC): Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
-\begin{lstlisting}[language=Python]
+\begin{python}
 model.add(Dense(200, activation='softmax'))
-\end{lstlisting}
+\end{python}
 \end{itemize}
 
 A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
@@ -283,20 +283,22 @@ Az előre terjesztés során egy kínai karakter képét (pl. 48x48) továbbítu
 
 A target egy vektor, ami a képzési címke, ami a karakterek valószínűségét tárolja (0->nem megfelelő karakter, 1->megfelelő karakter). Ezt kell kivonni az előre jelzett címke (véletlenszerű szám [0,1] között). Majd venni a négyzetét és elosztani 1/2-el. Ezt a folyamatot meg ismételjük minden egyes vizsgálandó kínai karakterre és összegezük őket.
 
-\begin{lstlisting}[language=Python]
-model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
-\end{lstlisting}
+\begin{python}
+model.compile(loss='categorical_crossentropy',
+              optimizer='adadelta',
+              metrics=['accuracy'])
+\end{python}
 
 A veszteség rendkívül magas az első képzésnél. Olyan pontra akarunk jutni, ahol az előre jelzett címke megegyezik a képzési címkével. Ahhoz, hogy odaérjünk, minimálisra csökkentjük a veszteségünket. Azt szeretnénk megtudni, hogy mely bemenetek (súlyok a mi esetünkben) leginkább hozzájárultak a hálózat veszteségéhez (vagy hibájához).
 
 \textit{Ide a model.fit}
 
-\begin{lstlisting}[language=Python]
+\begin{python}
 model.fit(f['trn/x'], f['trn/y'],	
 	validation_data=(f['vld/x'], f['vld/y']),
 	epochs=15, batch_size=128,
 	shuffle='batch', verbose=1)
-\end{lstlisting}
+\end{python}
 
 \begin{center}
 \includegraphics[scale=0.3]{CNN_loss}
