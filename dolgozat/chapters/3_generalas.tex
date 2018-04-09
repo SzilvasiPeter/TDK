@@ -130,30 +130,35 @@ dst = cv2.warpAffine(img,M,(cols,rows))
 \end{lstlisting}
 
 \item Vágás
+
+A grafikában a kivágás: a nem kívánt területek eltávolítása egy képből. Az egyik legegyszerűbb fotó manipulációs folyamat, ami eltávolítja a nem kívánt stroke részletet vagy releváns pixeleket a karakteren. A képarány változatlan marad, az összetétele változik. A képsíkon akár függvénnyel is megadható, hogy mely részeket távolítsuk el.
+
+\begin{lstlisting}[language=Python]
+import cv2
+img = cv2.imread("chinese_char1.png")
+crop_img = img[y:y+h, x:x+w]
+cv2.imshow("cropped", crop_img)
+cv2.waitKey(0)
+\end{lstlisting}
+
 \item Takarás
+
+A takarásnak lehet több lehetséges módjai: festő algoritmus, z-buffer, Warnock algoritmus, láthatósági gráfok.
+
+A festő algoritmus egszerű és párhuzamosítható. Ennek az algoritmusnak az alapgondolata, hogy a megjelenítendő objektumokat a nézőponttól való távolság függvényében sorba kell állítani. Az algoritmus a helyes takarási viszonyokat úgy alakítja ki, hogy a nézőhöz közelebb eső objektum képe felülírja a távolabbi objektum képét. Ennek legegyszerűbb változata az un. festő algoritmus, mely a képfestés technikájához hasonlóan a távolabbi objektumokra ráfesti a közelebbieket.
+Lépések:
+\begin{itemize}
+\item Rendezzük a poligonokat a legkisebb (legtávolabbi pontjaik) z koordinátáik szerint.
+\item Hátulról előre haladva fessük ki a poligonokat. 
+\end{itemize}
+
 \end{itemize}
 
 \textit{Line break}\\\\
 
 \begin{itemize}
-\item Ecset dinamika
-	\begin{itemize}
-	\item \(P_1 = (x_1, y_1, d_{x_1}, d_{y_1}, s_1)\) \(P_2 = (x_2, y_2, d_{x_2}, d_{y_2}, s_2)\)
-	\item Ecset szín (átmenetesség)
-	\end{itemize}
-\item Karakter kirajzolás
-	\begin{itemize}
-	\item Poligonos közelítés
-	\item Procedurális rajzolás
-	\item Pontonkénti színszámítás (fekete-szürke árnyalat-fehér)
-	\item \textit{Görbék kirajzolása (Hermit)}
-	\end{itemize}
-\item Ideális karakter megjelenítés
-\item Ideális karakter zajosítássa
-	\begin{itemize}
 	\item Különböző zajok
 	\item Hálózat robosztussága
-	\end{itemize}
 \end{itemize}
 
 \begin{comment}{Dolgozok a Hermit-es részen.}
