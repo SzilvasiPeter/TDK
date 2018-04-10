@@ -1,13 +1,15 @@
 \Chapter{Összegzés}
 
-A TDK dolgozatba betekintést nyertünk a kínai karakterek alap felépítésével. Továbbá megismerkedtünk azok építőelemeivel az alapvonásokkal (strokes).
+A TDK dolgozatba betekintést nyertünk a kínai karakterek alap felépítésével. Továbbá megismerkedtünk azok építőelemeivel az alapvonásokkal (strokes). Dolgozatomba leírtam a vonásrendek szabályait, amely hasznos az online karakterfelismerésnél.
 
-Részleteztem az optikai karakterfelismerést (OCR) müködését. Bemutattam mostanába használt OCR nyomtatott kínai karakterekre különböző betűtípusra\\
+Részleteztem az optikai karakterfelismerés (OCR) müködését. Kifejtettem az optikai karakterfelismerés részeit. Bemutattam manapság használt OCR-t, amely képes felismerni a nyomtatott kínai karaktereket különböző betűtípuson. Táblázattal vizualizáltam a betűtípusok felismerésének pontosságát.\\
 
-Minta generálás, domain randomization
+A minta generálás fontos eleme a rendszernek. A különböző mintákkal való betanítás a hálózatot robosztussá teszi. A széles körű zajok hozzáadása a képekhez, majd azzal való tanítás növeli a hálózat adaptációs képességét (zavaros képekre).
 
-Neurális háló, konvolúciós háló
+A stroke-ok kirajzolásának mechanikáját részleteztem. Megemlítettem a vonal vastagság fontosságát. Felvázoltam a vonal kirajzolás dinamikáját: pont paraméterei, vonal görbítésse Hermit ívek alkalmazásával. Továbbá bemutattam hogyan lehet openCV-vel zajokat hozzáadni a képekhez.\\
 
-Eredmények
+A neurális hálózat elemeivel megismerkedhetünk. A mögötte lévő matematikát megemlítettem és illusztratív képekkel probáltam megkönnyíteni a megértést.
 
-További célkitűzés
+Ezt követően a kép felismeréshez leghatékonyabb konvolúciós neurális hálózatot (CNN) részleteztem. Kifejtettem a CNN rétegeinek működését. Továbbá bemutattam egy kutatási cikket, amely a pontosságát hasonlítja össze különböző hálózat architektúrák szerint.\\
+
+A valídáció során betekintést nyerhetünk, hogy hogyan változik a hálózat osztályozása a bemeneti képektől. Az adathalmazok előállítása után a hálózat betanítás következett. Végül a tesztelés során kiderült, hogy a teszt eredmények kapcsolatba vannak a tanító halmazzal.
