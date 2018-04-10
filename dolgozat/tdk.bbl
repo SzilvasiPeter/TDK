@@ -1,0 +1,93 @@
+\begin{thebibliography}{10}
+
+\bibitem{kinaiiras}
+Kínai írás – wikipédia.
+\newblock \url{https://hu.wikipedia.org/wiki/K%C3%ADnai_%C3%ADr%C3%A1s}, 2.
+
+\bibitem{OpenCVli86}
+Opencv library.
+\newblock \url{https://opencv.org/}.
+
+\bibitem{StrokeCJ9}
+Stroke (cjkv character) - wikipedia.
+\newblock \url{https://en.wikipedia.org/wiki/Stroke_(CJKV_character)}, 2002.
+
+\bibitem{tmwebdvi77}
+tmweb.dvi.
+\newblock \url{http://szovegbanyaszat.typotex.hu/content/PDF/ch+ocr.pdf}, 2006.
+
+\bibitem{bunke1997handbook}
+{\sc Bunke, H., and Wang, P. S.-p.}
+\newblock {\em Handbook of character recognition and document image analysis}.
+\newblock World Scientific, 1997.
+
+\bibitem{cirecsan2015multi}
+{\sc Cire{\c{s}}an, D., and Meier, U.}
+\newblock Multi-column deep neural networks for offline handwritten chinese
+  character classification.
+\newblock In {\em Neural Networks (IJCNN), 2015 International Joint Conference
+  on\/} (2013), IEEE, pp.~1--6.
+
+\bibitem{ABeginne32}
+{\sc Deshpande, A.}
+\newblock A beginner's guide to understanding convolutional neural networks –
+  adit deshpande – cs undergrad at ucla ('19).
+\newblock
+  \url{https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks/},
+  2014.
+
+\bibitem{dong2005improved}
+{\sc Dong, J.-x., Krzy{\.z}ak, A., and Suen, C.~Y.}
+\newblock An improved handwritten chinese character recognition system using
+  support vector machine.
+\newblock {\em Pattern Recognition Letters 26}, 12 (2005), 1849--1856.
+
+\bibitem{lecun1995convolutional}
+{\sc LeCun, Y., Bengio, Y., et~al.}
+\newblock Convolutional networks for images, speech, and time series.
+\newblock {\em The handbook of brain theory and neural networks 3361}, 10
+  (1995), 1995.
+
+\bibitem{liconvolution}
+{\sc Li, B.}
+\newblock Convolution neural network for traditional chinese calligraphy
+  recognition.
+
+\bibitem{liu2013online}
+{\sc Liu, C.-L., Yin, F., Wang, D.-H., and Wang, Q.-F.}
+\newblock Online and offline handwritten chinese character recognition:
+  benchmarking on new databases.
+\newblock {\em Pattern Recognition 46}, 1 (2013), 155--162.
+
+\bibitem{feldolgozasi_szintek}
+{\sc Rövid, A., Vámossy, Z., and Sergyán, S.}
+\newblock A gépi látás és képfeldolgozás párhuzamos modelljei és
+  algoritmusai, 2014.
+
+\bibitem{WANG1973303}
+{\sc Wang, P.~P., and Shiau, R.~C.}
+\newblock Machine recognition of printed chinese characters via transformation
+  algorithms.
+\newblock {\em Pattern Recognition\/} (2003).
+
+\bibitem{wu2002recognition}
+{\sc Wu, X., and Wu, M.}
+\newblock A recognition algorithm for chinese characters in diverse fonts.
+\newblock In {\em Image Processing. 2002. Proceedings. 2002 International
+  Conference on\/} (2002), vol.~3, IEEE, pp.~981--984.
+
+\bibitem{zhong2015high}
+{\sc Zhong, Z., Jin, L., and Xie, Z.}
+\newblock High performance offline handwritten chinese character recognition
+  using googlenet and directional feature maps.
+\newblock In {\em Document Analysis and Recognition (ICDAR), 2015 13th
+  International Conference on\/} (2015), IEEE, pp.~846--850.
+
+\bibitem{zhou2017stroke}
+{\sc Zhou, Z., Zhan, E., and Zheng, J.}
+\newblock Stroke extraction of handwritten chinese character based on ambiguous
+  zone information.
+\newblock In {\em Multimedia and Image Processing (ICMIP), 2017 2nd
+  International Conference on\/} (2017), IEEE, pp.~68--72.
+
+\end{thebibliography}

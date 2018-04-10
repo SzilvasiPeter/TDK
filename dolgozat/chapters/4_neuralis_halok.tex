@@ -1,10 +1,8 @@
 \Chapter{Neurális hálók}
 
-<<<<<<< HEAD
 A neurális hálózattokat\cite{neurális77} gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
-=======
+
 A neurális hálózatokat gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
->>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
 \begin{figure}
 	\centering
@@ -181,11 +179,9 @@ Végül frissítjük az összes súlyunkat. Amikor eredetileg a 0.05 és a 0.1 b
 
 \section{Konvolúciós neurális hálózat}
 
-<<<<<<< HEAD
 A konvolúciós neurális hálózat\cite{liconvolution}\cite{lecun1995convolutional} hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkbe a bemenet a kínai karakter pixel értékei, a kimenet pedig valószíűségek a karakterekből adódóan.
-=======
+
 A konvolúciós neurális hálózat hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit eredendően képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkben a bemenet a kínai karakterek pixel értékei, a kimenet pedig egy becsült osztályba tartozási mérték.
->>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
 A hagyományos neurális hálózatok nem skálázzák a teljes képet. A kínai (különösen a hagyományos) több száz karaktert nem lehet megjeleníteni egy $16 \times 16$ pixeles rácsban. A megfelelő méret körülbelül $24 \times 24$ képpontot tartalmaz. Neurononként $24 \times 24 = 526$ súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket.
 
@@ -319,9 +315,8 @@ model.add(Dropout(0.5))
 
 \subsection{A háló tanítása}
 
-<<<<<<< HEAD
-Ez a neurális hálózatok\cite{neurális77} egyik legfontosabb része. Sok kérdés merülhet fel olvasás közben. Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését? Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket? Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak? A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett képzési folyamat révén.
-=======
+Ez a neurális hálózatok egyik legfontosabb része. Sok kérdés merülhet fel olvasás közben. Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését? Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket? Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak? A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett képzési folyamat révén.
+
 Ez a neurális hálózatok használatának egyik lényeges pontja. Sok kérdés merülhet fel a megfelelő tanítási algoritmus kiválasztása közben.
 \begin{itemize}
 \item Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését?
@@ -329,7 +324,6 @@ Ez a neurális hálózatok használatának egyik lényeges pontja. Sok kérdés 
 \item Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak?
 \end{itemize}
 A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett eljárással.
->>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
 A backpropagation\cite{ABeginne32} négy különböző szakaszra osztható
 \begin{itemize}
