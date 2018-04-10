@@ -134,9 +134,6 @@ Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál
 \label{fig:ocr_preprocess}
 \end{figure}
 
-\begin{comment}{Meg kellene említeni a dimenziók csökkentését is, mert az átalakítás során a komplexitás olyan formában csökken, hogy a dimenzió csökken és információ vész el.}
-\end{comment}
-
 \subsubsection{Dimenzió csökkentés}
 
 A dimenziószám csökkentése optimálizálási folyamatnak tekinthető. A kivont jellemzőkben található redundáns információkat távolítja el. A tipikus dimenzió redukciós algoritmusok a gépi tanulás terén két részre oszthatók\cite{zhang2009patch}:
@@ -159,9 +156,6 @@ Az osztályozás során történik meg a tényleges karakterfelismerés. A karak
 
 \subsection{Kínai karakter felismerés}
 
-\begin{comment}{Itt ez nagyon általánosan kezdődik. Vagy az alcímet érdemes megváltoztatni, vagy egyből a lényegi részre térni rá a kínai karakterek felismerésével kapcsolatban.}
-\end{comment}
-
 A karakterek felismerése lehet online és offline karakterfelismerés. A fő különbség az, hogy az online karakterfelismerés rögzíti az ecsetvonások mozgását, míg az offline karakterfelismerés pusztán a karakter geometriai alakján alapul.
 
 \begin{figure}[h]
@@ -183,9 +177,6 @@ Zaj hozzáadás:
 
 Az OCR folyamatba bevitt képek általában a szkennerekből származnak, amik képet és karaktert tartalmaznak. A karakterek gyakran különböző méretűek és betűtípusokat.
 
-\begin{comment}{Az online és offline felismerés megkülönböztetése kapcsán érdemes említeni, hogy a zaj generálásánál az online jelleg figyelembe vételre kerül majd.}
-\end{comment}
-
 Az előfeldolgozás \cite{zhou2017stroke} során a következők jöhetnek szóba: 
 \begin{itemize}
 \item karakterek szétosztása a bemenetek függvényébe
@@ -194,13 +185,7 @@ Az előfeldolgozás \cite{zhou2017stroke} során a következők jöhetnek szóba
 \item stroke váz generálása (thinning)
 \end{itemize}
 
-\begin{comment}{Legalább 3-4 hivatkozás kellene ezekhez a részekhez.}
-\end{comment}
-
 A jellemző alapú módszerek \cite{bunke1997handbook} kivonják a karakter jellemzőit, mivel ezek a jellemzők matematikailag számítottak, amire alkalmas számítógép. Így az optikai karakterfelismerés (OCR) nem igazán az optikai alapokon nyugszik, hanem inkább a matematikai számításokhoz köthető.
-
-\begin{comment}{A stroke szavak használata is jó, csak akkor érdemes valahol megadni, hogy az alapvonásokkal mi a viszonya.}
-\end{comment}
 
 Amint említettem, minden kínai karakternek egyedi geometriai alakja van, amiket a stroke-ok alakítják (a stroke és az alapvonás színonim szavak). A kínai karakterek felismerésének alapja a stroke-ok és a strukturális jellemzők. Hosszú ideig ez a módszer befolyásolta a kínai karakterfelismerés kutatási irányát.
 A karakter struktúrális lebontására láthatunk egy példát \aref{fig:ocr_features}. ábrán.
@@ -220,13 +205,7 @@ Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemző
 
 Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karaktert tévesen osztályoz. Ez javítható a különböző bemeneti minták növelésével.
 
-\begin{comment}{A leírás alapján itt még nem áll össze, hogy ez még az irodalmi áttekintés, vagy már a saját módszernek a bemutatása.}
-\end{comment}
-
 \subsection{Implementálás}
-
-\begin{comment}{A betűtípusokra részletesebben ki kellene térni. Irodalmi hivatkozás itt is mindenképpen kell majd.}
-\end{comment}
 
 Egy olyan algoritmust \cite{wu2002recognition} mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chinese_fonts}. ábrán láthatunk néhány példát.
 

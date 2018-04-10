@@ -276,9 +276,6 @@ Forrás: \url{http://www.fujitsu.com/global/Images/20130821-01b_tcm100-929717.jp
 
 \subsection{Hálózat architektúra}
 
-\begin{comment}{Melyik pontosan ez a cikk?}
-\end{comment}
-
 nagyon fontos a tervezés szakasznál. Egy 2013 kutatási papírt\cite{cirecsan2015multi} mutatnék be, miszerint a rétegek és a bennük lévő neuronok számával csökkenthető a hibaarány.
 
 Először vessünk egy pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek $48 \times 48$ pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
@@ -354,9 +351,6 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 \end{python}
 
-\begin{comment}{A képzési címke magyar nyelvű irodalomban szerepelt?}
-\end{comment}
-
 A veszteség rendkívül magas az első képzésnél. Olyan pontra akarunk jutni, ahol az előre jelzett címke megegyezik a képzési címkével. Ahhoz, hogy odaérjünk, minimálisra csökkentjük a veszteségünket. Azt szeretnénk megtudni, hogy mely bemenetek/súlyok azok, amelyek leginkább hozzájárultak a hálózat veszteségéhez (vagy hibájához). Ezt az illeszkedést az alábbi módon határozhatjuk meg.
 
 \begin{python}
@@ -401,9 +395,3 @@ Végül megnézzük, hogy működik-e a hálózat vagy sem. Különböző (még 
 \subsection{Transfer learning}
 
 A konvolúciós hálózatok betanításához nagyszámú mintára és nagy teljesítményű számítógépekre van szükség. Amennyiben nem áll rendelkezésünkre nagyjából egymillió képkockából álló tanító adathalmaz, akkor kis számú mintáról beszélünk. Ha nincs lehetőségünk vagy erőforrásunk nagy adathalmazzal tanítani, akkor is megvalósíthatjuk a kívánt leképezést. A transfer learning (tanulás átadása) módszer segítségével egy előre betanított hálózatot veszünk alapul, és annak utolsó pár rétegét lecserélve végezzük a tanítást. Ilyenkor a megmaradt rétegek betanított tulajdonság érzékelő funkciója segítségével a lecserélt rétegek által megvalósítandó leképezés könnyebbé vállhat. A konvolúciós neurális hálózatok tanítása esetében ez egy gyakori eljárás. A weben számos előre betanított hálózat található.
-
-\begin{comment}{Az egész fejezetnek arról kell szólnia, hogy hogy lehetett a konvolúciós neurális hálót alkalmazni a konkrét, karakterfelismerési problémára. Az általános részeket ennek megfelelően érdemes lehet átírni, vagy csak egy rövid áttekintésnek tekinteni a fejezet elején.}
-\end{comment}
-
-\begin{comment}{Konkrét, OCR konvolúciós megoldások hivatkozásai is kellenének majd.}
-\end{comment}
