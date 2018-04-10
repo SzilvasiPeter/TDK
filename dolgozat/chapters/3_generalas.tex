@@ -53,30 +53,87 @@ cv2.ellipse(img, center, axes, angle, start_angle,
 
 \subsection{Karakterek kirajzolása}
 
+A kínai karaktereket különféle módokon reprezentálhatjuk. Ezek közül néhány lehetőséget mutatnak be az alábbi pontok.
+
 \begin{enumerate}
-\item Poligonos közelítés: A kínai karakter ebben az esetben pontok halmaza és az ezeket összekötő poligonok. Minél több ponttal definiáljuk a karaktert annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
-\item Procedurális rajzolás: Ellipsziseket rajzolunk a képernyőre a kínai karakternek megfelelően. Az ellipsziseket érintő egyenesekkel összekötjük. Az ellipszisek tengelyeinek mérete különbözhetnek egymástól.
-\begin{center}
+\item \textit{Poligonos közelítés}: A kínai karakter kontúrját ebben az esetben, mint poligont adhatjuk meg. Minél több éllel definiáljuk a karaktert, annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
+\item \textit{Procedurális rajzolás}: Ebben az esetben a karakter kirajzolásának a procedúráját adhatjuk meg. Amennyiben feltételezzük, hogy az ecsetünk ellipszis alakú, úgy kitöltött ellipsziseket egymás után, kis lépésközzel kirajzolva. Az ellipszisek pozíciója mellett azok méretét is változtathatjuk. A közelítési módra egy példát láthatjuk \aref{fig:proc_draw}. ábrán.
+
+\begin{figure}
+\centering
 \begin{tabular}{ c c }
 \includegraphics[scale=0.25]{proc_draw1} & \includegraphics[scale=0.5]{ren}
 \end{tabular}
-\end{center}
+\caption{Karakter közelítése változó méretű ellipszisekkel}
+\label{fig:proc_draw}
+\end{figure}
+
 Az ellipszisek koordinátáit egy-egy 5 dimenziós vektorral adhatjuk meg
 \begin{align*}
 P_1 &= (x_1, y_1, d_{x_1}, d_{y_1}, s_1) \\
 P_2 &= (x_2, y_2, d_{x_2}, d_{y_2}, s_2).
 \end{align*}
-Az 'x' és 'y' koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ az ellipszis irányvektorai, amit majd a görbe kirajzolásnál lesz számunkra fontos. Az 's' az ellipszis területét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás (lassú->nagy terület, gyors->kis terület).
-\begin{center}
+Az $x$ és $y$ koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ a kirajzolandó görbe végpontjaiban vett érintő irányvektora. Az $s$ az ellipszis méretét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás, a kirajzolt ellipszis területével arányos. Az ecset dinamikája olyan, hogy lassú ecsetmozgás nagyobb, vastagabb vonalakat eredményez, míg a gyors általában véknyabbakat. Az íveken mozgatott változó méretű ellipszisek használatát szemlélteti \aref{fig:proc_draw2}. ábra.
+
+\begin{figure}
+\centering
 \includegraphics[scale=0.5]{images/proc_draw2}
-\end{center}
-\item Pontonkénti színszámítás: A képernyőt fellehet fogni mint egy n*m méretű mátix (képernyő szélessége: n, magassága: m). Az algoritmus pixelről pixelre haladva meghatározza annak értéket (0-255). A felbontás növekedés teljesítmény romláshoz vezet.
+\caption{A karakterek összeállítása íveken mozgatott ellipszisek segítségével}
+\label{fig:proc_draw2}
+\end{figure}
+
+A görbék kirajzolásához egy megfelelő megoldást ad a Hermit ívek alkalmazása. Ezek olyan harmadfokú görbék, melyeknek a két végpontja, és a végpontokban vett érintők rögzítettek.
+
+Jelölje $\textbf{H}$ a Hermit ívünket, amelynek $u \in [0, 1]$ a paramétere. Ezt a
+$$
+\textbf{H}(u) = \textbf{a}_0 u^3 + \textbf{a}_1 u^2 + \textbf{a}_2 u + \textbf{a}_3
+$$
+alakban írhatjuk föl, ahol az $\textbf{a}_i$ értékek a görbe helyére és alakjára vonatkozó konstansok. Tekintsünk egy $\textbf{p}_0$ és $\textbf{p}_1$ pontot, illetve a hozzájuk tartozó $\textbf{t}_0$ és $\textbf{t}_1$ érintőket. A vonások leírásához használt paraméterek alapján ezek az alábbiak lesznek:
+$$
+\textbf{p}_0 = [x_1, y_1], \quad
+\textbf{p}_1 = [x_2, y_2], \quad
+\textbf{t}_0 = [d_{x_1}, d_{y_1}], \quad
+\textbf{t}_1 = [d_{x_2}, d_{y_2}].
+$$
+
+A Hermit ív együtthatóit a következő képpen tudjuk kiszámítani:
+\begin{align*}
+\textbf{a}_0 &= -2(\textbf{p}_1 - \textbf{p}_0) + \textbf{t}_0 + \textbf{t}_1, \\
+\textbf{a}_1 &= 3(\textbf{p}_1 - \textbf{p}_0) - 2 \textbf{t}_0 - \textbf{t}_1, \\
+\textbf{a}_2 &= \textbf{t}_0, \\
+\textbf{a}_3 &= \textbf{p}_0.
+\end{align*}
+
+Tekintsük azt az esetet, amikor a görbén köröket mozgatunk. Ennek a számításához vezessük be a $\textbf{b}_i$ értékeket, amelyet a
+$$
+\textbf{b}_i = [-y, x] \quad \Leftrightarrow \quad \textbf{a}_i = [x, y]
+$$
+formában adhatunk meg. Ennek segítségével a görbe adott pontjához tartozó egység hosszúságú normálvektort az
+$$
+\textbf{n}(u) = \dfrac{3 \textbf{b}_0 u^2 + 2 \textbf{b}_1 u + \textbf{b}_2}{
+||3 \textbf{b}_0 u^2 + 2 \textbf{b}_1 u + \textbf{b}_2||
+}
+$$
+alakban kapjuk.
+
+A görbe egyes pontjaihoz tartozó kör méretét az alábbi módon számíthatjuk ki az $u$ függvényében:
+$$
+s(u) = (1 - u) \cdot s_1 + u \cdot s_2.
+$$
+
+A vonáshoz tartozó két (\textit{hosszanti}) kontúr görbét ezekből a
+$$
+\textbf{z}(u) = \textbf{H}(u) \pm s(u) \cdot \textbf{n}(u)
+$$
+alakban írhatjuk föl. Ez tehát tulajdonképpen két görbét ír le, amelyek a normálvektorok számításánál lévő hosszmeghatározás miatt nem írhatók föl Hermit ívként.
+
+A körökből ellipsziseket utólagos transformációval is kaphatunk, vagyis ha a kapott közelítő sokszög pontjait utólag a görbe mentén adott irányba arányosan eltoljuk.
+
+\item \textit{Pontonkénti színszámítás}: A képernyőn megjelenített képet lehet úgy tekinteni, mint egy $n \times m$ méretű mátix (képernyő szélessége: $m$, magassága: $n$). Az egyes pixelek értékét az algoritmussal külön-külön is meghatározhatjuk.
+
 \end{enumerate}
 
-A három karakter kirajzolás közül a procedurális rajzolás a legeffektívebb.
-
-\subsection{Görbék}
-\textit{Ide jöhet a Hermit}
+A három karakter kirajzolás közül a procedurális rajzolás a leginkább hatékony.
 
 \subsection{Karakter zajosítás \cite{WANG1973303}}
 
@@ -139,25 +196,25 @@ $$\begin{array}{l}
 
 Ennek az átalakulási mátrixnak a megtalálásához az OpenCV egy getRotationMatrix2D függvényt biztosít.
 
-\begin{lstlisting}[language=Python]
+\begin{python}
 img = cv2.imread('messi5.jpg',0)
 rows,cols = img.shape
 
 M = cv2.getRotationMatrix2D((cols/2,rows/2),90,1)
 dst = cv2.warpAffine(img,M,(cols,rows))
-\end{lstlisting}
+\end{python}
 
 \item Vágás
 
 A grafikában a kivágás: a nem kívánt területek eltávolítása egy képből. Az egyik legegyszerűbb fotó manipulációs folyamat, ami eltávolítja a nem kívánt stroke részletet vagy releváns pixeleket a karakteren. A képarány változatlan marad, az összetétele változik. A képsíkon akár függvénnyel is megadható, hogy mely részeket távolítsuk el.
 
-\begin{lstlisting}[language=Python]
+\begin{python}
 import cv2
 img = cv2.imread("chinese_char1.png")
 crop_img = img[y:y+h, x:x+w]
 cv2.imshow("cropped", crop_img)
 cv2.waitKey(0)
-\end{lstlisting}
+\end{python}
 
 \item Takarás
 

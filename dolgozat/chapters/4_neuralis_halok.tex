@@ -1,18 +1,25 @@
 \Chapter{Neurális hálók}
 
+<<<<<<< HEAD
 A neurális hálózattokat\cite{neurális77} gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
+=======
+A neurális hálózatokat gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
+>>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
-\begin{center}
+\begin{figure}
+	\centering
 	\includegraphics[scale=1.0]{images/neuron.png}
-\end{center}
+	\caption{A biológiai neuron fő részei}
+	\label{fig:neuron}
+\end{figure}
 
-A kutatók az agy felépítését vizsgálva egy olyan matematikai modellt dolgoztak ki, amely   reprezentálni próbálja az agyban található neuronokat és a közöttük lévő kapcsolatokat. Ezt a modellt nevezzük neurális hálónak vagy neurális hálózatnak.
+A kutatók az agy felépítését vizsgálva egy olyan matematikai modellt dolgoztak ki, amely   reprezentálni próbálja az agyban található neuronokat  és a közöttük lévő kapcsolatokat. (Az agyban lévő neuron sematikus felépítését láthatjuk \aref{fig:neuron}. ábrán.) Ezt a modellt nevezzük neurális hálónak vagy neurális hálózatnak.
 
 A neurális hálózatot alkotó neuronok úgynevezett rétegekbe rendeződnek. Háromféle réteget különbözetünk meg, a \textbf{\textit{bemeneti}}, a \textbf{\textit{kimeneti}} és a \textbf{\textit{rejtett réteget}}. Bemeneti és kimeneti rétegből minden hálózatban egy darab van, rejtett rétegből azonban tetszőleges számú lehet.
 
 A hálózatban a rétegeket élek kötik össze egymással, amelyekhez egyenként egy-egy \textbf{\textit{súly}} tartozik. A neuronok a bemeneti éleiken kapott értékek és a súlyok segítségével bizonyos műveleteket végeznek el, majd az eredmény a kimeneti éleiken keresztül továbbítják a következő réteg neuronjai felé.
 
-A tanítási folyamat elvégzésekor a hálózatba olyan bemenetet juttatunk, amelyhez tartozó kimenet ismert. A bemenetet végig futtatjuk a hálózat rétegein, majd a kimeneti réteg által szolgáltatott eredményt összehasonlítjuk a kimenet várt értékével. A két érték közötti eltérést a hálózat \textit{\textbf{hibájának}} nevezzük. A tanítás folyamán a hálózat súlyait úgy változtatjuk, hogy ez a hiba lehetőleg minél kisebb legyen. A hálózat betanítása után már olyan bemeneteket is megadhatunk, amelyeknek már nem ismerjük a kimenetét, és a hálózat ezekre is képes hibahatáron belüli kimenetet produkálni.
+A tanítási folyamat elvégzésekor a hálózatba olyan bemenetet juttatunk, amelyhez tartozó kimenet ismert. A bemenetet végig futtatjuk a hálózat rétegein, majd a kimeneti réteg által szolgáltatott eredményt összehasonlítjuk a kimenet várt értékével. A két érték közötti eltérést a hálózat \textit{\textbf{hibájának}} nevezzük. A tanítás folyamán a hálózat súlyait úgy változtatjuk, hogy ez a hiba lehetőleg minél kisebb legyen. A hálózat betanítása után már olyan bemeneteket is megadhatunk, amelyeknek nem ismerjük a kimenetét, és a hálózat ezekre is képes hibahatáron belüli kimenetet produkálni.
 
 \begin{figure}[h]
 	\centering
@@ -20,92 +27,95 @@ A tanítási folyamat elvégzésekor a hálózatba olyan bemenetet juttatunk, am
 	\caption{Egy általános felépítésű neurális hálózat}
 \end{figure}
 
-\section{Perceptron}
+\section{A neurális hálók elemei}
 
 Az egyszerűség kedvéért vizsgáljunk meg egy olyan neurális hálózatot, amelynek egyetlen neuronnal rendelkezik. Ezt szokás \textbf{\textit{Perceptron}}-nak is nevezni.
 
-\section{A neurális hálók elemei}
+\textbf{\textit{Bemenet}}: Az kiértékelendő adat (ember számára ingerek), amit általában egy vektor (jelölje $x$) reprezentál.
 
-\textbf{\textit{Bemenet}}: Az kiértékelendő adat (ember számára ingerek), amit általában egy vektor (\(x\)) reprezentál.
-
-\textit{\textbf{Súlyok}}: Két neuron közötti kapcsolat. Egy valós szám (eleinte véletlenszerűek). A hálózat súlyait (W) mátrixba tároljuk el.
+\textit{\textbf{Súlyok}}: Két neuron közötti kapcsolat. Egy valós érték. A hálózat súlyait mátrixba tároljuk el (ezt jelölje $W$).
 
 \textbf{\textit{Összegző csomópont}}: A bemeneteket összeszorozza a megfelelő súlyokkal és ezek összegét képezi. Tulajdonképpen mátrix szorzásról van szó.
 
-\[v(n) = \sum_i^{n}(w_ix_i)\]
+$$
+v(n) = \sum_{i=1}^{n}(w_ix_i)
+$$
 
-\textit{\textbf{Aktivációs függvény}}: Egy olyan függvény ($\varphi$), ami leképezi a kapott összeget egy kisebb intervallumba pl. [0,1] vagy [-1,1] között.
+\textit{\textbf{Aktivációs függvény}}: Egy olyan függvény ($\varphi$), ami leképezi a kapott összeget egy adott intervallumba, amely általában a $[0, 1]$ vagy $[-1, 1]$ intervallumokat jelenti.
 
-\textbf{\textit{Kimenet}}: A leképezett értékünk lesz a kimenetünk (\(y\)).
+\textbf{\textit{Kimenet}}: A leképezett értékünk lesz a kimenetünk (jelölje $y$).
 
-\begin{center}
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.6]{images/ANNParts.png}
-\end{center}
+	\caption{A matematikai neuron modell felépítése}
+	\label{fig:ANNParts}
+\end{figure}
 
-\begin{comment}{A generált súlyok lehetnek 0 értékűek, de általában a random inicializálás jobb konvergenciát eredményez.}
-\end{comment}
+\Aref{fig:ANNParts}. ábrán láthatjuk a mesterséges neurális háló neuronjának matematikai modelljét. Ebben a $b_n$ változót \textit{bias}-nak nevezzük. A bias érték általában egy olyan bemenet, amely akkor is lehetővé teszi az $1$-es kimeneti értéket, ha a bemeneten $0$ érték szerepel. Ez kritikus fontoss-gú lehet a sikeres tanuláshoz. Tegyük fel hogy a neurális hálózat egy függvény: $y = mx$. A fenti függvény az origót metszi, ami nem minden esetben add jó eredményeket. A bias definiálásával a függvényünk kap egy konstans paramétert $y = mx + b$. A $b_n$-hez tartozó súly ($w_b$) általában -1 vagy 1.
 
-A képen láthatunk egy \(b_n\) változót másnéven bias. Valójában a bias érték lehetővé teszi egy neuron aktiválódását, ami kritikus lehet a sikeres tanuláshoz. Tegyük fel hogy a neurális hálózat egy függvény: \(y = mx\). A fenti függvény az origót metszi, ami nem minden esetben add jó eredményeket. A bias definiálásával a függvényünk kap egy konstans paramétert \(y = mx + b\). A \(b(n)\)-hez tartozó súly (\(w_b\)) általában -1 vagy 1.
-
-\begin{comment}{A \textit{most nem részleteznék} jellegű észrevételeket kerülni kellene. Egy fél mondatban elég belemenni, nagyon valóban nem kell részletezni.}
-\end{comment}
-
-Amennyiben az \(x(n)\) bemenethez tartozó ideális kimenetet \(d(n)\)-nel jelöljük, illetve \(y(n)\) jelenti a hálózat által az \(x(n)\) bemenetre adott kimenetét, a neurális hálózat négyzetes hibáját a következőképpen értelmezzük:
-
-\[ \varepsilon = (d(n) - y(n))^2\]
+Amennyiben az $x(n)$ bemenethez tartozó ideális kimenetet $d(n)$-nel jelöljük, illetve $y(n)$ jelenti a hálózat által az $x(n)$ bemenetre adott kimenetét, a neurális hálózat négyzetes hibáját a következőképpen értelmezzük:
+$$
+\varepsilon = (d(n) - y(n))^2.
+$$
 
 Ezt a hibát akarjuk a tanítási eljárás során minimálisra csökkenteni. Természetesen az lenne az ideális, ha a hibát egészen nullára tudnánk redukálni, de ez általában nem sikerül, ezért meg kell elégednünk egy kellően kicsiny hibaküszöbbel.
 
 Aktivációs függvényként tetszőleges balról illetve jobbról folytonos eloszlásfüggvény megfelel, azaz olyan függvényt kell választanunk, amely
-
 \begin{itemize}
-\item monoton növekvő
+\item monoton növekvő,
 \item balról/jobbról folytonos,
-\item határértéke + $\infty$ -ben 1, - $\infty$ -ben 0.
+\item határértéke $+\infty$-ben 1, $-\infty$ -ben 0.
 \end{itemize}
 
-Aktivációs függvénynek általában a szigmoid, azaz S alakú, függvényeket használjuk (pl. logisztikus, tangens hiperbolikus stb.).
+Aktivációs függvénynek általában a szigmoid, azaz S alakú, függvényeket használjuk (mint például a logisztikus, tangens hiperbolikus függvények).
 
-Az aktivációs függvényeknél egy ún. rámpafüggvényről (RELU), ami az
+Az aktivációs függvényeknél egy úgynevezett rámpafüggvényről (RELU), ami az
+$$
+f(x) = max(0,x)
+$$
+összefüggéssel írható le, ahol $x$ az aktivációs függvény bemenete (\ref{fig:relu}. ábra).
 
-\[ f(x) = max(0,x) \]
-
-összefüggéssel írható le, ahol x az aktivációs függvény bemenete.
-
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=1.0]{relu}
-\end{center}
+\caption{A rámpafüggvény}
+\label{fig:relu}
+\end{figure}
 
 A legújabb biológiai kutatások és a gyakorlati tapasztalatok is igazolják hogy a RELU-val történő tanítások szignifikánsan jobban teljesítenek. Legnagyobb előnye a regressziós tanítások esetén mutatkozik meg.
 
-\section{Backpropagation}
+\section{A Backpropagation tanítási algoritmus}
 
-Hiba minimalizálása során szükségünk van az aktuális hibára. Az összes kimeneti neuronra kiszámoljuk a négyzetes hibát és ezeket összeadjuk.
+Hiba minimalizálása során szükségünk van az aktuális hibára. Az összes kimeneti neuronra kiszámoljuk a négyzetes hibát és ezeket összeadjuk:
+$$
+E_{total} = \sum \dfrac{1}{2}(target - output)^2.
+$$
+(Az $\dfrac{1}{2}$ szorzót azért használjuk hogy el tudjuk távolítani majd a kitevőt a későbbiekben deriváláskor.)
 
-\[ E_{total} = \sum \dfrac{1}{2}(target - output)^2\]
+A backpropagation célja, hogy frissítse az egyes súlyokat a hálózaton úgy, hogy az aktuális kimenet közelebb kerüljön a célkimenethez, ezáltal minimalizálva az egyes kimeneti neuronok és a hálózat egészének hibáját. A backpropagation algoritmus számításaira láthatunk egy példát \aref{fig:ANN_backprog}. ábrán.
 
-\textit{\hl{Az 1/2 szorzót azért használjuk hogy eltávolítsuk a kitevőt, deriváláskor}
-}
-
-A backpropagation célja, hogy frissítse az egyes súlyokat a hálózaton úgy, hogy az aktuális kimenet közelebb kerüljön a célkimenethez, ezáltal minimalizálva az egyes kimeneti neuronok és a hálózat egészének hibáját.
-
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.5]{ANN_backprog}
-\end{center}
+\caption{Példa a visszaterjesztéses tanítás alkalmazására}
+\label{fig:ANN_backprog}
+\end{figure}
 
-Tekintsük a \(w_5\)-öt. Azt szeretnénk tudni, hogy a \(w_5\) változása milyen hatást gyakorol a teljes hibára, más néven $\frac{\partial E_ {total}}{\partial w_ {5}}$. Úgy is fogalmazhatunk hogy a gradiens a \(w_5\) vonatkoztatásba.
+Tekintsük a $w_5$-öt. Azt szeretnénk tudni, hogy a $w_5$ változása milyen hatást gyakorol a teljes hibára, más néven $\frac{\partial E_ {total}}{\partial w_ {5}}$. Úgy is fogalmazhatunk hogy a gradiens a $w_5$ vonatkoztatásba.
 
-A láncszabály alkalmazásával tudjuk kiszámolni:
+Ezt a láncszabály alkalmazásával tudjuk kiszámolni:
+$$
+\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} \cdot \frac{\partial out_{o1}}{\partial net_{o1}} \cdot \frac{\partial net_{o1}}{\partial w_{5}}.
+$$
 
-\[\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}\]
-
-Lássuk az egyenlet elemeit:
+Lássuk az egyenlet elemeit!
 \begin{flushleft}
 \begin{equation}
 E_{total} = \frac{1}{2}(target_{o1} - out_{o1})^{2} + \frac{1}{2}(target_{o2} - out_{o2})^{2}
 \end{equation}
 \begin{equation}
-\frac{\partial E_{total}}{\partial out_{o1}} = 2 * \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} * -1 + 0
+\frac{\partial E_{total}}{\partial out_{o1}} = 2 \cdot \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} \cdot -1 + 0
 \end{equation}
 \begin{equation}
 \frac{\partial E_{total}}{\partial out_{o1}} = -(target_{o1} - out_{o1}) = -(0.01 - 0.75136507) = 0.74136507
@@ -114,52 +124,74 @@ E_{total} = \frac{1}{2}(target_{o1} - out_{o1})^{2} + \frac{1}{2}(target_{o2} - 
 \end{flushleft}
 
 A logisztikus függvény parciális deriváltja a kimenet szorzata (1 - kimenet):
+$$
+out_{o1} = \frac{1}{1+e^{-net_{o1}}}
+$$
 
-\[out_{o1} = \frac{1}{1+e^{-net_{o1}}}\]
+$$
+\frac{\partial out_{o1}}{\partial net_{o1}} = out_{o1}(1 - out_{o1}) = 0.75136507(1 - 0.75136507) = 0.186815602
+$$
 
-\[\frac{\partial out_{o1}}{\partial net_{o1}} = out_{o1}(1 - out_{o1}) = 0.75136507(1 - 0.75136507) = 0.186815602\]
+Végül, mennyire változik az $o1$ változó teljes bemenete a $w_5$ tekintetében?
+$$
+net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1
+$$
 
-Végül, mennyire változik az o1 változó teljes nettó bemenete a \(w_5\) tekintetében?
+$$
+\frac{\partial net_{o1}}{\partial w_{5}} = 1 * out_{h1} * w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992
+$$
 
-\[net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1\]
+Összesítve az eddigieket:
+$$
+\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} \cdot \frac{\partial out_{o1}}{\partial net_{o1}} \cdot \frac{\partial net_{o1}}{\partial w_{5}}
+$$
 
-\[\frac{\partial net_{o1}}{\partial w_{5}} = 1 * out_{h1} * w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992\]
-
-Összesítve:\\
-
-\[\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} * \frac{\partial out_{o1}}{\partial net_{o1}} * \frac{\partial net_{o1}}{\partial w_{5}}\]
-
-\[\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 * 0.186815602 * 0.593269992 = 0.082167041\]
+$$
+\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 \cdot 0.186815602 * 0.593269992 = 0.082167041
+$$
 
 A hiba csökkentése érdekében kivonjuk ezt az értéket az aktuális súlyból (adott esetben szorozva egy bizonyos tanulási sebességgel, $\eta$, amelyet 0,5-re állítunk):
-
-\[w_5^{+} = w_5 - \eta * \frac{\partial E_{total}}{\partial w_{5}} = 0.4 - 0.5 * 0.082167041 = 0.35891648\]
+$$
+w_5^{+} = w_5 - \eta \cdot \frac{\partial E_{total}}{\partial w_{5}} = 0.4 - 0.5 \cdot 0.082167041 = 0.35891648
+$$
 
 Meg tudjuk ismételni ezt a folyamatot, hogy megkapjuk az új súlyokat $w_6$, $w_7$ és $w_8$:
+$$
+w_6 ^ {+} = 0,408666186
+$$
 
-\[w_6 ^ {+} = 0,408666186\]
+$$
+w_7 ^ {+} = 0.511301270
+$$
 
-\[w_7 ^ {+} = 0.511301270\]
+$$
+w_8 ^ {+} = 0.561370121
+$$
 
-\[w_8 ^ {+} = 0.561370121\]
+Ezután folytatjuk a hátrafelé az új értékeket a $w_1$, $w_2$, $w_3$ és $w_4$ értékek kiszámításával. Hasonlóan láncszabályt alkalmazunk. A visszaterjesztés módjának egy szemléltetését \aref{fig:ANN_bp_viz}. ábrán láthatjuk.
 
-Ezután folytatjuk a hátrafelé az új értékeket a $w_1$, $w_2$, $w_3$ és $w_4$ értékek kiszámításával. Hasonlóan láncszabályt alkalmazunk.\\
-
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.5]{ANN_bp_viz}
-\end{center}
+\caption{A hiba visszaterjesztése a súlyok módosításához}
+\label{fig:ANN_bp_viz}
+\end{figure}
 
-Végül frissítjük az összes súlyunkat! Amikor eredetileg a 0.05 és a 0.1 bemeneteket továbbítottuk, a hálózat hibája 0.2983711 volt. A backpropagation első fordulója után a teljes hiba 0,2910279 értékre csökken. Lehet, hogy nem tűnik soknak, de miután megismételtük ezt a folyamatot 10 000-szer, a hiba lecsökken 0,0000351-re.\\
+Végül frissítjük az összes súlyunkat. Amikor eredetileg a 0.05 és a 0.1 bemeneteket továbbítottuk, a hálózat hibája 0.2983711 volt. A backpropagation első fordulója után a teljes hiba 0,2910279 értékre csökken. Lehet, hogy nem tűnik soknak, de miután megismételtük ezt a folyamatot 10 000-szer, a hiba lecsökken 0,0000351-re.
 
 \section{Konvolúciós neurális hálózat}
 
+<<<<<<< HEAD
 A konvolúciós neurális hálózat\cite{liconvolution}\cite{lecun1995convolutional} hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkbe a bemenet a kínai karakter pixel értékei, a kimenet pedig valószíűségek a karakterekből adódóan.
+=======
+A konvolúciós neurális hálózat hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit eredendően képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkben a bemenet a kínai karakterek pixel értékei, a kimenet pedig egy becsült osztályba tartozási mérték.
+>>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
-A hagyományos neurális hálózatok nem skálázzák a teljes képet. A kínai (különösen a hagyományos) több száz karaktert nem lehet megjeleníteni egy 16x16 pixeles rácsban. A megfelelő méret valószínűleg körülbelül 24x24 képpontot tartalmaz. Neurononként 24x24 = 526 súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket.
+A hagyományos neurális hálózatok nem skálázzák a teljes képet. A kínai (különösen a hagyományos) több száz karaktert nem lehet megjeleníteni egy $16 \times 16$ pixeles rácsban. A megfelelő méret körülbelül $24 \times 24$ képpontot tartalmaz. Neurononként $24 \times 24 = 526$ súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket.
 
-Ha végig gondoljuk, hogy az hány paramétert jelent még egy kis neuronszámú kevés rejtett rétegből álló hálózat esetében, akkor rájöhetünk, hogy nagyobb méretű képen fellelhető minták felismeréséhez a tisztán hagyományos neurális hálózatok alkalmazása nem célravezető, emiatt a kép elő feldolgozására, szűrésére konvolúciós rétegeket vezetnek be.
+Ha végig gondoljuk, hogy az hány paramétert jelent még egy kis neuronszámú kevés rejtett rétegből álló hálózat esetében, akkor rájöhetünk, hogy nagyobb méretű képen fellelhető minták felismeréséhez a hagyományos neurális hálózatok alkalmazása nem célravezető, emiatt a kép előfeldolgozására, szűrésére konvolúciós rétegeket vezetnek be.
 
-\subsection{Felépítés}
+\subsection{A háló felépítése}
 
 A konvolúciós neurális hálózatokban szereplő rétegeket funkció alapján alapvetően két csoportra lehet bontani.
 
@@ -170,25 +202,33 @@ A konvolúciós neurális hálózatokban szereplő rétegeket funkció alapján 
 
 A konvolúciós rétegek alapjában véve színes képek feldolgozására lettek kifejlesztve, ezért a neuronjaik három dimenzióban (szélesség, magasság, színcsatornák) vannak elrendezve.
 
-A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fekete akkor 0-át, ha fehér akkor 255-et rendelünk hozzá. A szürke színt [0, 255] közötti értékekkel definiáljuk.
+A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fekete akkor 0-át, ha fehér akkor 255-et rendelünk hozzá. A szürke árnyalatokat $[0, 255]$ közötti értékekkel definiáljuk. Egy kínai karakterre \aref{fig:chinese_char_pixel}. ábrán láthatunk példát.
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.65]{chinese_char_pixel}
-\end{center}
+\caption{Egy kínai karakter fekete-fehér raszteres képként}
+\label{fig:chinese_char_pixel}
+\end{figure}
 
 A következő felsorolásban - a tipikus, de nem kizárólagos sorrendre ügyelve - bemutatnám a konvolúciós hálózat rétegtípusait:
 
 \begin{itemize}
-\item bemeneti réteg: Tartalmazza a kép nyers pixel értékeit. Az értékeket sorba állítjuk és azokat egy 1 dimenziós vektor reprezentálja, ami 0 és 1 értékeket tartalmaz.
+\item \textit{Bemeneti réteg}: Tartalmazza a kép nyers pixel értékeit. Az értékeket sorba állítjuk és azokat egy 1 dimenziós vektor reprezentálja, ami 0 és 1 értékeket tartalmaz.
 
-\item konvolúciós réteg: Adott képpont csoportokra konvolúció matematikai műveletet alkalmazunk. A konvolúció eredménye egy skalár (a skaláris szorzata a kép egy adott részének és a szűrőnek). Ha minden képpont csoportra elvégezzük a konvolúciót, akkor egy aktivációs térképet kapunk. Általában több szűrő paraméterrel is elvégezzük a konvolúciót és aktivációs térképeket egymásra rakjuk. Az aktivációs térkép, a művelet tulajdonsága miatt, kisebb
-méretű lesz.
+\item \textit{Konvolúciós réteg}: Adott képpont csoportokra konvolúció matematikai műveletet alkalmazunk. A konvolúció eredménye egy skalár (a skaláris szorzata a kép egy adott részének és a szűrőnek). Ha minden képpont csoportra elvégezzük a konvolúciót, akkor egy aktivációs térképet kapunk. Általában több szűrő paraméterrel is elvégezzük a konvolúciót és aktivációs térképeket egymásra rakjuk. Az aktivációs térkép, a művelet tulajdonsága miatt, kisebb
+méretű lesz (\ref{fig:convolution}. ábra).
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.3]{convolution}
-\end{center}
+\caption{A bináris mátrix és a belőle konvolúcióval kinyert jellemzők}
+\label{fig:convolution}
+\end{figure}
 
-Konkrétan mátrix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet különböző szűröt használni.
+Konkrétan mátrix szorzásról van szó. A feature map elemei egész számok, amik további konvolúciós rétegen mennek keresztül. Lehet közben különböző szűröket is használni.
+
+A \textit{keras} Python csomagban ennek megvalósítása az alábbi módon lehetséges.
 \begin{python}
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
@@ -203,38 +243,46 @@ model.add(Conv2D(64, (3, 3),
 	input_shape=(1, 64, 64)))
 \end{python}
 
-\item RELU réteg: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: \(f(x) = max(x, 0)\). Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel. A konvolúciós hálóknál a RELU sokkal gyorsabb más aktivációs függvényeknél, mint például a sigmoid vagy a tanh.
-\item összevonó réteg (pooling layer): A Pooling Layer függetlenül működik minden egyes feature map-nél. A MAX művelet segítségével kinyeri a legfontosabb vonásokat, csökkentve a dimenzióját. A leggyakoribb forma egy 2x2-es méretű szűrő, melyet 2 lépéssel kell felvinni minden szeletre. A bemenetben 2 szélesség és magasság mellett, az aktiválások 75\% -át eldobja. Minden MAX művelet ebben az esetben 4 számot vesz igénybe.
-
+\item \textit{RELU réteg}: A konvolúciós réteg aktivációs függvénye, ami a következő leképezést valósítja meg: $f(x) = max(x, 0)$. Vagyis, ha a bemenet kisebb, mint nulla, akkor a kimenet nulla lesz, ha nagyobb, mint nulla, akkor a kimenet a bemenet értékét veszi fel. A konvolúciós hálóknál a RELU sokkal gyorsabb más aktivációs függvényeknél, mint például a sigmoid vagy a tanh.
+\item \textit{Összevonó réteg (pooling layer)}: A Pooling Layer függetlenül működik minden egyes feature map-nél. A MAX művelet segítségével kinyeri a legfontosabb vonásokat, csökkentve a dimenzióját. A leggyakoribb forma egy $2 \times 2$-es méretű szűrő, melyet 2 lépéssel kell felvinni minden szeletre. A bemenetben 2 szélesség és magasság mellett, az aktiválások 75\% -át eldobja. Minden MAX művelet ebben az esetben 4 számot vesz igénybe. Ennek használatát az alábbi kódpélda mutatja.
 \begin{python}
 model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 \end{python}
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.3]{maxpool}
-\end{center}
+\caption{A pooling réteg működése egy példán keresztül}
+\label{fig:maxpool}
+\end{figure}
 
-\item teljesen összekötött réteg (fully connected, FC): Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
+\item \textit{Teljesen összekötött réteg (fully connected, FC)}: Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
 \begin{python}
 model.add(Dense(200, activation='softmax'))
 \end{python}
 \end{itemize}
 
-A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
+\Aref{fig:CNN_CCR_working}. ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.65]{CNN_CCR_working}
-\end{center}
+\caption{A konvolúciós karakterfelismerő hálózat sematikus felépítése}
+\label{fig:CNN_CCR_working}
+\end{figure}
 
-\subparagraph{Hálózat architektúra}
+\subsection{Hálózat architektúra}
+
+\begin{comment}{Melyik pontosan ez a cikk?}
+\end{comment}
 
 nagyon fontos a tervezés szakasznál. Egy 2013 kutatási papírt\cite{cirecsan2015multi} mutatnék be, miszerint a rétegek és a bennük lévő neuronok számával csökkenthető a hibaarány.
 
-Először vessünk pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek 48x48 pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
+Először vessünk egy pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek $48 \times 48$ pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
 
 Nyolc hálózaton történt tanítás. Minden hálózatnak 11 rétege van, beleértve a bemeneti és kimeneti réteget. A jellemzők kinyerés fázisánál 100-450 darabszámú neuront használ. Végezetül két egymást követő teljesen összekötött (fully-connected) hálózat végzi el az osztályozást.
 
-Tehát 48x48 bemeneti réteg, xCy konvolúciós réteg, ahol 'x' neuronok (maps) száma és 'y' a szűrő mérete (y * y). Az MPy a összevonó réteg (max-pooling), ahol az 'y' a pooling méret (y * y). Az xN pedig a teljesen összekötött hálózat, ahol az 'x' a neuronok számát jelöli.
+Tehát $48 \times 48$ bemeneti réteg, $xCy$ konvolúciós réteg, ahol $x$ neuronok (maps) száma és $y$ a szűrő mérete ($y \cdot y$). Az $MPy$ az összevonó réteg (max-pooling), ahol az $y$ a pooling méret ($y \cdot y$). Az $xN$ pedig a teljesen összekötött hálózat, ahol az $x$ a neuronok számát jelöli.
 
 \begin{table}[h]
 \centering
@@ -255,21 +303,33 @@ Tehát 48x48 bemeneti réteg, xCy konvolúciós réteg, ahol 'x' neuronok (maps)
 
 Észrevehető, hogy a rétegekben a neuronok növelése csökkenti a hibaarányt. Bizonyítható, hogy a pontosság és a robusztusság növekszik, ha neuronok száma nő.
 
-A bonyolult hálózatok gyakran hajlamosak az overfitting-re. Az overfitting azt jelenti, hogy a hálózat túl jól illeszkedik a tanitó mintára, ezért az nem fog jól teljesíteni a teszt mintára.
+A bonyolult hálózatok gyakran hajlamosak a túltanulásra, overfitting-re. Az overfitting azt jelenti, hogy a hálózat túl jól illeszkedik a tanitó mintára, ezért az nem fog jól teljesíteni a teszt mintára.
 
-\begin{lstlisting}[language=Python]
+Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent, hogy véletlenszerűen deaktivál neuronokat, hogy a hálózat más útvonalakon haladva máshogy fog tanulni. Ez Python-ban az alábbi kóddal valósítható meg.
+\begin{python}
 model.add(Dropout(0.5))
-\end{lstlisting}
+\end{python}
 
-Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent, hogy véletlenszerűen deaktivál neuronokat, hogy a hálózat más útvonalakon haladva máshogy fog tanulni.
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{dropout}
+\caption{Neuronok véletlenszerű deaktiválása}
+\label{fig:dropout}
+\end{figure} 
 
-\begin{center}
-\includegraphics[scale=0.7]{dropout}
-\end{center} 
+\subsection{A háló tanítása}
 
-\subsection{Tanítás}
-
+<<<<<<< HEAD
 Ez a neurális hálózatok\cite{neurális77} egyik legfontosabb része. Sok kérdés merülhet fel olvasás közben. Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését? Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket? Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak? A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett képzési folyamat révén.
+=======
+Ez a neurális hálózatok használatának egyik lényeges pontja. Sok kérdés merülhet fel a megfelelő tanítási algoritmus kiválasztása közben.
+\begin{itemize}
+\item Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését?
+\item Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket?
+\item Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak?
+\end{itemize}
+A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett eljárással.
+>>>>>>> f50dead678388d130a61361df79d82502c27fb4d
 
 A backpropagation\cite{ABeginne32} négy különböző szakaszra osztható
 \begin{itemize}
@@ -279,19 +339,24 @@ A backpropagation\cite{ABeginne32} négy különböző szakaszra osztható
 \item Súly frissítés (weight update)
 \end{itemize}
 
-Az előre terjesztés során egy kínai karakter képét (pl. 48x48) továbbítunk az egész hálózaton. Az első leképzésnél, mivel minden súly és szűrőérték véletlenszerűen van inicializálva, így a kimenet is valószínűleg véletlenszerű lesz, ezért a hálózat nem add pontos osztályozást. A hálózat jelenlegi súlyaival nem tudja keresni az alacsony szintű jellemzőket, ilyenek például a stroke-ok. Emiatt tovább lépünk a veszteség számítás részre. Ne felejtsük el, hogy a tanító mintának van egy címkéje. A veszteségfüggvény többféle módon definiálható, de gyakori az MSE (átlagos négyzetes hiba) \(E_{total} = \sum 1/2(target - output)^2\). 
+Az előre terjesztés során egy kínai karakter képét (amelynek mérete például $48 \times 48$ pixel) továbbítunk az egész hálózaton. Az első leképzésnél, mivel minden súly és szűrőérték véletlenszerűen van inicializálva, így a kimenet is valószínűleg véletlenszerű lesz, ezért a hálózat nem add pontos osztályozást. A hálózat jelenlegi súlyaival nem tudja keresni az alacsony szintű jellemzőket, ilyenek például a stroke-ok. Emiatt tovább lépünk a veszteség számítás részre. Ne felejtsük el, hogy a tanító mintának van egy címkéje. A veszteségfüggvény többféle módon definiálható, de gyakori az \textit{MSE} (\textit{Mean Squared Error}, átlagos négyzetes hiba)
+$$
+E_{total} = \sum 1/2(target - output)^2.
+$$ 
 
-A target egy vektor, ami a képzési címke, ami a karakterek valószínűségét tárolja (0->nem megfelelő karakter, 1->megfelelő karakter). Ezt kell kivonni az előre jelzett címke (véletlenszerű szám [0,1] között). Majd venni a négyzetét és elosztani 1/2-el. Ezt a folyamatot meg ismételjük minden egyes vizsgálandó kínai karakterre és összegezük őket.
+A \textit{target} egy vektor, aminek az értékei azt mutatják meg, hogy az adott minta a neurális háló döntése alapján mennyire illeszkedik a megfelelő karakterre. Ezt tipikusan úgy állítják össze, hogy a $0$ jelentse azt, hogy egyáltalán nem illeszkedik, az $1$ érték pedig, hogy a háló döntése alapján az a karakter teljesen illeszkedik.
 
+A modell használatát mutatja az alábbi kódrészlet.
 \begin{python}
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
 \end{python}
 
-A veszteség rendkívül magas az első képzésnél. Olyan pontra akarunk jutni, ahol az előre jelzett címke megegyezik a képzési címkével. Ahhoz, hogy odaérjünk, minimálisra csökkentjük a veszteségünket. Azt szeretnénk megtudni, hogy mely bemenetek (súlyok a mi esetünkben) leginkább hozzájárultak a hálózat veszteségéhez (vagy hibájához).
+\begin{comment}{A képzési címke magyar nyelvű irodalomban szerepelt?}
+\end{comment}
 
-\textit{Ide a model.fit}
+A veszteség rendkívül magas az első képzésnél. Olyan pontra akarunk jutni, ahol az előre jelzett címke megegyezik a képzési címkével. Ahhoz, hogy odaérjünk, minimálisra csökkentjük a veszteségünket. Azt szeretnénk megtudni, hogy mely bemenetek/súlyok azok, amelyek leginkább hozzájárultak a hálózat veszteségéhez (vagy hibájához). Ezt az illeszkedést az alábbi módon határozhatjuk meg.
 
 \begin{python}
 model.fit(f['trn/x'], f['trn/y'],	
@@ -300,21 +365,29 @@ model.fit(f['trn/x'], f['trn/y'],
 	shuffle='batch', verbose=1)
 \end{python}
 
-\begin{center}
-\includegraphics[scale=0.3]{CNN_loss}
-\end{center}
+A négyzetes hibafüggvény szemléltetését láthatjuk \aref{fig:CNN_loss}. ábrán.
 
-A $dL/dW$ matematikai egyenlet írjuk fel a veszteség hozzájárulást. Következő lépés a hiba visszaterjesztés, amely meghatározza, hogy a súlyok milyen mértékben járultak hozzá a veszteséghez, és megtalálják azokat a módokat, amelyekkel a károk csökkenthetők. Miután kiszámítjuk ezt a származékot, akkor megyünk az utolsó lépéshez, amely a súlyok frissítése. Itt vesszük az összes súlyt és szűröt, és frissítjük őket úgy, hogy a gradiens ellenkező irányba változzon.
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{CNN_loss}
+\caption{A négyzetes hibafelület}
+\label{fig:CNN_loss}
+\end{figure}
 
-\begin{center}
-\includegraphics[scale=0.9]{CNN_update_weight}
-\end{center}
+A $dL/dW$ matematikai egyenlet írjuk fel a veszteség hozzájárulást. Következő lépés a hiba visszaterjesztés, amely meghatározza, hogy a súlyok milyen mértékben járultak hozzá a veszteséghez, és megtalálják azokat a módokat, amelyekkel a károk csökkenthetők. Miután kiszámítjuk ezt a származékot, akkor megyünk az utolsó lépéshez, amely a súlyok frissítése. Itt vesszük az összes súlyt és szűröt, és frissítjük őket úgy, hogy a gradiens ellenkező irányba változzon. Ekkor
+$$
+w = w_i - \eta \dfrac{dL}{dW},
+$$
+ahol $w$ a súly, a $w_i$ a kezdeti súly, az $\eta$ pedig a tanulási tényező.
 
-A tanulási sebesség egy olyan paraméter, amelyet a programozó választ. A magas tanulási arány azt jelenti, hogy nagyobb súlycsökkenést kell végrehajtani a súlycsökkentésekben, így kevesebb időre lehet szükség ahhoz, hogy a modell konvergáljon az optimális súlycsoporton. Azonban a túl magas tanulási arány olyan túl nagy ugrásokhoz vezethet, amelyek nem elég pontosak ahhoz, hogy elérjék az optimális pontot.
+A tanulási tényező egy olyan paraméter, amelyet a programozó választ. A magas tanulási arány azt jelenti, hogy nagyobb súlycsökkenést kell végrehajtani a súlycsökkentésekben, így kevesebb időre lehet szükség ahhoz, hogy a modell konvergáljon az optimális súlycsoporton. Azonban a túl magas tanulási arány olyan túl nagy ugrásokhoz vezethet, amelyek nem elég pontosak ahhoz, hogy elérjék az optimális pontot. Ennek egy szemléltetését láthatjuk \aref{fig:CNN_learning_rate}. ábrán.
 
-\begin{center}
-\includegraphics[scale=0.7]{CNN_learning_rate}
-\end{center}
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{CNN_learning_rate}
+\caption{Magas és alacsony tanulási tényezők hatása}
+\label{fig:CNN_learning_rate}
+\end{figure}
 
 Az előre terjesztés, a veszteség számítás, a visszaterjesztés és a paraméterfrissítés folyamata egy képzési iteráció. A program megismételi ezt a folyamatot egy rögzített számú iterációra. Miután befejezte a paraméter frissítést az utolsó képzésnél, remélhetőleg a hálózat megfelelően működik.
 
@@ -324,7 +397,7 @@ Végül megnézzük, hogy működik-e a hálózat vagy sem. Különböző (még 
 
 \subsection{Transfer learning}
 
-A konvolúciós hálózatok betanításához nagyszámú mintára és nagyteljesítményű számítógépekre van szükség. Amennyiben nem áll rendelkezésünkre nagyjából egymillió képkockából álló tanító adathalmaz, akkor kisszámú mintáról beszélünk. Ha nincs lehetőségünk vagy erőforrásunk nagy adathalmazzal tanítani, akkor is megvalósíthatjuk a kívánt leképezést. A transfer learning (tanulás átadása) módszer segítségével egy előre betanított hálózatot veszünk alapul, és annak utolsó pár rétegét lecserélve végezzük a tanítást. Ilyenkor a megmaradt rétegek betanított tulajdonság érzékelő funkciója segítségével a lecserélt rétegek által megvalósítandó leképezés könnyebbé vállhat. A konvolúciós neurális hálózatok tanítása esetében ez egy gyakori eljárás. A weben számos előre betanított hálózat található.
+A konvolúciós hálózatok betanításához nagyszámú mintára és nagy teljesítményű számítógépekre van szükség. Amennyiben nem áll rendelkezésünkre nagyjából egymillió képkockából álló tanító adathalmaz, akkor kis számú mintáról beszélünk. Ha nincs lehetőségünk vagy erőforrásunk nagy adathalmazzal tanítani, akkor is megvalósíthatjuk a kívánt leképezést. A transfer learning (tanulás átadása) módszer segítségével egy előre betanított hálózatot veszünk alapul, és annak utolsó pár rétegét lecserélve végezzük a tanítást. Ilyenkor a megmaradt rétegek betanított tulajdonság érzékelő funkciója segítségével a lecserélt rétegek által megvalósítandó leképezés könnyebbé vállhat. A konvolúciós neurális hálózatok tanítása esetében ez egy gyakori eljárás. A weben számos előre betanított hálózat található.
 
 \begin{comment}{Az egész fejezetnek arról kell szólnia, hogy hogy lehetett a konvolúciós neurális hálót alkalmazni a konkrét, karakterfelismerési problémára. Az általános részeket ennek megfelelően érdemes lehet átírni, vagy csak egy rövid áttekintésnek tekinteni a fejezet elején.}
 \end{comment}
