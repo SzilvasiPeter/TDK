@@ -42,6 +42,12 @@ tmweb.dvi.
   support vector machine.
 \newblock {\em Pattern Recognition Letters 26}, 12 (2005), 1849--1856.
 
+\bibitem{neuralis77}
+{\sc István, F.}
+\newblock neurális hálózatok.pdf.
+\newblock
+  \url{https://gyires.inf.unideb.hu/GyBITT/19/Neuralis_halozatok_v8.pdf}, 2013.
+
 \bibitem{lecun1995convolutional}
 {\sc LeCun, Y., Bengio, Y., et~al.}
 \newblock Convolutional networks for images, speech, and time series.

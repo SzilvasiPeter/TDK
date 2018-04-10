@@ -20,52 +20,51 @@ I was expecting a `,' or a `}'---line 125 of file tdk.bib
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "ccr"
-Warning--I didn't find a database entry for "neurális77"
 Warning--to sort, need author or key in kinaiiras
 Warning--to sort, need author or key in tmwebdvi77
 Warning--to sort, need author or key in StrokeCJ9
 Warning--to sort, need author or key in OpenCVli86
 Warning--there's a month but no year in kinaiiras
 Warning--empty journal in liconvolution
-You've used 16 entries,
+You've used 17 entries,
             2253 wiz_defined-function locations,
-            620 strings with 6693 characters,
-and the built_in function-call counts, 4651 in all, are:
-= -- 449
-> -- 173
+            623 strings with 6803 characters,
+and the built_in function-call counts, 4865 in all, are:
+= -- 469
+> -- 180
 < -- 0
-+ -- 78
-- -- 58
-* -- 304
-:= -- 703
-add.period$ -- 42
-call.type$ -- 16
-change.case$ -- 75
++ -- 81
+- -- 60
+* -- 312
+:= -- 738
+add.period$ -- 45
+call.type$ -- 17
+change.case$ -- 79
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 190
-empty$ -- 433
-format.name$ -- 58
-if$ -- 1016
+cite$ -- 23
+duplicate$ -- 198
+empty$ -- 456
+format.name$ -- 60
+if$ -- 1063
 int.to.chr$ -- 0
-int.to.str$ -- 16
+int.to.str$ -- 17
 missing$ -- 11
-newline$ -- 77
-num.names$ -- 24
-pop$ -- 114
+newline$ -- 82
+num.names$ -- 26
+pop$ -- 122
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 63
 quote$ -- 0
-skip$ -- 143
+skip$ -- 150
 stack$ -- 0
-substring$ -- 256
-swap$ -- 53
+substring$ -- 261
+swap$ -- 55
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 66
 warning$ -- 6
-while$ -- 41
-width$ -- 18
-write$ -- 152
+while$ -- 43
+width$ -- 19
+write$ -- 162
 (There were 2 error messages)

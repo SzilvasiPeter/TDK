@@ -1,14 +1,15 @@
 \Chapter{Neurális hálók}
 
-A neurális hálózattokat\cite{neurális77} gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
+A neurális hálózattokat \cite{neuralis77} gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
 
 A neurális hálózatokat gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{images/neuron.png}
 	\caption{A biológiai neuron fő részei}
 	\label{fig:neuron}
+	Forrás: \url{https://blog.vivekpanyam.com/deep-learning-made-simple-part-1/}
 \end{figure}
 
 A kutatók az agy felépítését vizsgálva egy olyan matematikai modellt dolgoztak ki, amely   reprezentálni próbálja az agyban található neuronokat  és a közöttük lévő kapcsolatokat. (Az agyban lévő neuron sematikus felépítését láthatjuk \aref{fig:neuron}. ábrán.) Ezt a modellt nevezzük neurális hálónak vagy neurális hálózatnak.
@@ -22,7 +23,7 @@ A tanítási folyamat elvégzésekor a hálózatba olyan bemenetet juttatunk, am
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.75]{images/ANNLayers.png}
-	\caption{Egy általános felépítésű neurális hálózat}
+	\caption{Egy általános felépítésű neurális hálózat\cite{neuralis77}}
 \end{figure}
 
 \section{A neurális hálók elemei}
@@ -43,10 +44,10 @@ $$
 
 \textbf{\textit{Kimenet}}: A leképezett értékünk lesz a kimenetünk (jelölje $y$).
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.6]{images/ANNParts.png}
-	\caption{A matematikai neuron modell felépítése}
+	\caption{A matematikai neuron modell felépítése\cite{neuralis77}}
 	\label{fig:ANNParts}
 \end{figure}
 
@@ -74,11 +75,12 @@ f(x) = max(0,x)
 $$
 összefüggéssel írható le, ahol $x$ az aktivációs függvény bemenete (\ref{fig:relu}. ábra).
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=1.0]{relu}
+\includegraphics[scale=1.0]{images/relu}
 \caption{A rámpafüggvény}
 \label{fig:relu}
+Forrás: \url{https://sefiks.com/2017/08/21/relu-as-neural-networks-activation-function/}
 \end{figure}
 
 A legújabb biológiai kutatások és a gyakorlati tapasztalatok is igazolják hogy a RELU-val történő tanítások szignifikánsan jobban teljesítenek. Legnagyobb előnye a regressziós tanítások esetén mutatkozik meg.
@@ -93,10 +95,11 @@ $$
 
 A backpropagation célja, hogy frissítse az egyes súlyokat a hálózaton úgy, hogy az aktuális kimenet közelebb kerüljön a célkimenethez, ezáltal minimalizálva az egyes kimeneti neuronok és a hálózat egészének hibáját. A backpropagation algoritmus számításaira láthatunk egy példát \aref{fig:ANN_backprog}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{ANN_backprog}
+\includegraphics[scale=0.5]{images/ANN_backprog}
 \caption{Példa a visszaterjesztéses tanítás alkalmazására}
+Forrás: \url{https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/}
 \label{fig:ANN_backprog}
 \end{figure}
 
@@ -113,7 +116,7 @@ Lássuk az egyenlet elemeit!
 E_{total} = \frac{1}{2}(target_{o1} - out_{o1})^{2} + \frac{1}{2}(target_{o2} - out_{o2})^{2}
 \end{equation}
 \begin{equation}
-\frac{\partial E_{total}}{\partial out_{o1}} = 2 \cdot \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} \cdot -1 + 0
+\frac{\partial E_{total}}{\partial out_{o1}} = 2 \cdot \frac{1}{2}(target_{o1} - out_{o1})^{2 - 1} \cdot (-1) + 0
 \end{equation}
 \begin{equation}
 \frac{\partial E_{total}}{\partial out_{o1}} = -(target_{o1} - out_{o1}) = -(0.01 - 0.75136507) = 0.74136507
@@ -132,11 +135,11 @@ $$
 
 Végül, mennyire változik az $o1$ változó teljes bemenete a $w_5$ tekintetében?
 $$
-net_{o1} = w_5 * out_{h1} + w_6 * out_{h2} + b_2 * 1
+net_{o1} = w_5 \cdot out_{h1} + w_6 \cdot out_{h2} + b_2 \cdot 1
 $$
 
 $$
-\frac{\partial net_{o1}}{\partial w_{5}} = 1 * out_{h1} * w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992
+\frac{\partial net_{o1}}{\partial w_{5}} = 1 \cdot out_{h1} \cdot w_5^{(1 - 1)} + 0 + 0 = out_{h1} = 0.593269992
 $$
 
 Összesítve az eddigieket:
@@ -145,7 +148,7 @@ $$
 $$
 
 $$
-\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 \cdot 0.186815602 * 0.593269992 = 0.082167041
+\frac{\partial E_{total}}{\partial w_{5}} = 0.74136507 \cdot 0.186815602 \cdot 0.593269992 = 0.082167041
 $$
 
 A hiba csökkentése érdekében kivonjuk ezt az értéket az aktuális súlyból (adott esetben szorozva egy bizonyos tanulási sebességgel, $\eta$, amelyet 0,5-re állítunk):
@@ -168,14 +171,15 @@ $$
 
 Ezután folytatjuk a hátrafelé az új értékeket a $w_1$, $w_2$, $w_3$ és $w_4$ értékek kiszámításával. Hasonlóan láncszabályt alkalmazunk. A visszaterjesztés módjának egy szemléltetését \aref{fig:ANN_bp_viz}. ábrán láthatjuk.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{ANN_bp_viz}
+\includegraphics[scale=0.5]{images/ANN_bp_viz}
 \caption{A hiba visszaterjesztése a súlyok módosításához}
 \label{fig:ANN_bp_viz}
+Forrás: \url{https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/}
 \end{figure}
 
-Végül frissítjük az összes súlyunkat. Amikor eredetileg a 0.05 és a 0.1 bemeneteket továbbítottuk, a hálózat hibája 0.2983711 volt. A backpropagation első fordulója után a teljes hiba 0,2910279 értékre csökken. Lehet, hogy nem tűnik soknak, de miután megismételtük ezt a folyamatot 10 000-szer, a hiba lecsökken 0,0000351-re.
+Végül frissítjük az összes súlyunkat. Amikor eredetileg a 0.05 és a 0.1 bemeneteket továbbítottuk, a hálózat hibája 0.2983711 volt. A backpropagation első fordulója után a teljes hiba 0.2910279 értékre csökken. Lehet, hogy nem tűnik soknak, de miután megismételtük ezt a folyamatot 10 000-szer, a hiba lecsökken 0.0000351-re.
 
 \section{Konvolúciós neurális hálózat}
 
@@ -200,9 +204,9 @@ A konvolúciós rétegek alapjában véve színes képek feldolgozására lettek
 
 A mi esetünkbe fekete-fehér képek állnak rendelkezésre. A színes képek esetén grayscale konvertálást végezhetünk el. Ha a pixel érték fekete akkor 0-át, ha fehér akkor 255-et rendelünk hozzá. A szürke árnyalatokat $[0, 255]$ közötti értékekkel definiáljuk. Egy kínai karakterre \aref{fig:chinese_char_pixel}. ábrán láthatunk példát.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.65]{chinese_char_pixel}
+\includegraphics[scale=0.65]{images/chinese_char_pixel}
 \caption{Egy kínai karakter fekete-fehér raszteres képként}
 \label{fig:chinese_char_pixel}
 \end{figure}
@@ -215,10 +219,11 @@ A következő felsorolásban - a tipikus, de nem kizárólagos sorrendre ügyelv
 \item \textit{Konvolúciós réteg}: Adott képpont csoportokra konvolúció matematikai műveletet alkalmazunk. A konvolúció eredménye egy skalár (a skaláris szorzata a kép egy adott részének és a szűrőnek). Ha minden képpont csoportra elvégezzük a konvolúciót, akkor egy aktivációs térképet kapunk. Általában több szűrő paraméterrel is elvégezzük a konvolúciót és aktivációs térképeket egymásra rakjuk. Az aktivációs térkép, a művelet tulajdonsága miatt, kisebb
 méretű lesz (\ref{fig:convolution}. ábra).
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.3]{convolution}
+\includegraphics[scale=0.3]{images/convolution}
 \caption{A bináris mátrix és a belőle konvolúcióval kinyert jellemzők}
+Forrás: \url{https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2}
 \label{fig:convolution}
 \end{figure}
 
@@ -245,11 +250,12 @@ model.add(Conv2D(64, (3, 3),
 model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 \end{python}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.3]{maxpool}
+\includegraphics[scale=0.3]{images/maxpool}
 \caption{A pooling réteg működése egy példán keresztül}
 \label{fig:maxpool}
+Forrás: \url{http://cs231n.github.io/convolutional-networks/}
 \end{figure}
 
 \item \textit{Teljesen összekötött réteg (fully connected, FC)}: Utolsó rétegekként szokták használni, hagyományos réteg. Lehet 1 vagy több réteg is a feladattól függően. Az osztályozás rész itt történik. A kimenetek valószínűségek a felsorolt karakterek szerint.
@@ -260,10 +266,11 @@ model.add(Dense(200, activation='softmax'))
 
 \Aref{fig:CNN_CCR_working}. ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve vannak az egyes rétegek utáni állapotok. A képen látható az egyes konvolúció utáni állapotok tulajdonság érzékelőként viselkednek.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.65]{CNN_CCR_working}
+\includegraphics[scale=0.65]{images/CNN_CCR_working}
 \caption{A konvolúciós karakterfelismerő hálózat sematikus felépítése}
+Forrás: \url{http://www.fujitsu.com/global/Images/20130821-01b_tcm100-929717.jpg}
 \label{fig:CNN_CCR_working}
 \end{figure}
 
@@ -306,9 +313,9 @@ Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent, hogy véletlenszer�
 model.add(Dropout(0.5))
 \end{python}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{dropout}
+\includegraphics[scale=0.8]{images/dropout}
 \caption{Neuronok véletlenszerű deaktiválása}
 \label{fig:dropout}
 \end{figure} 
@@ -361,10 +368,11 @@ model.fit(f['trn/x'], f['trn/y'],
 
 A négyzetes hibafüggvény szemléltetését láthatjuk \aref{fig:CNN_loss}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{CNN_loss}
+\includegraphics[scale=0.4]{images/CNN_loss}
 \caption{A négyzetes hibafelület}
+Forrás: \url{https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks/}
 \label{fig:CNN_loss}
 \end{figure}
 
@@ -376,10 +384,11 @@ ahol $w$ a súly, a $w_i$ a kezdeti súly, az $\eta$ pedig a tanulási tényező
 
 A tanulási tényező egy olyan paraméter, amelyet a programozó választ. A magas tanulási arány azt jelenti, hogy nagyobb súlycsökkenést kell végrehajtani a súlycsökkentésekben, így kevesebb időre lehet szükség ahhoz, hogy a modell konvergáljon az optimális súlycsoporton. Azonban a túl magas tanulási arány olyan túl nagy ugrásokhoz vezethet, amelyek nem elég pontosak ahhoz, hogy elérjék az optimális pontot. Ennek egy szemléltetését láthatjuk \aref{fig:CNN_learning_rate}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{CNN_learning_rate}
+\includegraphics[scale=0.8]{images/CNN_learning_rate}
 \caption{Magas és alacsony tanulási tényezők hatása}
+Forrás: \url{https://adeshpande3.github.io/A-Beginner%27s-Guide-To-Understanding-Convolutional-Neural-Networks/}
 \label{fig:CNN_learning_rate}
 \end{figure}
 

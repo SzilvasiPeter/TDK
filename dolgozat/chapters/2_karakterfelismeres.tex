@@ -1,14 +1,8 @@
 \Chapter{Kínai karakterek felismerése}
 
-\begin{comment}{Be kellene majd hivatkozni, hogy az említett dolgok hol találhatók meg a szakirodalomban (pl.: kínai tankönyvek)}
-\end{comment}
-
-\begin{comment}{Itt a következő mire vonatkozik?}
-\end{comment}
-
 \section{Az alapvonások}
 
-Az írásjegyek felépítésének következő lényeges szabálya az írásjegy vonásainak sorrendje \cite{kinaiiras}. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
+Az írásjegyek felépítésének lényeges szabálya az írásjegy vonásainak sorrendje \cite{kinaiiras}. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
 
 \begin{figure}[h]
 	\centering
@@ -51,10 +45,14 @@ A kínai írásjegyek különböző számú alapvonásokból épülhetnek fel. E
 \end{CJK*} si „tíz”,
 \begin{CJK*}{UTF8}{gbsn}
 人
-\end{CJK*} zsen „ember” stb. A hagyományos írásjegyek zöme 15–30 vonásból épül fel (átlagosan 9 vonásból). Esetenként azonban ennél jóval több vonásból álló írásjegyek is előfordulhatnak, melyek tulajdonképpen már több önálló írásjegy összevonásának is tekinthetők. Ritkák ugyan, de léteznek 50 vagy akár 80 vonásból álló írásjegyek is.
+\end{CJK*} zsen „ember” stb. A hagyományos írásjegyek zöme 15–30 vonásból épül fel (átlagosan 9 vonásból). Esetenként azonban ennél jóval több vonásból álló írásjegyek is előfordulhatnak, melyek tulajdonképpen már több önálló írásjegy összevonásának is tekinthetők. Ritkák ugyan, de léteznek 50 vagy akár 80 vonásból álló írásjegyek is.\Aref{fig:char_numbers} ábrán láthatjuk a karakterek mennyiségét stroke-ok száma szerint.
 
-\begin{comment}{Ha a vonások számát valahol táblázatos formában el lehet érni, akkor érdemes ide egy hisztogramot is berakni.}
-\end{comment}
+\begin{figure}[h]
+\includegraphics[scale=0.85]{images/chinese_char_by_strokes}
+\centering
+\caption{Kínai karakterek száma stroke-ok szerint}
+\label{fig:char_numbers}
+\end{figure}
 
 \section{OCR megvalósítások}
 
@@ -70,11 +68,8 @@ Vannak készen elérhető OCR megoldások \cite{tmwebdvi77}, amelyek tipikusan a
 \item  A mesterséges intelligencia szoftverből, ami elvégezi a beérkezett minták osztályozását, azaz magát a karakterfelismerést.
 \end{enumerate}
 
-\begin{comment}{Hivatkozni kellene konkrét ilyen eszközöket}
-\end{comment}
-
 \begin{figure}[h]
-\includegraphics[scale=0.65]{ocr}
+\includegraphics[scale=0.65]{images/ocr}
 \centering
 \caption{Az OCR-es feldolgozás szintjei}
 \label{fig:feldolgozasi_szintek}
@@ -105,9 +100,6 @@ Az OCR-el való feldolgozás során alapvetően három szintet \cite{feldolgozas
 
 Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani, amihez úgy általában egy adatbázis szükséges.
 
-\begin{comment}{Ez a felsorolás így elég vázlatos. Részletezni, vagy legalábbis teljes mondatokra át kellene írni őket.}
-\end{comment}
-
 \begin{itemize}
 \item A felismerni kivánt képek halmaza. A képekhez címkék tartoznak, ami szükséges a mesterséges intelligencia tanulás során.
 \item A feldolgozott képek
@@ -118,26 +110,18 @@ Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani,
 \item Az interneten rengeteg adatbázis található: \textit{mnist, imagenet, kaggle, CASIA}
 \end{itemize}
 
-\begin{comment}{Érdemes konkretizálni az adatbázis és a nyilak jelentését, hogy ne legyen annyira általános!}
-\end{comment}
-
 \subsection{Szegmentációs módszerek}
-
-\begin{comment}{A szegmentálást úgy általában is használják kéfeldolgozásnál a régiók elkülönítéséhez. Ki kellene hangsúlyozni, hogy mi a kettő között a különbség.}
-\end{comment}
 
 A szegmentáció során a karakterek közötti éles határ megtalálása a cél annak érdekében, hogy téves minták ne kerüljenek osztályozásra (például két fél karakter). A szegmentáció feladata lehet az is, hogy a karakter-dőlésszögeket, karakterméreteket normalizálja. Sok esetben a szöveges dokumentumokban nem csak karakterek vannak, hanem képek és egyéb, a felismerés szempontjából nem lényeges szimbólumok. A szegmentáció további feladata tehát az is, hogy az ilyen, számunkra nem releváns grafikus objektumok közül kiszűrje a csak karaktereket tartalmazó szöveges részeket. \Aref{fig:ocr_segmentation}. ábrán láthatunk egy példát arra, hogy hogyan képes az algoritmus kiemelni az egy karakterhez tartozó képrészt.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1.0]{ocr_segmentation}
+\includegraphics[scale=1.0]{images/ocr_segmentation}
 \caption{Példa egy név karaktereinek a szegmentálására}
 \label{fig:ocr_segmentation}
 {\cite{tmwebdvi77}}
 \end{figure}
 
-\begin{comment}{Ez itt saját kép?}
-\end{comment}
 
 \subsection{Optikai előfeldolgozás}
 
@@ -145,7 +129,7 @@ Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.65]{ocr_preprocess}
+\includegraphics[scale=0.65]{images/ocr_preprocess}
 \caption{Jellemzők kinyerésének egy fázisa, amely a dimenzió csökkenésével jár}
 \label{fig:ocr_preprocess}
 \end{figure}
@@ -176,9 +160,12 @@ Zaj hozzáadás:
 \item Alacsony kontraszt: pixel megfelelő értékeinek szorzása
 \end{itemize}
 
-\begin{center}
-\includegraphics[scale=0.75]{ocr_online_offline}
-\end{center}
+\begin{figure}
+\centering
+\includegraphics[scale=0.75]{images/ocr_online_offline}
+\caption{Offline és Online Karakterfelismerés}
+Forrás: \url{http://www.srimca.edu.in/Srijan/Srijanjan2011/IT/IntroductionToOCR.html}
+\end{figure}
 
 Az OCR folyamatba bevitt képek általában a szkennerekből származnak, amik képet és karaktert tartalmaznak. A karakterek gyakran különböző méretűek és betűtípusokat.
 
@@ -206,7 +193,7 @@ A karakter struktúrális lebontására láthatunk egy példát \aref{fig:ocr_fe
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{ocr_features}
+\includegraphics[scale=0.8]{images/ocr_features}
 \caption{Egy kínai karakter lebontása alapelemekre, hogy az után azokat, mint jellemzőket lehessen használni}
 \label{fig:ocr_features}
 \end{figure}
@@ -227,14 +214,14 @@ Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány kar
 \begin{comment}{A betűtípusokra részletesebben ki kellene térni. Irodalmi hivatkozás itt is mindenképpen kell majd.}
 \end{comment}
 
-Egy olyan algoritmust \cite{wu2002recognition} mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chenese_fonts}. ábrán láthatunk néhány példát.
+Egy olyan algoritmust \cite{wu2002recognition} mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chinese_fonts}. ábrán láthatunk néhány példát.
 
 Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szótárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.
 
 \begin{figure}[h]
 \centering
 \begin{tabular}{ c c }
-\includegraphics[scale=0.35]{chinese_fonts1} & \includegraphics[scale=0.35]{chinese_fonts2}
+\includegraphics[scale=0.35]{images/chinese_fonts1} & \includegraphics[scale=0.35]{images/chinese_fonts2}
 \end{tabular}
 \caption{Különféle kínai betűtípusok}
 \label{fig:chinese_fonts}
@@ -249,9 +236,9 @@ ahol $i = 1, \ldots, 8$, és $l_i$ a csatlakoztatott fekete képpontok száma $i
 \begin{figure}[h]
 \centering
 \begin{tabular}{ c c }
-\includegraphics[scale=0.6]{8direction} & \includegraphics[scale=0.6]{ocr_PDC}
+\includegraphics[scale=0.6]{images/8direction} & \includegraphics[scale=0.6]{images/ocr_PDC}
 \end{tabular}
-\caption{A jellemző irányok használati módja a karakterfelismerés során}
+\caption{A jellemző irányok használati módja a karakterfelismerés során\cite{wu2002recognition}}
 \label{fig:8direction}
 \end{figure}
 

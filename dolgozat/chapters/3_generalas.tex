@@ -11,7 +11,7 @@ Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{calligraphy}
+\includegraphics[scale=0.8]{images/calligraphy}
 \caption{Példa néhány kézzel írott kínai karakterre}
 \label{fig:calligraphy}
 \end{figure}
@@ -26,7 +26,7 @@ A következőkben részletezném a vonal vastagság változását a stroke\cite{
 \item A horizontális vonalak közepe elvékonyul majd a végén újra vastagabb lesz. A vastagságot súlyokkal könnyedén lehet definiálni.
 
 \begin{center}
-\includegraphics[scale=0.6]{horizontal_line}
+\includegraphics[scale=0.6]{images/horizontal_line}
 \end{center}
 
 \item A kampós vonalaknál (hooked stroke) a "kampó" hirtelen vékonyodással és irányváltoztatással jár. Az ecset hirtelen felemelésével érik el. Általában a kampó \includegraphics[scale=1.0]{hook} stroke része.
@@ -62,7 +62,7 @@ A kínai karaktereket különféle módokon reprezentálhatjuk. Ezek közül né
 \begin{figure}
 \centering
 \begin{tabular}{ c c }
-\includegraphics[scale=0.25]{proc_draw1} & \includegraphics[scale=0.5]{ren}
+\includegraphics[scale=0.25]{images/proc_draw1} & \includegraphics[scale=0.5]{images/ren}
 \end{tabular}
 \caption{Karakter közelítése változó méretű ellipszisekkel}
 \label{fig:proc_draw}
@@ -135,9 +135,9 @@ A körökből ellipsziseket utólagos transformációval is kaphatunk, vagyis ha
 
 A három karakter kirajzolás közül a procedurális rajzolás a leginkább hatékony.
 
-\subsection{Karakter zajosítás \cite{WANG1973303}}
+\subsection{Karakter zajosítás}
 
-A zajokat OpenCV-be \cite{OpenCVli86} könnyedén meg lehet valósítani.
+A zajokat OpenCV-be \cite{OpenCVli86} könnyedén meg lehet valósítani. Többféle zajosítás létezik\cite{WANG1973303}.
 
 \begin{itemize}
 \item Pontszerű zajok
