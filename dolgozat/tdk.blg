@@ -26,45 +26,45 @@ Warning--to sort, need author or key in StrokeCJ9
 Warning--to sort, need author or key in OpenCVli86
 Warning--there's a month but no year in kinaiiras
 Warning--empty journal in liconvolution
-You've used 17 entries,
+You've used 19 entries,
             2253 wiz_defined-function locations,
-            623 strings with 6803 characters,
-and the built_in function-call counts, 4865 in all, are:
-= -- 469
-> -- 180
+            639 strings with 7292 characters,
+and the built_in function-call counts, 5642 in all, are:
+= -- 547
+> -- 219
 < -- 0
-+ -- 81
-- -- 60
-* -- 312
-:= -- 738
-add.period$ -- 45
-call.type$ -- 17
-change.case$ -- 79
++ -- 97
+- -- 74
+* -- 386
+:= -- 864
+add.period$ -- 51
+call.type$ -- 19
+change.case$ -- 92
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 198
-empty$ -- 456
-format.name$ -- 60
-if$ -- 1063
+cite$ -- 25
+duplicate$ -- 216
+empty$ -- 514
+format.name$ -- 74
+if$ -- 1218
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 11
-newline$ -- 82
-num.names$ -- 26
-pop$ -- 122
+int.to.str$ -- 19
+missing$ -- 13
+newline$ -- 92
+num.names$ -- 30
+pop$ -- 131
 preamble$ -- 1
-purify$ -- 63
+purify$ -- 74
 quote$ -- 0
-skip$ -- 150
+skip$ -- 160
 stack$ -- 0
-substring$ -- 261
-swap$ -- 55
+substring$ -- 333
+swap$ -- 59
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 66
+type$ -- 74
 warning$ -- 6
-while$ -- 43
-width$ -- 19
-write$ -- 162
+while$ -- 51
+width$ -- 21
+write$ -- 182
 (There were 2 error messages)
