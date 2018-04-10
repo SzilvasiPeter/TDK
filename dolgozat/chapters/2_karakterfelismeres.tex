@@ -8,9 +8,9 @@
 
 \section{Az alapvonások}
 
-Az írásjegyek felépítésének következő lényeges szabálya az írásjegy vonásainak sorrendje. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
+Az írásjegyek felépítésének következő lényeges szabálya az írásjegy vonásainak sorrendje \cite{kinaiiras}. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{chinese_strokes}
 	\caption{A kínai karakterek alapvonásai}
@@ -34,7 +34,7 @@ Az előző szakaszban említett általános elv mellett az alábbi szabályokat 
 
 Egy szimmetrikus felépítésű írásjegynél előbb a középső részt kell kialakítani, s csak azután az oldalakat. Erre láthatunk egy példát \aref{fig:sorrend_pelda}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{images/vonasrend_ordered.png}
 	\caption{Példa egy szimmetrikus írásjel vonásainak sorrendjére}
@@ -64,7 +64,7 @@ A különböző formátumú dokumentumok kezelésének egyik speciális esete, a
 
 Az alap probléma itt az, hogy a nyomtatott, papír alapú dokumentumok esetében nagy zajaránnyal kell megküzdeni annak érdekében, hogy a releváns információt kinyerjük az érzékelt képi jelek és minták közül. Nyomtatott dokumentum esetében ilyen zajnak tekinthető például egy apró folt a papíron, tintaelmosódás, tintahiány, homályos háttér, apró gyűrődés a papíron, túl közeli vagy egybeolvadó betűk, betű dőlésszögének ingadozása stb. Kézírás esetén a kihívás még nagyobb, hiszen itt a személyiségjegyek sokszínűségéből adódó írásminták kavalkádjából kell megkűzdeni, hogy fel tudjuk imsertetni a karaktereket. Mind a nyomtatott, mind pedig a kézírásos esetben az optikai karakterfelismerő rendszer egy tanulási fázist követően képes olyan mintákat is osztályozni (a megfelelő karaktert felismerni), amelyekkel a tanulási fázisban nem találkozott, tehát megvan a szükséges generalizációs képessége.
 
-Vannak készen elérhető OCR megolások, amelyek tipikusan az alábbi két részből állnak.
+Vannak készen elérhető OCR megoldások \cite{tmwebdvi77}, amelyek tipikusan az alábbi két részből állnak.
 \begin{enumerate}
 \item A szkennelő fejből, amely a dokumentum egészét vagy részeit beszkenneli. Hardverről van szó, ami elvégezi a digitalizálást. Két fizikai jelenségen alapszik fényvisszaverődésen és a fényelnyelésen.
 \item  A mesterséges intelligencia szoftverből, ami elvégezi a beérkezett minták osztályozását, azaz magát a karakterfelismerést.
@@ -80,7 +80,7 @@ Vannak készen elérhető OCR megolások, amelyek tipikusan az alábbi két rés
 \label{fig:feldolgozasi_szintek}
 \end{figure}
 
-Az OCR-el való feldolgozás során alapvetően három szintet különböztethetünk meg (\ref{fig:feldolgozasi_szintek}. ábra).
+Az OCR-el való feldolgozás során alapvetően három szintet \cite{feldolgozasi_szintek} különböztethetünk meg (\ref{fig:feldolgozasi_szintek}. ábra). 
 
 \begin{enumerate}
 \item Alacsony szintű (\textit{low-level}) feldolgozás
@@ -116,15 +116,7 @@ Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani,
 	\item továbbítják azt egy magasabb szintre
 	\end{itemize}	  
 \item Az interneten rengeteg adatbázis található: \textit{mnist, imagenet, kaggle, CASIA}
-\item !Kiegészíthető! Az adatok előkészítése:
-	\begin{enumerate}
-	\item Kiválasztás, feldolgozás, transzformálás
-	\item Publikus adatbázis vagy saját adatbázis
-	\item Konvertálás vektorra a gépi feldolgozás érdekébe
-	\end{enumerate}
 \end{itemize}
-
-\cite{feldolgozasi_szintek}
 
 \begin{comment}{Érdemes konkretizálni az adatbázis és a nyilak jelentését, hogy ne legyen annyira általános!}
 \end{comment}
@@ -136,11 +128,12 @@ Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani,
 
 A szegmentáció során a karakterek közötti éles határ megtalálása a cél annak érdekében, hogy téves minták ne kerüljenek osztályozásra (például két fél karakter). A szegmentáció feladata lehet az is, hogy a karakter-dőlésszögeket, karakterméreteket normalizálja. Sok esetben a szöveges dokumentumokban nem csak karakterek vannak, hanem képek és egyéb, a felismerés szempontjából nem lényeges szimbólumok. A szegmentáció további feladata tehát az is, hogy az ilyen, számunkra nem releváns grafikus objektumok közül kiszűrje a csak karaktereket tartalmazó szöveges részeket. \Aref{fig:ocr_segmentation}. ábrán láthatunk egy példát arra, hogy hogyan képes az algoritmus kiemelni az egy karakterhez tartozó képrészt.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=1.0]{ocr_segmentation}
 \caption{Példa egy név karaktereinek a szegmentálására}
 \label{fig:ocr_segmentation}
+{\cite{tmwebdvi77}}
 \end{figure}
 
 \begin{comment}{Ez itt saját kép?}
@@ -150,7 +143,7 @@ A szegmentáció során a karakterek közötti éles határ megtalálása a cél
 
 Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál, és annak legjellemzőbb vonásait emeli ki. Különösen nagy jelentősége van a kézírás felismerésekor, ugyanis az írott betűk jóval komplexebb mintákat alkothatnak, mint a nyomtatott betűk. A jellemzők kiemelése során a komplexitás úgy csökken, hogy közben a legjellemzőbb információk megmaradnak és ezáltal a későbbi feldolgozás számításigényét redukálhatjuk. Ez a folyamat tulajdonképpen egy komplexitáscsökkentéssel járó digitalizáció. \Aref{fig:ocr_preprocess}. ábra egy egyszerű digitalizálási módszert mutat, amikor az analóg jelre egy mátrixot reprezentáló rácshálót illesztünk, és amelyik cellán átmegy az analóg karakter, az az elem a mátrixban 1 értéket vesz fel (fekete), egyéb esetben pedig 0-t (fehér).
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.65]{ocr_preprocess}
 \caption{Jellemzők kinyerésének egy fázisa, amely a dimenzió csökkenésével jár}
@@ -192,7 +185,7 @@ Az OCR folyamatba bevitt képek általában a szkennerekből származnak, amik k
 \begin{comment}{Az online és offline felismerés megkülönböztetése kapcsán érdemes említeni, hogy a zaj generálásánál az online jelleg figyelembe vételre kerül majd.}
 \end{comment}
 
-Az előfeldolgozás során a következők jöhetnek szóba: 
+Az előfeldolgozás \cite{zhou2017stroke} során a következők jöhetnek szóba: 
 \begin{itemize}
 \item karakterek szétosztása a bemenetek függvényébe
 \item a zaj megszüntetése
@@ -203,7 +196,7 @@ Az előfeldolgozás során a következők jöhetnek szóba:
 \begin{comment}{Legalább 3-4 hivatkozás kellene ezekhez a részekhez.}
 \end{comment}
 
-A jellemző alapú módszerek kivonják a karakter jellemzőit, mivel ezek a jellemzők matematikailag számítottak, amire alkalmas számítógép. Így az optikai karakterfelismerés (OCR) nem igazán az optikai alapokon nyugszik, hanem inkább a matematikai számításokhoz köthető.
+A jellemző alapú módszerek \cite{bunke1997handbook} kivonják a karakter jellemzőit, mivel ezek a jellemzők matematikailag számítottak, amire alkalmas számítógép. Így az optikai karakterfelismerés (OCR) nem igazán az optikai alapokon nyugszik, hanem inkább a matematikai számításokhoz köthető.
 
 \begin{comment}{A stroke szavak használata is jó, csak akkor érdemes valahol megadni, hogy az alapvonásokkal mi a viszonya.}
 \end{comment}
@@ -211,7 +204,7 @@ A jellemző alapú módszerek kivonják a karakter jellemzőit, mivel ezek a jel
 Amint említettem, minden kínai karakternek egyedi geometriai alakja van, amiket a stroke-ok alakítják. A kínai karakterek felismerésének alapja a stroke-ok és a strukturális jellemzők. Hosszú ideig ez a módszer befolyásolta a kínai karakterfelismerés kutatási irányát.
 A karakter struktúrális lebontására láthatunk egy példát \aref{fig:ocr_features}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.8]{ocr_features}
 \caption{Egy kínai karakter lebontása alapelemekre, hogy az után azokat, mint jellemzőket lehessen használni}
@@ -220,9 +213,9 @@ A karakter struktúrális lebontására láthatunk egy példát \aref{fig:ocr_fe
 
 Azonban ez nagyon nehéz a gyakorlatban, mert a stroke és a struktúrák közötti kapcsolat nagyon instabil. A stroke-ok és a strukturális jellemzők nem tudják hatékonyan kivonni a jellemzőket vagy nem praktikus.
 
-Rengeteg mód van a jellemzők kivonására, például lehet alapozni az él detektálásra, transzformációkra, rács jellemzőkre, kulcsfontosságú jellemzőkre, vektor vonali jellemzőkre.
+Rengeteg mód van \cite{bunke1997handbook} a jellemzők kivonására, például lehet alapozni az él detektálásra, transzformációkra, rács jellemzőkre, kulcsfontosságú jellemzőkre, vektor vonali jellemzőkre.
 
-Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
+Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket \cite{liu2013online} \cite{dong2005improved} \cite{zhong2015high} állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
 
 Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karaktert tévesen osztályoz. Ez javítható a különböző bemeneti minták növelésével.
 
@@ -234,11 +227,11 @@ Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány kar
 \begin{comment}{A betűtípusokra részletesebben ki kellene térni. Irodalmi hivatkozás itt is mindenképpen kell majd.}
 \end{comment}
 
-Egy olyan algoritmust mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chenese_fonts}. ábrán láthatunk néhány példát.
+Egy olyan algoritmust \cite{wu2002recognition} mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chenese_fonts}. ábrán láthatunk néhány példát.
 
 Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szótárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \begin{tabular}{ c c }
 \includegraphics[scale=0.35]{chinese_fonts1} & \includegraphics[scale=0.35]{chinese_fonts2}
@@ -247,13 +240,13 @@ Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt hasz
 \label{fig:chinese_fonts}
 \end{figure}
 
-A funkciókivonás fontos eleme az OCR-nek. Az algoritmus egy 8-dimenziós vektor tartozik $[d_1, d_2, \ldots d_8]$. Kiszámítása az alábbi összefüggés segítségével történik
+A funkciókivonás \cite{wu2002recognition} fontos eleme az OCR-nek. Az algoritmus egy 8-dimenziós vektor tartozik $[d_1, d_2, \ldots d_8]$. Kiszámítása az alábbi összefüggés segítségével történik
 $$
 d_i = \dfrac{l_i}{\sqrt{\displaystyle \sum_{k=1}^8 l_k^2}},
 $$
 ahol $i = 1, \ldots, 8$, és $l_i$ a csatlakoztatott fekete képpontok száma $i$-edik irányban. Erre egy példát láthatunk \aref{fig:8direction}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \begin{tabular}{ c c }
 \includegraphics[scale=0.6]{8direction} & \includegraphics[scale=0.6]{ocr_PDC}
@@ -283,9 +276,7 @@ Test & 99.71 & 99.50 & 99.80 & 99.09 & 98.43 & 98.15 & 98.78 & 98.19 & 98.96\\
 \end{tabular}
 \caption{Az elérhető karakterfelismerő rendszer hatékonysága különböző betűtípusok esetén}
 \label{tab:ccr_results}
+{\cite{wu2002recognition}}
 \end{table}
 
 A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyorsan és pontosan felismerni a karaktereket akár 8 különböző betűtípussal is. Az algoritmus kiváló felismerési teljesítményt nyújt a 4 leggyakrabban használt betűtípusnál \cite{ccr}.
-
-
-!Kiegészíteni lehet CCR HANDWIRTTEN CHAR!

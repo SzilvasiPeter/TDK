@@ -1,6 +1,6 @@
 \Chapter{Neurális hálók}
 
-A neurális hálózattokat gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
+A neurális hálózattokat\cite{neurális77} gyakran hasonlítjuk az emberi agy működéséhez. Ha körültekintően szemügyre vesszük agyunk működését, akkor azt tapasztaljuk, hogy neuronokból és közöttük felépülő kapcsolatokból áll össze. A külvilágból érkezett ingereket értelmezhetjük úgy, mint egy bemenetet, amit az agyunkban lévő neuronok feldolgoznak.
 
 \begin{center}
 	\includegraphics[scale=1.0]{images/neuron.png}
@@ -14,7 +14,7 @@ A hálózatban a rétegeket élek kötik össze egymással, amelyekhez egyenkén
 
 A tanítási folyamat elvégzésekor a hálózatba olyan bemenetet juttatunk, amelyhez tartozó kimenet ismert. A bemenetet végig futtatjuk a hálózat rétegein, majd a kimeneti réteg által szolgáltatott eredményt összehasonlítjuk a kimenet várt értékével. A két érték közötti eltérést a hálózat \textit{\textbf{hibájának}} nevezzük. A tanítás folyamán a hálózat súlyait úgy változtatjuk, hogy ez a hiba lehetőleg minél kisebb legyen. A hálózat betanítása után már olyan bemeneteket is megadhatunk, amelyeknek már nem ismerjük a kimenetét, és a hálózat ezekre is képes hibahatáron belüli kimenetet produkálni.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.75]{images/ANNLayers.png}
 	\caption{Egy általános felépítésű neurális hálózat}
@@ -153,7 +153,7 @@ Végül frissítjük az összes súlyunkat! Amikor eredetileg a 0.05 és a 0.1 b
 
 \section{Konvolúciós neurális hálózat}
 
-A konvolúciós neurális hálózat hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkbe a bemenet a kínai karakter pixel értékei, a kimenet pedig valószíűségek a karakterekből adódóan.
+A konvolúciós neurális hálózat\cite{liconvolution}\cite{lecun1995convolutional} hagyományos neurális hálózat alapokon nyugszik. Annak egy speciális fajtája, amit képeken található minták feltárására fejlesztettek. Neuronokból épülnek fel és hasonlóképpen rendelkeznek tanítható súlyokkal. A bemeneteiken kapott értékek skaláris szorzatát egy nem lineáris leképezés követheti. Az egész hálózat reprezentálhat egy egyszerű osztályozó eljárást, aminek a bemenetei a nyers képpontok, és a kimenete lehet egy adott kép osztályba tartozás valószínűsége. A mi esetünkbe a bemenet a kínai karakter pixel értékei, a kimenet pedig valószíűségek a karakterekből adódóan.
 
 A hagyományos neurális hálózatok nem skálázzák a teljes képet. A kínai (különösen a hagyományos) több száz karaktert nem lehet megjeleníteni egy 16x16 pixeles rácsban. A megfelelő méret valószínűleg körülbelül 24x24 képpontot tartalmaz. Neurononként 24x24 = 526 súly paramétert jelentene. Ez még kezelhetőnek tűnik, de tisztán látszik, hogy a teljesen összekapcsolt struktúra nem kezeli jól a képeket.
 
@@ -228,7 +228,7 @@ A következő ábra egy konvolúciós feldolgozást mutat be, ahol szemléltetve
 
 \subparagraph{Hálózat architektúra}
 
-nagyon fontos a tervezés szakasznál. Egy 2013 kutatási papírt mutatnék be, miszerint a rétegek és a bennük lévő neuronok számával csökkenthető a hibaarány.
+nagyon fontos a tervezés szakasznál. Egy 2013 kutatási papírt\cite{cirecsan2015multi} mutatnék be, miszerint a rétegek és a bennük lévő neuronok számával csökkenthető a hibaarány.
 
 Először vessünk pillantást az adathalmazunkra. Az adat egyszerű képeket tartalmaz (offline kép). Tartalmaz 224419 karaktert, amelyeket 60 személy írt. A karakterek 48x48 pixelre skálázták. Az előfeldolgozás OpenCV-vel történik.
 
@@ -269,9 +269,9 @@ Ilyenkor lehet kezdeményezni Dropout-ot, ami annyit jelent, hogy véletlenszer�
 
 \subsection{Tanítás}
 
-Ez a neurális hálózatok egyik legfontosabb része. Sok kérdés merülhet fel olvasás közben. Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését? Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket? Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak? A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett képzési folyamat révén.
+Ez a neurális hálózatok\cite{neurális77} egyik legfontosabb része. Sok kérdés merülhet fel olvasás közben. Hogyan ismerik az első konvolúciós rétegben lévő szűrők az élek és görbék keresését? Hogyan ismeri fel a teljesen összekapcsolt réteg a jellemzőket? Hogyan ismerik a szűrők az egyes rétegekben milyen értékeket kapnak? A számítógép képes beállítani a szűrő értékeit (vagy súlyait) a backpropagation-nek nevezett képzési folyamat révén.
 
-A backpropagation négy különböző szakaszra osztható
+A backpropagation\cite{ABeginne32} négy különböző szakaszra osztható
 \begin{itemize}
 \item Előre terjesztés (forward pass)
 \item Veszteség számítás (loss function)

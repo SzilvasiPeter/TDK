@@ -9,7 +9,7 @@ A megvalósító neurális hálózat betanítása felügyelt tanulás módszerre
 
 Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját. A vonal kirajzolás sorrendje mellet fontos a vonal vastagsága is. Az kézírás ugyan sokat változott, de az alapjai megmaradtak. A stroke-ok vastagsága az ecset gyorsaságától, az ecsetre ható nyomás nagyságától függ. A megfelelően rajzolt vonalakat nagyon fontosnak tartják a kínaiak, mivel a kultúrájukhoz tartozik. A kalligráfia elárulhatja az ember nemét, korát, személyességét. Kézzel írott karakterekre láthatunk néhány példát \aref{fig:calligraph}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.8]{calligraphy}
 \caption{Példa néhány kézzel írott kínai karakterre}
@@ -18,7 +18,7 @@ Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját.
 
 \subsection{Vonal vastagság}
 
-A következőkben részletezném a vonal vastagság változását a stroke-ok rajzolásának függvényébe. 
+A következőkben részletezném a vonal vastagság változását a stroke\cite{StrokeCJ9}-ok rajzolásának függvényébe. 
 
 \begin{itemize}
 \item A stroke-ok vége elvékonyul, ezt a valóságban az ecset hirtelen felemelésével érik el. (Van néhány kivétel, mint például a \textit{right fally} \includegraphics[scale=1.0]{right_fally}) 
@@ -78,7 +78,10 @@ A három karakter kirajzolás közül a procedurális rajzolás a legeffektíveb
 \subsection{Görbék}
 \textit{Ide jöhet a Hermit}
 
-\subsection{Karakter zajosítás}
+\subsection{Karakter zajosítás \cite{WANG1973303}}
+
+A zajokat OpenCV-be \cite{OpenCVli86} könnyedén meg lehet valósítani.
+
 \begin{itemize}
 \item Pontszerű zajok
 
@@ -167,13 +170,6 @@ Lépések:
 \item Hátulról előre haladva fessük ki a poligonokat. 
 \end{itemize}
 
-\end{itemize}
-
-\textit{Line break}\\\\
-
-\begin{itemize}
-	\item Különböző zajok
-	\item Hálózat robosztussága
 \end{itemize}
 
 \begin{comment}{Dolgozok a Hermit-es részen.}
