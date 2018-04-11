@@ -1,15 +1,13 @@
 \Chapter{Összegzés}
 
-A TDK dolgozatba betekintést nyertünk a kínai karakterek alap felépítésével. Továbbá megismerkedtünk azok építőelemeivel az alapvonásokkal (strokes). Dolgozatomba leírtam a vonásrendek szabályait, amely hasznos az online karakterfelismerésnél.
+A dolgozat ismerteti a kínai karakterek alapfelépítését, írási módjukat, bemutatja azok építőelemeit az alapvonásokat (strokes). Ezt követően bemutatja a vonásrendek szabályait, amely hasznos az online karakterfelismerésnél.
 
-Részleteztem az optikai karakterfelismerés (OCR) müködését. Kifejtettem az optikai karakterfelismerés részeit. Bemutattam manapság használt OCR-t, amely képes felismerni a nyomtatott kínai karaktereket különböző betűtípuson. Táblázattal vizualizáltam a betűtípusok felismerésének pontosságát.\\
+Részletezésre kerül az optikai karakterfelismerés (OCR) müködése, annak részei. Mivel a probléma már rég óta közismert, ezért áttekintésre kerülnek a manapság használt OCR-es megoldások, amelyek képesek felismerni a nyomtatott kínai karaktereket különböző betűtípuson.
 
-A minta generálás fontos eleme a rendszernek. A különböző mintákkal való betanítás a hálózatot robosztussá teszi. A széles körű zajok hozzáadása a képekhez, majd azzal való tanítás növeli a hálózat adaptációs képességét (zavaros képekre).
+A minta generálás fontos eleme a bemutatott, saját karakterfelismerő rendszernek. A különböző mintákkal való betanítás a hálózatot robosztussá teszi. A széles körű zajok hozzáadása a képekhez, majd az azzal való tanítás növeli a hálózat adaptációs képességét.
 
-A stroke-ok kirajzolásának mechanikáját részleteztem. Megemlítettem a vonal vastagság fontosságát. Felvázoltam a vonal kirajzolás dinamikáját: pont paraméterei, vonal görbítésse Hermit ívek alkalmazásával. Továbbá bemutattam hogyan lehet openCV-vel zajokat hozzáadni a képekhez.\\
+Az alapvonások kirajzolásának mechanikájának modellezése egy saját módszer kidolgozását tette szükségessé. Ennek bemutatása során a dolgozat kitér a vonal vastagságának a fontosságára. A vonal kirajzolásának dinamikáját Hermit ívek alkalmazásával sikerült megadni, majd a különféle zajok generálása és a képhez adása az OpenCV függvénykönyvtár segítségével került implementálásra.
 
-A neurális hálózat elemeivel megismerkedhetünk. A mögötte lévő matematikát megemlítettem és illusztratív képekkel probáltam megkönnyíteni a megértést.
+A tématerület bemutatásához szükségesnek látszott a neurális hálózat alapvető elemeinek, tanítási és tesztelési módjának bemutatása. Ezt követően a képfelismeréshez leginkább ajánlott (az elérhető irodalmak alapján vélhetően a leghatékonyabb) konvolúciós neurális hálózatra (CNN) esett a választás. Az ezzel foglalkozó fejezet kifejti a CNN rétegeinek működését, továbbá bemutat egy aránylag aktuális kutatási eredményt, amely a felismerés pontosságát hasonlítja össze különböző hálózat architektúrák szerint.
 
-Ezt követően a kép felismeréshez leghatékonyabb konvolúciós neurális hálózatot (CNN) részleteztem. Kifejtettem a CNN rétegeinek működését. Továbbá bemutattam egy kutatási cikket, amely a pontosságát hasonlítja össze különböző hálózat architektúrák szerint.\\
-
-A valídáció során betekintést nyerhetünk, hogy hogyan változik a hálózat osztályozása a bemeneti képektől. Az adathalmazok előállítása után a hálózat betanítás következett. Végül a tesztelés során kiderült, hogy a teszt eredmények kapcsolatba vannak a tanító halmazzal.
+A valídáció során betekintést nyerhetünk, az eredmények ellenőrzéséhez összeállított adathalmazba, és hogy hogyan változik a hálózat osztályozási hatékonysága a bemeneti képek és a zajjal való terhelés hatására.

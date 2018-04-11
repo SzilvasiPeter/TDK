@@ -2,7 +2,7 @@
 
 \section{Az alapvonások}
 
-Az írásjegyek felépítésének lényeges szabálya az írásjegy vonásainak sorrendje \cite{kinaiiras}. Az írásjegyek – bármilyen bonyolult legyen is némelyik – tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
+Az írásjegyek megrajzolásának az egyik elsődleges szabályát az írásjegy vonásainak sorrendje adja \cite{kinaiiras}. Az írásjegyek -- bármilyen bonyolult legyen is némelyik -- tulajdonképpen néhány igen egyszerű vonalból épülnek fel. Ezek az írásjegyek alapelemei, vagy alap-ecsetvonásai. \Aref{fig:alapvonasok}. ábrán az alapvonások néhány főbb típusa látható. Természetesen az alapvonásoknak több változata is lehetséges (méret, vastagság, irány) attól függően, hogy az írásjegy melyik részén helyezkedik el.
 
 \begin{figure}[h]
 	\centering
@@ -88,7 +88,7 @@ Az OCR-el való feldolgozás során alapvetően három szintet \cite{feldolgozas
 	\begin{itemize}
 	\item A bemenetek képek, de a kiementek már a képekből nyert jellemzők.
 	\item A kép komponenseinek kiemelése (szegmentálás) és azok jellemzése.
-	\item Bizonyos mértékű mesterséges intelligencia/gépi tanulás szükséges hozzá.
+	\item Bizonyos mértékű mesterséges intelligencia/gépi tanulás szükséges lehet hozzá.
 	\end{itemize}
 \item Magas szintű (\textit{high-level}) feldolgozás
 	\begin{itemize}
@@ -98,17 +98,15 @@ Az OCR-el való feldolgozás során alapvetően három szintet \cite{feldolgozas
 	\end{itemize}
 \end{enumerate}
 
-Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani, amihez úgy általában egy adatbázis szükséges.
+Az adatok kezelését struktúrált, ellenőrzött formában érdemes megoldani, amihez ilyen esetben adatbázis szükséges. Az adatbázisban alapvetően az alábbi adatokat tárolhatjuk.
 
 \begin{itemize}
-\item A felismerni kivánt képek halmaza. A képekhez címkék tartoznak, ami szükséges a mesterséges intelligencia tanulás során.
-\item A feldolgozott képek
-	\begin{itemize}
-	\item visszakerülnek az adatbázisba vagy
-	\item továbbítják azt egy magasabb szintre
-	\end{itemize}	  
-\item Az interneten rengeteg adatbázis található: \textit{mnist, imagenet, kaggle, CASIA}
+\item A felismerni kivánt képek halmaza. 
+\item A képekhez tartozó címkék, annoticiók, amelyek szükségesek a mesterséges intelligencia tanítása során.
+\item Különféle paraméterezések, konfigurációval kapcsolatos adatok.
 \end{itemize}
+
+Az interneten rengeteg adatbázis található: \textit{mnist, imagenet, kaggle, CASIA}
 
 \subsection{Szegmentációs módszerek}
 
@@ -117,15 +115,13 @@ A szegmentáció során a karakterek közötti éles határ megtalálása a cél
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.0]{images/ocr_segmentation}
-\caption{Példa egy név karaktereinek a szegmentálására}
+\caption{Példa egy név karaktereinek a szegmentálására (forrás: \cite{tmwebdvi77})}
 \label{fig:ocr_segmentation}
-{\cite{tmwebdvi77}}
 \end{figure}
-
 
 \subsection{Optikai előfeldolgozás}
 
-Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál, és annak legjellemzőbb vonásait emeli ki. Különösen nagy jelentősége van a kézírás felismerésekor, ugyanis az írott betűk jóval komplexebb mintákat alkothatnak, mint a nyomtatott betűk. A jellemzők kiemelése során a komplexitás úgy csökken, hogy közben a legjellemzőbb információk megmaradnak és ezáltal a későbbi feldolgozás számításigényét redukálhatjuk. Ez a folyamat tulajdonképpen egy komplexitáscsökkentéssel járó digitalizáció. \Aref{fig:ocr_preprocess}. ábra egy egyszerű digitalizálási módszert mutat, amikor az analóg jelre egy mátrixot reprezentáló rácshálót illesztünk, és amelyik cellán átmegy az analóg karakter, az az elem a mátrixban 1 értéket vesz fel (fekete), egyéb esetben pedig 0-t (fehér).
+Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál, és annak legjellemzőbb vonásait emeli ki. Különösen nagy jelentősége van a kézírás felismerésekor, ugyanis az írott betűk jóval komplexebb mintákat alkothatnak, mint a nyomtatott betűk. A jellemzők kiemelése során a komplexitás úgy csökken, hogy közben a legjellemzőbb információk megmaradnak és ezáltal a későbbi feldolgozás számításigényét redukálhatjuk. Ez a folyamat tulajdonképpen egy komplexitáscsökkentéssel járó digitalizáció. \Aref{fig:ocr_preprocess}. ábra egy egyszerű digitalizálási módszert mutat, amikor az analóg jelre egy mátrixot reprezentáló rácshálót illesztünk, és amelyik cellán átmegy az analóg karakter, az az elem a mátrixban 1 értéket vesz fel (fekete), egyéb esetben pedig 0-t (fehér). (Természetesen konvenciótól függően fordított eset is elképzelhető.)
 
 \begin{figure}[h]
 \centering
@@ -136,7 +132,7 @@ Az előfeldolgozás a bemeneti minta komplexitásának csökkentésére szolgál
 
 \subsubsection{Dimenzió csökkentés}
 
-A dimenziószám csökkentése optimálizálási folyamatnak tekinthető. A kivont jellemzőkben található redundáns információkat távolítja el. A tipikus dimenzió redukciós algoritmusok a gépi tanulás terén két részre oszthatók\cite{zhang2009patch}:
+A dimenziószám csökkentése optimálizálási folyamatnak tekinthető. A kivont jellemzőkben található redundáns információkat távolítja el. A tipikus dimenzió redukciós algoritmusok a gépi tanulás terén két részre oszthatók \cite{zhang2009patch}:
 \begin{itemize}
 \item hagyományos lineáris dimenziós redukció
 	\begin{itemize}
@@ -162,7 +158,7 @@ A karakterek felismerése lehet online és offline karakterfelismerés. A fő k�
 \centering
 \includegraphics[scale=0.75]{images/ocr_online_offline}
 \caption{Offline és Online Karakterfelismerés}
-Forrás: \url{http://www.srimca.edu.in/Srijan/Srijanjan2011/IT/IntroductionToOCR.html}
+(forrás: \url{http://www.srimca.edu.in/Srijan/Srijanjan2011/IT/IntroductionToOCR.html})
 \end{figure}
 
 Az online karakterfelismerés során lehetőségünk van zaj generálására. Az ecsetvonások mozgása során véletlenszerű zajokat adhatunk hozzá. A zajos képekkel való betanítás a rendszerünk robusztusságát éri el.
@@ -175,14 +171,14 @@ Zaj hozzáadás:
 \item Alacsony kontraszt: pixel megfelelő értékeinek szorzása
 \end{itemize}
 
-Az OCR folyamatba bevitt képek általában a szkennerekből származnak, amik képet és karaktert tartalmaznak. A karakterek gyakran különböző méretűek és betűtípusokat.
+Az OCR folyamatba bevitt képek általában a szkennerekből származnak, amik általában karaktereket, ábrákat vagy egyéb, nem szöveges elemeket is tartalmazhatnak. A karakterek gyakran különböző méretűek és betűtípusokat.
 
-Az előfeldolgozás \cite{zhou2017stroke} során a következők jöhetnek szóba: 
+Az előfeldolgozás során a következők jöhetnek szóba \cite{zhou2017stroke}: 
 \begin{itemize}
-\item karakterek szétosztása a bemenetek függvényébe
-\item a zaj megszüntetése
-\item normalizálni a betűméretet és pozícionálni a filtert (kernel-t)
-\item stroke váz generálása (thinning)
+\item karakterek szétosztása a bemenetek függvényében,
+\item a zaj megszüntetése,
+\item normalizálni a betűméretet és pozícionálni a filtert (kernel-t),
+\item stroke váz generálása (thinning).
 \end{itemize}
 
 A jellemző alapú módszerek \cite{bunke1997handbook} kivonják a karakter jellemzőit, mivel ezek a jellemzők matematikailag számítottak, amire alkalmas számítógép. Így az optikai karakterfelismerés (OCR) nem igazán az optikai alapokon nyugszik, hanem inkább a matematikai számításokhoz köthető.
@@ -197,17 +193,17 @@ A karakter struktúrális lebontására láthatunk egy példát \aref{fig:ocr_fe
 \label{fig:ocr_features}
 \end{figure}
 
-Azonban ez nagyon nehéz a gyakorlatban, mert a stroke és a struktúrák közötti kapcsolat nagyon instabil. A stroke-ok és a strukturális jellemzők nem tudják hatékonyan kivonni a jellemzőket vagy nem praktikus.
+Ennek megvalósítása nagyon nehéz a gyakorlatban, mert a stroke és a struktúrák közötti kapcsolat nagyon instabil. A stroke-ok és a strukturális jellemzők nem tudják hatékonyan kivonni a jellemzőket vagy nem praktikus.
 
-Rengeteg mód van \cite{bunke1997handbook} a jellemzők kivonására, például lehet alapozni az él detektálásra, transzformációkra, rács jellemzőkre, kulcsfontosságú jellemzőkre, vektor vonali jellemzőkre.
+Rengeteg mód van a jellemzők kivonására \cite{bunke1997handbook}, például lehet alapozni az él detektálásra, transzformációkra, rács jellemzőkre, kulcsfontosságú jellemzőkre, vektor vonali jellemzőkre.
 
-Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket \cite{liu2013online} \cite{dong2005improved} \cite{zhong2015high} állíthat össze és összehasonlíthatjuk a kimeneteket. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
+Miután rendelkezésre állnak a módszerek, amikkel ki lehet nyerni a jellemzőket, hozzáfoghatunk a végleges kimenet előállítására. Lehetséges, hogy különböző felismerési rendszereket állíthat össze és összehasonlíthatjuk a kimeneteket \cite{liu2013online} \cite{dong2005improved} \cite{zhong2015high}. Azonban ez extra számítási költséget igényel, viszont a pontosság tovább javítható.
 
 Mikor a felismerési rendszer kimenetet generál, lehetséges, hogy néhány karaktert tévesen osztályoz. Ez javítható a különböző bemeneti minták növelésével.
 
 \subsection{Implementálás}
 
-Egy olyan algoritmust \cite{wu2002recognition} mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai). Ezekre a betűtípusokra \aref{fig:chinese_fonts}. ábrán láthatunk néhány példát.
+Egy olyan algoritmust mutatok be, ami képes kínai karakterek felismerésére sok különböző betűtípussal (pl. Song, Fang, Kai, Hei, Yuan, Lishu, Weibei és Xingkai) \cite{wu2002recognition}. Ezekre a betűtípusokra \aref{fig:chinese_fonts}. ábrán láthatunk néhány példát.
 
 Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt használ. Először egy 3 szintes illesztést végez mindegyik szótárhoz képest. Az ilyen illesztésekhez kapcsolódó távolsági méréseket ezután egy központi diszkriminátorba táplálják, hogy a végső felismerési eredményt kiadják. Gyors és a pontos felismerést ért el mind a címben az összes 8 betűtípust és mind a főoldalon, amelyhez az első 4 általánosan használt betűtípus tartozik.
 
@@ -220,7 +216,7 @@ Az algoritmus származtatott jellemzőkön alapul, és egy szótár halmazt hasz
 \label{fig:chinese_fonts}
 \end{figure}
 
-A funkciókivonás \cite{wu2002recognition} fontos eleme az OCR-nek. Az algoritmus egy 8-dimenziós vektor tartozik $[d_1, d_2, \ldots d_8]$. Kiszámítása az alábbi összefüggés segítségével történik
+A funkciókivonás fontos eleme az OCR-nek \cite{wu2002recognition}. Az algoritmus egy 8-dimenziós vektor tartozik $[d_1, d_2, \ldots d_8]$. Kiszámítása az alábbi összefüggés segítségével történik
 $$
 d_i = \dfrac{l_i}{\sqrt{\displaystyle \sum_{k=1}^8 l_k^2}},
 $$
@@ -231,7 +227,7 @@ ahol $i = 1, \ldots, 8$, és $l_i$ a csatlakoztatott fekete képpontok száma $i
 \begin{tabular}{ c c }
 \includegraphics[scale=0.6]{images/8direction} & \includegraphics[scale=0.6]{images/ocr_PDC}
 \end{tabular}
-\caption{A jellemző irányok használati módja a karakterfelismerés során\cite{wu2002recognition}}
+\caption{A jellemző irányok használati módja a karakterfelismerés során (forrás: \cite{wu2002recognition})}
 \label{fig:8direction}
 \end{figure}
 
@@ -254,11 +250,12 @@ Train & 99.82 & 99.64 & 99.81 & 99.57 & 98.77 & 98.75 & 99.35 & 98.82 & 99.32\\
 Test & 99.71 & 99.50 & 99.80 & 99.09 & 98.43 & 98.15 & 98.78 & 98.19 & 98.96\\
 \hline
 \end{tabular}
-\caption{Az elérhető karakterfelismerő rendszer hatékonysága különböző betűtípusok esetén}
+\caption{Az elérhető karakterfelismerő rendszer hatékonysága különböző betűtípusok esetén (forrás: \cite{wu2002recognition})}
 \label{tab:ccr_results}
-{\cite{wu2002recognition}}
 \end{table}
 
-A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyorsan és pontosan felismerni a karaktereket akár 8 különböző betűtípussal is. Az algoritmus kiváló felismerési teljesítményt nyújt a 4 leggyakrabban használt betűtípusnál \cite{ccr}.
+A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyorsan és pontosan felismerni a karaktereket akár 8 különböző betűtípussal is. Az algoritmus kiváló felismerési teljesítményt nyújt a 4 leggyakrabban használt betűtípusnál.
+
+% \cite{ccr}
 
 A kísérleti eredmények azt mutatják, hogy a javasolt algoritmus képes gyorsan és pontosan felismerni a karaktereket akár 8 különböző betűtípussal is. Az algoritmus kiváló felismerési teljesítményt nyújt a 4 leggyakrabban használt betűtípusnál \cite{wu2002recognition}.

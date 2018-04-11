@@ -4,7 +4,7 @@
 
 A megvalósító neurális hálózat betanítása felügyelt tanulás módszerrel történik. A minták alapján történő tanulás lényege, hogy az eljárás során a be- és kimeneti mintapárokból igyekszünk megfelelő ismereteket kinyerni és ezzel a rendszer viselkedését módosítani. A hálózat feladata, hogy megtanulja a rendelkezésre álló mintapont párok által reprezentált bemenet-kimenet leképezést. Ehhez elő kell állítani a megfelelő adathalmazt.
 
-Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját. A vonal kirajzolás sorrendje mellet fontos a vonal vastagsága is. Az kézírás ugyan sokat változott, de az alapjai megmaradtak. A stroke-ok vastagsága az ecset gyorsaságától, az ecsetre ható nyomás nagyságától függ. A megfelelően rajzolt vonalakat nagyon fontosnak tartják a kínaiak, mivel a kultúrájukhoz tartozik. A kalligráfia elárulhatja az ember nemét, korát, személyességét. Kézzel írott karakterekre láthatunk néhány példát \aref{fig:calligraph}. ábrán.
+Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját. A vonal kirajzolás sorrendje mellet fontos a vonal vastagsága is. Az kézírás ugyan sokat változott, de az alapjai megmaradtak. A stroke-ok vastagsága az ecset gyorsaságától, az ecsetre ható nyomás nagyságától függ. A megfelelően rajzolt vonalakat nagyon fontosnak tartják a kínaiak, mivel a kultúrájukhoz tartozik. A kalligráfia elárulhatja az ember nemét, korát, személyességét. Kézzel írott karakterekre láthatunk néhány példát \aref{fig:calligraphy}. ábrán.
 
 \begin{figure}[h]
 \centering
@@ -15,16 +15,19 @@ Az adathalmaz előállítása elött definiálni kell a rajzolás dinamikáját.
 
 \subsection{Vonal vastagság}
 
-A következőkben részletezném a vonal vastagság változását a stroke\cite{StrokeCJ9}-ok rajzolásának függvényébe. 
+A következőkben részletezném a vonal vastagság változását a stroke-ok rajzolásának függvényében \cite{StrokeCJ9}. 
 
 \begin{itemize}
 \item A stroke-ok vége elvékonyul, ezt a valóságban az ecset hirtelen felemelésével érik el. (Van néhány kivétel, mint például a \textit{right fally} \includegraphics[scale=1.0]{right_fally}) 
 \item Ha egy stroke végéből kezdődik egy másik stroke, akkor azok találkozásánál a vonalvastagság növekszik.
-\item A horizontális vonalak közepe elvékonyul majd a végén újra vastagabb lesz. A vastagságot súlyokkal könnyedén lehet definiálni.
+\item A horizontális vonalak közepe elvékonyul majd a végén újra vastagabb lesz (\ref{fig:vastagsag}. ábra). A vastagságot súlyokkal könnyedén lehet definiálni.
 
-\begin{center}
+\begin{figure}
+\centering
 \includegraphics[scale=0.6]{images/horizontal_line}
-\end{center}
+\caption{Vonal vastagságának változata a vonások egyes részeinél}
+\label{fig:vastagsag}
+\end{figure}
 
 \item A kampós vonalaknál (hooked stroke) a "kampó" hirtelen vékonyodással és irányváltoztatással jár. Az ecset hirtelen felemelésével érik el. Általában a kampó \includegraphics[scale=1.0]{hook} stroke része.
 \item A további stroke-ok általában állandó vonal vastagsággal (ecset gyorsaság állandó). A kézzel írás és festés egyén függő.
@@ -35,7 +38,7 @@ A következőkben részletezném a vonal vastagság változását a stroke\cite{
 \begin{itemize}
 \item A kínai karakterek festése papíron történik. A mi esetünkben ez a képernyő. A karakterek fekete-fehér színüek. A szürke árnyalatokat $[0, 255]$ intervallumon vett egész értékek reprezentálják. Az ideálisan kirajzolt karakter fekete-fehér színű, és ahhoz a generálás során adhatunk hozzá szürke pixelek formájában zajt.
 
-A karakterek rajzolásához a Python programozási nyelv és a hozzá elérhető eszközök tüntek megfelelőnek. Egy $512 \times 512$ pixelből álló fehér kép kirajzolása az alábbi módon történik a segítségével.
+A karakterek rajzolásához a Python programozási nyelv és a hozzá elérhető eszközök használata tünt megfelelő választásnak. Egy $512 \times 512$ pixelből álló fehér kép kirajzolása az alábbi módon történik a segítségével.
 \begin{python}
 img = np.zeros((512, 512, 3), np.uint8)
 img[0:512] = (255, 255, 255)
@@ -134,37 +137,63 @@ A három karakter kirajzolás közül a procedurális rajzolás a leginkább hat
 
 \subsection{Karakter zajosítás}
 
-A zajokat OpenCV-be \cite{OpenCVli86} könnyedén meg lehet valósítani. Többféle zajosítás létezik\cite{WANG1973303}.
+A zajok hozzáadását OpenCV-ben könnyedén meg lehet valósítani \cite{OpenCVli86}. Különféle zajosítási módokat szoktak használni \cite{WANG1973303}, amelyek közül a jelentősebbeket az alábbi pontok mutatják be.
 
 \begin{itemize}
 \item Pontszerű zajok
 
 Tételezzük fel hogy a karakterünk mátrixa $M$ és zaj mátrixunk $N$ van. A két mátrix sor és oszlop száma megegyezik.
-
-\begin{center}
-\includegraphics[scale=0.6]{images/noise_matrix}
-\end{center}
+$$
+M = \left(
+\begin{array}{ccccccc}
+1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+0 & 1 & 0 & 1 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+\end{array}
+\right),
+\quad
+N = \left(
+\begin{array}{ccccccc}
+0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+0 & 1 & 1 & 1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+\end{array}
+\right).
+$$
 
 M $\oplus$ N (a bináris operátor $\oplus$ később kerül meghatározásra). Fizikailag a zaj helytelen nyomtatási folyamatot jelent, vagy olyan helyzetet, amikor a felismerési rendszerben lévő gépi zaj torzítja a mintát. Feltételezzük továbbá, hogy minden egyes cellához tartozik zaj.
-Ha egy adott cella (i, j) zajszintje nagyobb, mint az "1" vagy "fekete", akkor "1"-re kvantálódik. Más szavakkal, minden cella végül "1" vagy "0" besorolásnak kell alávetni. Megállapíthatjuk tehát, hogy a fent említett bináris művelet a következőket jelenti: 0 $\oplus$ 0 = 0,0 $\oplus$ 1 = 1, 1 ~ 0 = 1, és 1 $\oplus$ 1 = 1.
+Ha egy adott cella $(i, j)$ zajszintje nagyobb, mint az 1 vagy "fekete", akkor 1-re kvantálódik. Más szavakkal, minden cella végül 1 vagy 1 besorolásnak kell alávetni. Megállapíthatjuk tehát, hogy a fent említett bináris művelet a következőket jelenti: 0 $\oplus$ 0 = 0, 0 $\oplus$ 1 = 1, 1 ~ 0 = 1, és 1 $\oplus$ 1 = 1.
 A zaj mátrix elemeinek megválasztásával különböző pontszerű zajokat tudunk létrehozni.
+
 \item Elmosódások
 
 Az elmosódás, amit símitásnak is neveznek, egyszerű és gyakran használt képfeldolgozási művelet. A simításnak sok oka van. A zaj növelése érdekében a elmosódás összpontosítunk.
 
-Az elmosódás művelet végrehajtásához szűrőt alkalmazunk a képünkre. A szűrők legáltalánosabb típusa lineáris, amelyben a bemeneti pixelértékek (azaz $f(i+k, j+l)$) súlyozott összegével határozzák meg a kimeneti pixel értékét (azaz $g(i, j)$):
+Az elmosódás művelet végrehajtásához szűrőt alkalmazunk a képünkre. A szűrők legáltalánosabb típusa lineáris, amelyben a bemeneti pixelértékek (azaz $f(i+k, j+l)$) súlyozott összegével határozzák meg a kimeneti pixel értékét. Jelölje a pixel értékét $g(i, j)$. Ekkor ezt a
+$$
+g(i, j) = \sum_{k, l} f(i + k, j + l) h(k, l)
+$$
+formában számolhatjuk, ahol $h(k, l)$-t a kernelnek nevezik, ami nem más, mint a szűrő együtthatói.
 
-\[g (i, j) = \ sum_ {k, l} f (i + k, j + l) h (k, l)\]
-
-$h(k, l)$ a kernelnek nevezik, ami nem más, mint a szűrő együtthatói. Segít megjeleníteni egy szűrőt, mint a képen csúsztatható együtthatók ablakát.
-
-Sokféle szűrő létezik, mint például: Normalizált szűrő, gauss szűrő, medián szűrő.
+Sokféle további szűrő létezik, mint például: Normalizált szűrő, gauss szűrő, medián szűrő.
 
 A normalizált szűrő a legegyszerűbb. Minden kimeneti pixel a kernel szomszédainak átlaga (mindegyik egyenlő súlyokkal jár)
 
 A kernel az alábbi:
 
-\[K = \dfrac{1}{K_{szélesség} \cdot K_{magasság}}
+\[K = \dfrac{1}{K_{szélesség} \cdot K_{magasság}} \;
+\cdot
+\left[
 \begin{matrix}
     1 & 1 & 1 & ... & 1 \\
     1 & 1 & 1 & ... & 1 \\
@@ -172,13 +201,14 @@ A kernel az alábbi:
     . &. &. & ... & 1 \\
     1 & 1 & 1 & ... & 1   
 \end{matrix}
+\right].
 \]
 \item Forgatás
-Forgatás
-Egy kép elforgatását a szög $\theta$ értéket az alak átalakító mátrixával érjük el
 
-$$M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta   \end{bmatrix}$$
-
+Egy kép elforgatását $\theta$ szöggel az alábbi mátrix formájában írhatjuk föl:
+$$
+M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta   \end{bmatrix}.
+$$
 Az OpenCV azonban skálázható elforgatással rendelkezik, állítható forgó centrummal, így tetszőleges helyre forgatható. A módosított transzformációs mátrixot a
 
 $$\begin{bmatrix}
@@ -191,13 +221,13 @@ $$\begin{array}{l}
 \alpha =  scale \cdot \cos \theta , \\ \beta =  scale \cdot \sin \theta
 \end{array}$$
 
-Ennek az átalakulási mátrixnak a megtalálásához az OpenCV egy getRotationMatrix2D függvényt biztosít.
+Ennek az átalakulási mátrixnak a megtalálásához az OpenCV egy \\ \texttt{getRotationMatrix2D} függvényt biztosít.
 
 \begin{python}
-img = cv2.imread('messi5.jpg',0)
+img = cv2.imread('chinese_char1.png', 0)
 rows,cols = img.shape
 
-M = cv2.getRotationMatrix2D((cols/2,rows/2),90,1)
+M = cv2.getRotationMatrix2D((cols/2, rows/2), 90, 1)
 dst = cv2.warpAffine(img,M,(cols,rows))
 \end{python}
 
@@ -215,9 +245,9 @@ cv2.waitKey(0)
 
 \item Takarás
 
-A takarásnak lehet több lehetséges módjai: festő algoritmus, z-buffer, Warnock algoritmus, láthatósági gráfok.
+A takarási feladat megoldásának több lehetséges módja van, mint például: festő algoritmus, z-buffer, Warnock algoritmus, láthatósági gráfok.
 
-A festő algoritmus egszerű és párhuzamosítható. Ennek az algoritmusnak az alapgondolata, hogy a megjelenítendő objektumokat a nézőponttól való távolság függvényében sorba kell állítani. Az algoritmus a helyes takarási viszonyokat úgy alakítja ki, hogy a nézőhöz közelebb eső objektum képe felülírja a távolabbi objektum képét. Ennek legegyszerűbb változata az un. festő algoritmus, mely a képfestés technikájához hasonlóan a távolabbi objektumokra ráfesti a közelebbieket.
+A festő algoritmus egszerű és párhuzamosítható. Ennek az algoritmusnak az alapgondolata, hogy a megjelenítendő objektumokat a nézőponttól való távolság függvényében sorba kell állítani. Az algoritmus a helyes takarási viszonyokat úgy alakítja ki, hogy a nézőhöz közelebb eső objektum képe felülírja a távolabbi objektum képét. Ennek legegyszerűbb változata az úgynevezett festő algoritmus, mely a képfestés technikájához hasonlóan a távolabbi objektumokra ráfesti a közelebbieket.
 Lépések:
 \begin{itemize}
 \item Rendezzük a poligonokat a legkisebb (legtávolabbi pontjaik) z koordinátáik szerint.
