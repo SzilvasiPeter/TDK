@@ -1,0 +1,209 @@
+\documentclass{beamer}
+
+\usepackage{listings}
+\usepackage{color}
+
+% Code colorature
+\definecolor{paszt}{RGB}{252,252,252}
+\definecolor{keret}{RGB}{220,220,220}
+\lstset{
+backgroundcolor=\color{paszt},
+% showlines=true,
+framexleftmargin=4mm,
+framexrightmargin=4mm,
+framextopmargin=2mm,
+framexbottommargin=2mm,
+frameround=tttt,
+frame=trbl,
+rulecolor=\color{keret}
+}
+
+\usetheme{Copenhagen}
+\useinnertheme{rectangles}
+
+% ---- Mongo theme ----
+%\definecolor{light-background}{RGB}{210,250,170}
+%\definecolor{dark-background}{RGB}{128,92,64}
+%\usecolortheme[RGB={220,250,180}]{structure}
+
+% ---- Vanilla theme ----
+% \definecolor{light-background}{RGB}{250,250,190}
+% \definecolor{dark-background}{RGB}{128,92,64}
+% \usecolortheme[RGB={210, 210, 140}]{structure}
+
+% ---- Blue theme ----
+%\definecolor{light-background}{RGB}{200,220,240}
+%\definecolor{dark-background}{RGB}{100,110,120}
+%\usecolortheme[RGB={180, 200, 230}]{structure}
+
+% ---- Green theme ----
+\definecolor{light-background}{RGB}{229,237,204}
+\definecolor{dark-background}{RGB}{156,163,140}
+\usecolortheme[RGB={180, 210, 150}]{structure}
+
+\setbeamercolor{palette primary}{fg=black, bg=light-background}
+\setbeamercolor{palette quaternary}{fg=white,bg=dark-background}
+
+\setbeamercolor{title}{fg=black}
+\setbeamercolor{frametitle}{fg=black}
+
+% Set font
+\usefonttheme{structurebold}
+
+\frenchspacing
+
+% Language packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[magyar]{babel}
+
+% AMS
+\usepackage{amssymb,amsmath}
+
+% Graphic packages
+\usepackage{graphicx}
+
+% Syntax highlighting
+% \usepackage{listings}
+
+\usepackage{tikz}
+
+%\begin{figure}[htb]
+%\begin{center}
+%	\includegraphics[scale=0.4]{ps_times.png}
+%\end{center}
+%\end{figure}
+
+% ==============
+\begin{document}
+% ==============
+
+\title[Kínai karakterek felismerése
+generált minták alapján]{
+{\Large Kínai karakterek felismerése
+generált minták alapján}
+}
+\author[Szilvási Péter]{\Large Szilvási Péter}
+\date{TDK konferencia, Miskolci Egyetem, 2018. április 25.}
+
+% --------------------
+% Title page
+\frame{\titlepage}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Kínai karakterek felismerése}
+
+Vonások, vonás sorrend
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{OCR megvalósítások}
+
+Karakterek részekre bontása, struktúrális elemzése
+
+Betűtípusokból való eltérések
+
+\end{frame}
+
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Minták generálása}
+
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Tanítóminták zajosítása}
+
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Mesterséges neurális hálók}
+
+Tanítóalgoritmus, backpropagation
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Konvolúciós neurális háló}
+
+A hálózat architektúrája, használt topológia
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{A háló felépítése}
+
+4.10-es ábra
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{A hálózat architektúrája}
+
+5.2 ábra
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Az offline adatbázis}
+
+Kb. 3x4 karakter az 5.1 ábrából
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Validáció}
+
+Tesztelés módja, helyesség ellenőrzése
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{A felismerés hatékonysága}
+
+Eredmények konkrét százalékokkal
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Összegzés}
+
+
+\end{frame}
+
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Hivatkozások}
+
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+    \frametitle{\ }
+
+\begin{center}
+\Large \textbf{Köszönöm szépen a figyelmet!}
+\end{center}
+
+\end{frame}
+
+
+\end{document}
+
