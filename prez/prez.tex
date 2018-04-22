@@ -1,5 +1,9 @@
 \documentclass{beamer}
 
+\graphicspath{ {../dolgozat/images/} }
+\usepackage[export]{adjustbox}
+\usepackage{python}
+
 \usepackage{listings}
 \usepackage{color}
 
@@ -94,7 +98,22 @@ generált minták alapján}
 \begin{frame}[fragile]
 \frametitle{Kínai karakterek felismerése}
 
-Vonások, vonás sorrend
+\begin{tabular}{c c}
+{\large Vonások, vonás sorrend} & 
+\includegraphics[scale=0.3, center]{vonasrend_ordered}
+\end{tabular}
+
+\begin{enumerate}
+\item A vízszintes vonások megelőzik a függőleges vonásokat.
+\item A balra lejtő vonások megelőzik a jobbra lejtő vonásokat.
+\item Az írásjegyek írását felülről kell kezdeni.
+\item Az írásjegyet balról jobbra haladva építik fel.
+\item A felülről keretezett írásjegyeknél előbb a keretet kell meghúzni.
+\item Az alulról keretezett írásjegyeknél a keretet legvégül kell meghúzni.
+\item A teljes keretet mindig legvégül kell bezárni.
+\end{enumerate}
+
+
 
 \end{frame}
 
@@ -102,25 +121,131 @@ Vonások, vonás sorrend
 \begin{frame}[fragile]
 \frametitle{OCR megvalósítások}
 
-Karakterek részekre bontása, struktúrális elemzése
+\begin{itemize}
+\item Dokumentumok digitalizálása
+\item OCR részei: szekennelő fej + szoftver
+\item Feldolgozási szintek:
+\begin{itemize}
+	\item Alacsony szintű: zajos kép $\rightarrow$ előfeldolgozás $\rightarrow$ javított kép
+	\item Középső szintű: kép $\rightarrow$ szegmentálás $\rightarrow$ kép jellemzők
+	\item Magas szintű: jellemzők $\rightarrow$ osztályozás $\rightarrow$ osztálycímke
+\end{itemize}
 
-Betűtípusokból való eltérések
+\includegraphics[scale=0.45, center]{ocr}
+\end{itemize}
+
+
+% Karakterek részekre bontása, struktúrális elemzése
+
+% Betűtípusokból való eltérések
 
 \end{frame}
 
+% --------------------
+\begin{frame}[fragile]
+\frametitle{OCR megvalósítások}
+\begin{itemize}
+\item OCR típus:
+\begin{itemize}
+	\item Online
+	\item Offline
+\end{itemize}
+\end{itemize}
+
+{\large Kínai karakter felismerés}
+\begin{itemize}
+\item Zaj szűrés: pontszerű, elmosódás, forgatás, kontraszt
+\item Jellemző kivonás
+
+\includegraphics[scale=0.6, center]{ocr_features}
+\end{itemize}
+
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{OCR megvalósítások}
+\begin{tabular}{c c}
+{\large Használt algoritmus} & 
+\includegraphics[scale=0.2, center]{chinese_fonts1}
+\end{tabular}
+\begin{itemize}
+\item Funkció kivonás
+
+\(d_i = \dfrac{l_i}{\sqrt{\displaystyle \sum_{k=1}^8 l_k^2}}\)
+\begin{tabular}{ c c }
+\includegraphics[scale=0.3]{8direction} & \includegraphics[scale=0.3]{ocr_PDC}
+\end{tabular}
+\item Tanítás
+\item Tesztelés
+\begin{table}
+\centering
+\begin{tabular}{ |c|c|c|c|c|}
+\hline
+Font & Song & Fang & Kai & Hei\\
+\hline
+Train & 99.82 & 99.64 & 99.81 & 99.57\\
+\hline
+Test & 99.71 & 99.50 & 99.80 & 99.09\\
+\hline
+\end{tabular}
+\end{table}
+\end{itemize}
+\end{frame}
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Minták generálása}
+\begin{itemize}
+\item {\large Tanító mintapontok előállítása} (sorrend, vonal vastagság)
+\item Képernyő \begin{lstlisting}
+img = np.zeros((512,512,3),np.uint8)
+img[0:512] = (255,255,255)
+\end{lstlisting} 
+\item Ecset \begin{lstlisting}
+cv2.ellipse(img,center,axes,angle,start_angle,
+end_angle,color,thickness=1,lineType=8,shift=0) 
+\end{lstlisting}
+\end{itemize}
 
+
+\end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{Karakterek kirajzolása}
+\begin{enumerate}
+\item Poligonos közelítés
+\item Procedurális rajzolás \begin{figure}
+\includegraphics[scale=0.35]{proc_draw2}
+\end{figure}
+\begin{itemize}
+\item Hermit ív: $\textbf{H}(u) = \textbf{a}_0 u^3 + \textbf{a}_1 u^2 + \textbf{a}_2 u + \textbf{a}_3$
+\end{itemize}
+\item Pontonkénti színszámítás
+\end{enumerate}
 
 \end{frame}
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Tanítóminták zajosítása}
-
-
+\begin{enumerate}
+\item Pontszerű: zaj mátrix (M $\oplus$ N)
+\item Elmosódás: normalizált szűrő, gauss szűrő, medián szűrő $
+g(i, j) = \sum_{k, l} f(i + k, j + l) h(k, l)
+$
+\item Forgatás: $
+M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta   \end{bmatrix}.
+$ (cv2.getRotationMatrix2D())
+\item Vágás: \lstinline{crop_img} = img[y:y+h, x:x+w]\lstinline{}
+\item Takarás: festő algoritmus
+\end{enumerate}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{noises}
+\end{figure}
 \end{frame}
 
 % --------------------

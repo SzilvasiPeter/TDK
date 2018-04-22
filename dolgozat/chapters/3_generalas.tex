@@ -22,7 +22,7 @@ A következőkben részletezném a vonal vastagság változását a stroke-ok ra
 \item Ha egy stroke végéből kezdődik egy másik stroke, akkor azok találkozásánál a vonalvastagság növekszik.
 \item A horizontális vonalak közepe elvékonyul majd a végén újra vastagabb lesz (\ref{fig:vastagsag}. ábra). A vastagságot súlyokkal könnyedén lehet definiálni.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{images/horizontal_line}
 \caption{Vonal vastagságának változata a vonások egyes részeinél}
@@ -59,7 +59,7 @@ A kínai karaktereket különféle módokon reprezentálhatjuk. Ezek közül né
 \item \textit{Poligonos közelítés}: A kínai karakter kontúrját ebben az esetben, mint poligont adhatjuk meg. Minél több éllel definiáljuk a karaktert, annál jobb minőségű képet érünk el, viszont a számítás igényünk növekszik.
 \item \textit{Procedurális rajzolás}: Ebben az esetben a karakter kirajzolásának a procedúráját adhatjuk meg. Amennyiben feltételezzük, hogy az ecsetünk ellipszis alakú, úgy kitöltött ellipsziseket egymás után, kis lépésközzel kirajzolva. Az ellipszisek pozíciója mellett azok méretét is változtathatjuk. A közelítési módra egy példát láthatjuk \aref{fig:proc_draw}. ábrán.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \begin{tabular}{ c c }
 \includegraphics[scale=0.25]{images/proc_draw1} & \includegraphics[scale=0.5]{images/ren}
@@ -75,7 +75,7 @@ P_2 &= (x_2, y_2, d_{x_2}, d_{y_2}, s_2).
 \end{align*}
 Az $x$ és $y$ koordináta párral az ellipszis középpontját adjuk meg. A $d_x$ és $d_y$ a kirajzolandó görbe végpontjaiban vett érintő irányvektora. Az $s$ az ellipszis méretét adja meg. Meghatározza, hogy mennyire gyors az ecsetvonás, a kirajzolt ellipszis területével arányos. Az ecset dinamikája olyan, hogy lassú ecsetmozgás nagyobb, vastagabb vonalakat eredményez, míg a gyors általában véknyabbakat. Az íveken mozgatott változó méretű ellipszisek használatát szemlélteti \aref{fig:proc_draw2}. ábra.
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{images/proc_draw2}
 \caption{A karakterek összeállítása íveken mozgatott ellipszisek segítségével}
@@ -177,7 +177,7 @@ A zaj mátrix elemeinek megválasztásával különböző pontszerű zajokat tud
 
 \item Elmosódások
 
-Az elmosódás, amit símitásnak is neveznek, egyszerű és gyakran használt képfeldolgozási művelet. A simításnak sok oka van. A zaj növelése érdekében a elmosódás összpontosítunk.
+Az elmosódás, amit símitásnak is neveznek, egyszerű és gyakran használt képfeldolgozási művelet. A simításnak sok oka van. A zaj növelése érdekében a elmosódásra összpontosítunk.
 
 Az elmosódás művelet végrehajtásához szűrőt alkalmazunk a képünkre. A szűrők legáltalánosabb típusa lineáris, amelyben a bemeneti pixelértékek (azaz $f(i+k, j+l)$) súlyozott összegével határozzák meg a kimeneti pixel értékét. Jelölje a pixel értékét $g(i, j)$. Ekkor ezt a
 $$
