@@ -3,6 +3,7 @@
 \graphicspath{ {../dolgozat/images/} }
 \usepackage[export]{adjustbox}
 \usepackage{python}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \usepackage{listings}
 \usepackage{color}
@@ -251,24 +252,61 @@ $ (cv2.getRotationMatrix2D())
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Mesterséges neurális hálók}
-
-Tanítóalgoritmus, backpropagation
+% Tanítóalgoritmus, backpropagation
+\begin{itemize}
+\item Neurális hálózatok
+	\begin{itemize}
+	\item Rétegek
+	\item Elemei
+	\end{itemize}
+\item Backpropagation
+	\begin{itemize}
+	\item Hiba $E_{total} = \sum \dfrac{1}{2}(target - output)^2.$
+	\item Láncszabály $\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} \cdot \frac{\partial out_{o1}}{\partial net_{o1}} \cdot \frac{\partial net_{o1}}{\partial w_{5}}.$
+	\end{itemize}
+\end{itemize}
+\includegraphics[scale=0.4, center]{ANNParts}
 
 \end{frame}
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Konvolúciós neurális háló}
-
-A hálózat architektúrája, használt topológia
-
+% A hálózat architektúrája, használt topológia
+\begin{itemize}
+\item Bevezetés
+\item Hálózat felépítése (konvolúciós rétegek -> hagyományos ANN)
+\item Bemenet->(\textit{Konvolúció->RELU->POOL})->Kimenet(FC)
+\end{itemize}
+\begin{tabular}{c c}
+\includegraphics[scale=0.15]{convolution} & \includegraphics[scale=0.2]{maxpool}
+\end{tabular}
+\begin{itemize}
+\item Hálózat tanítás
+\end{itemize}
+\begin{table}
+\centering
+\begin{tabular}{l l}
+	1. Előre terjsztés & 3. Hiba visszaterjesztés\\
+	2. Veszteség számítás & 4. Súly frissítés
+\end{tabular}
+\end{table}
+\begin{itemize}
+\item Dropout
+\end{itemize}
 \end{frame}
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{A háló felépítése}
 
-4.10-es ábra
+% 4.10-es ábra
+\includegraphics[scale=0.485]{CNN_CCR_working}
+
+\begin{itemize}
+\item Tesztelés
+\item Transfer learning
+\end{itemize}
 
 \end{frame}
 
@@ -276,23 +314,52 @@ A hálózat architektúrája, használt topológia
 \begin{frame}[fragile]
 \frametitle{A hálózat architektúrája}
 
-5.2 ábra
+% 5.2 ábra
+\includegraphics[scale=0.5]{architecture}
 
 \end{frame}
+
+% --------------------
+\begin{frame}[fragile]
+\frametitle{A hálózat architektúrája}
+
+\begin{lstlisting}
+model.add(
+Convolution2D(1,	# filter retegek szama    
+              3, 3,	# 3x3 kernel meret 
+              strides=(1,1) # lepes
+              input_shape=image))
+\end{lstlisting}
+\begin{lstlisting}
+model.add(MaxPooling2D(pool_size=(2,2)))
+\end{lstlisting}
+\begin{lstlisting}
+model.compile(loss='mean_squared_error', # Hiba
+optimizer='adam', metrics=['accuracy'])
+
+model.fit_generator(generator=training_data,
+steps_per_epoch=1000, epochs=10)	# Tanitas
+\end{lstlisting}
+
+\end{frame}
+
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Az offline adatbázis}
 
-Kb. 3x4 karakter az 5.1 ábrából
+% Kb. 3x4 karakter az 5.1 ábrából
+\begin{itemize}
+\item Adathalmaz: nyomtatott, kézzel írott, generált
 
-\end{frame}
-
-% --------------------
-\begin{frame}[fragile]
-\frametitle{Validáció}
-
-Tesztelés módja, helyesség ellenőrzése
+\includegraphics[scale=1.0, center]{offline_dataset4x3}
+\item \begin{tabular}{l r}
+Tanító/Teszt(80/20) & \textit{random.shuffle(self.images)}
+\end{tabular}
+\item Tanító minták változatossága
+\item Tesztelés módja
+\item Helyesség ellenőrzése
+\end{itemize}
 
 \end{frame}
 
@@ -300,14 +367,49 @@ Tesztelés módja, helyesség ellenőrzése
 \begin{frame}[fragile]
 \frametitle{A felismerés hatékonysága}
 
-Eredmények konkrét százalékokkal
+% Eredmények konkrét százalékokkal
+\begin{table}
+\begin{tabular}{l c c}
+0\%\tab $\rightarrow$\tab & \includegraphics[scale=0.5]{original} & \tab $\rightarrow$\tab 90-95\% \\
+75-80\%\tab $\rightarrow$\tab & \includegraphics[scale=0.5]{noise} & \tab $\rightarrow$\tab 84\% \\
+ 68\%\tab $\rightarrow$\tab & \includegraphics[scale=0.5]{rotate} & \tab $\rightarrow$\tab 75\% \\
+ 87\%\tab $\rightarrow$\tab & \includegraphics[scale=0.5]{blur} & \tab $\rightarrow$\tab 93\% \\
+\end{tabular}
+\end{table}
 
 \end{frame}
 
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Összegzés}
-
+\begin{itemize}
+\item Kínai karakterek
+	\begin{itemize}
+	\item stroke
+	\item vonásrend
+	\end{itemize}
+\item OCR
+	\begin{itemize}
+	\item részei
+	\item használt OCR bemutatás
+	\end{itemize}
+\item Minta generálás
+	\begin{itemize}
+	\item vonal vastagság
+	\item görbe rajzolás
+	\item zajok hozzáadása
+	\end{itemize}
+\item Neurális hálózatok
+	\begin{itemize}
+	\item hagyományos neurális háló (ANN)
+	\item konvolúciós neurális háló (CNN)
+	\end{itemize}
+\item Valídáció
+	\begin{itemize}
+	\item adathalmaz előállítás
+	\item hálózat osztályozása
+	\end{itemize}
+\end{itemize}
 
 \end{frame}
 

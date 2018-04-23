@@ -1,3 +1,5 @@
-img = np.zeros((512, 512, 3), np.uint8)
-img[0:512] = (255, 255, 255)
+model.add(Convolution2D(1, # filter rétegek száma
+                        3, 3, # 3x3 kernel méret
+                        strides=(1,1) # lépés
+                        input_shape=image))
 

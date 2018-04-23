@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  22 APR 2018 10:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.19)  23 APR 2018 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1218,20 +1218,20 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 ))) (./prez.aux)
 \openout1 = `prez.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 82.
-LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1297,7 +1297,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box63
-Package hyperref Info: Link coloring OFF on input line 82.
+Package hyperref Info: Link coloring OFF on input line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1307,71 +1307,71 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count182
 )
-LaTeX Info: Redefining \ref on input line 82.
-LaTeX Info: Redefining \pageref on input line 82.
-LaTeX Info: Redefining \nameref on input line 82.
+LaTeX Info: Redefining \ref on input line 83.
+LaTeX Info: Redefining \pageref on input line 83.
+LaTeX Info: Redefining \nameref on input line 83.
 
 (./prez.out) (./prez.out)
 \@outlinefile=\write7
 \openout7 = `prez.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 82.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 83.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 82.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 83.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 82.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 82.
+(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 83.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 82.
+(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 82.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 82.
+(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 83.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 82.
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 82.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 82.
+(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 83.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 82.
+(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 82.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 82.
+(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 83.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 82.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 82.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 83.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 82.
+(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 83.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 82.
+(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/cmr/bx/n on input line 82.
+(Font)                  OT1/cmss/bx/n --> T1/cmr/bx/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/cmss/bx/n --> T1/cmss/bx/n on input line 82.
+(Font)                  T1/cmss/bx/n --> T1/cmss/bx/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 82.
+(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 82.
+(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 83.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/cmtt/m/n --> T1/cmtt/bx/n on input line 82.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 82.
+(Font)                  T1/cmtt/m/n --> T1/cmtt/bx/n on input line 83.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 83.
 LaTeX Font Info:    Encoding `T1' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `normal' on input line 82
+(Font)              `pureletters' in the math version `normal' on input line 83
 .
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  T1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 82
+(Font)                  T1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 83
 .
 LaTeX Font Info:    Encoding `T1' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `bold' on input line 82.
+(Font)              `pureletters' in the math version `bold' on input line 83.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  T1/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 8
-2.
+3.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 82.
+ut line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -1397,20 +1397,20 @@ Dictionary: translator-numbers-dictionary, Language: English
 orem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 82.
+LaTeX Info: Redefining \includegraphics on input line 83.
 \c@lstlisting=\count183
  (./prez.nav)
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 90.
+(hyperref)                setting the option has no effect on input line 91.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <4> not available
-(Font)              size <5> substituted on input line 95.
+(Font)              size <5> substituted on input line 96.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 95.
+(Font)              size <5> substituted on input line 96.
 
 [1
 
@@ -1552,40 +1552,135 @@ Package pdftex.def Info: ../dolgozat/images/noises.png used on input line 15.
 \openout4 = `prez.vrb'.
 
 
-(./prez.vrb) [9
+(./prez.vrb <../dolgozat/images/ANNParts.png, id=263, 602.25pt x 351.3125pt>
+File: ../dolgozat/images/ANNParts.png Graphic file (type png)
+
+<use ../dolgozat/images/ANNParts.png>
+Package pdftex.def Info: ../dolgozat/images/ANNParts.png used on input line 15.
+
+(pdftex.def)             Requested size: 240.89572pt x 140.5225pt.
+)
+Overfull \vbox (3.38464pt too high) detected at line 270
+ []
+
+[9
+
+ <../dolgozat/images/ANNParts.png>]
+\openout4 = `prez.vrb'.
+
+ (./prez.vrb
+<../dolgozat/images/convolution.png, id=293, 1021.8175pt x 622.325pt>
+File: ../dolgozat/images/convolution.png Graphic file (type png)
+
+<use ../dolgozat/images/convolution.png>
+Package pdftex.def Info: ../dolgozat/images/convolution.png used on input line 
+9.
+(pdftex.def)             Requested size: 153.266pt x 93.34471pt.
+
+<../dolgozat/images/maxpool.png, id=294, 789.95125pt x 369.38pt>
+File: ../dolgozat/images/maxpool.png Graphic file (type png)
+
+<use ../dolgozat/images/maxpool.png>
+Package pdftex.def Info: ../dolgozat/images/maxpool.png used on input line 9.
+(pdftex.def)             Requested size: 157.98744pt x 73.87468pt.
+
+Overfull \hbox (27.96358pt too wide) in paragraph at lines 8--12
+[] 
+ []
+
+) [10
+
+ <../dolgozat/images/convolution.png (PNG copy)> <../dolgozat/images/maxpool.pn
+g>]
+\openout4 = `prez.vrb'.
+
+ (./prez.vrb
+<../dolgozat/images/CNN_CCR_working.png, id=322, 672.5125pt x 311.1625pt>
+File: ../dolgozat/images/CNN_CCR_working.png Graphic file (type png)
+
+<use ../dolgozat/images/CNN_CCR_working.png>
+Package pdftex.def Info: ../dolgozat/images/CNN_CCR_working.png used on input l
+ine 4.
+(pdftex.def)             Requested size: 326.16817pt x 150.91364pt.
+
+Overfull \hbox (18.8783pt too wide) in paragraph at lines 4--5
+[][]  
+ []
+
+) [11
+
+ <../dolgozat/images/CNN_CCR_working.png>]
+\openout4 = `prez.vrb'.
+
+ (./prez.vrb
+<../dolgozat/images/architecture.png, id=349, 603.25375pt x 432.61626pt>
+File: ../dolgozat/images/architecture.png Graphic file (type png)
+
+<use ../dolgozat/images/architecture.png>
+Package pdftex.def Info: ../dolgozat/images/architecture.png used on input line
+ 4.
+(pdftex.def)             Requested size: 301.62613pt x 216.3076pt.
+) [12
+
+ <../dolgozat/images/architecture.png>]
+\openout4 = `prez.vrb'.
+
+ (./prez.vrb
+Overfull \hbox (12.58585pt too wide) in paragraph at lines 18--19
+[][][][][][][][][][][] 
+ []
+
+) [13
 
 ]
 \openout4 = `prez.vrb'.
 
- (./prez.vrb) [10
+ (./prez.vrb
+<../dolgozat/images/offline_dataset4x3.jpg, id=405, 75.28125pt x 58.71938pt>
+File: ../dolgozat/images/offline_dataset4x3.jpg Graphic file (type jpg)
 
-]
+<use ../dolgozat/images/offline_dataset4x3.jpg>
+Package pdftex.def Info: ../dolgozat/images/offline_dataset4x3.jpg used on inpu
+t line 7.
+(pdftex.def)             Requested size: 75.28105pt x 58.71921pt.
+) [14
+
+ <../dolgozat/images/offline_dataset4x3.jpg>]
 \openout4 = `prez.vrb'.
 
- (./prez.vrb) [11
+ (./prez.vrb
+<../dolgozat/images/original.png, id=432, 42.1575pt x 64.24pt>
+File: ../dolgozat/images/original.png Graphic file (type png)
 
-]
-\openout4 = `prez.vrb'.
+<use ../dolgozat/images/original.png>
+Package pdftex.def Info: ../dolgozat/images/original.png used on input line 6.
+(pdftex.def)             Requested size: 21.07869pt x 32.11992pt.
 
- (./prez.vrb) [12
+<../dolgozat/images/noise.png, id=433, 42.1575pt x 64.24pt>
+File: ../dolgozat/images/noise.png Graphic file (type png)
 
-]
-\openout4 = `prez.vrb'.
+<use ../dolgozat/images/noise.png>
+Package pdftex.def Info: ../dolgozat/images/noise.png used on input line 7.
+(pdftex.def)             Requested size: 21.07869pt x 32.11992pt.
 
+<../dolgozat/images/rotate.png, id=434, 42.1575pt x 64.24pt>
+File: ../dolgozat/images/rotate.png Graphic file (type png)
 
-(./prez.vrb) [13
+<use ../dolgozat/images/rotate.png>
+Package pdftex.def Info: ../dolgozat/images/rotate.png used on input line 8.
+(pdftex.def)             Requested size: 21.07869pt x 32.11992pt.
 
-]
-\openout4 = `prez.vrb'.
+<../dolgozat/images/blur.png, id=435, 42.1575pt x 64.24pt>
+File: ../dolgozat/images/blur.png Graphic file (type png)
 
- (./prez.vrb) [14
+<use ../dolgozat/images/blur.png>
+Package pdftex.def Info: ../dolgozat/images/blur.png used on input line 9.
+(pdftex.def)             Requested size: 21.07869pt x 32.11992pt.
+) [15
 
-]
-\openout4 = `prez.vrb'.
-
- (./prez.vrb) [15
-
-]
+ <../dolgozat/images/original.png (PNG copy)> <../dolgozat/images/noise.png (PN
+G copy)> <../dolgozat/images/rotate.png> <../dolgozat/images/blur.png (PNG copy
+)>]
 \openout4 = `prez.vrb'.
 
  (./prez.vrb) [16
@@ -1593,8 +1688,8 @@ Package pdftex.def Info: ../dolgozat/images/noises.png used on input line 15.
 ]
 \openout4 = `prez.vrb'.
 
-
-(./prez.vrb) [17
+ (./prez.vrb)
+[17
 
 ]
 \openout4 = `prez.vrb'.
@@ -1611,11 +1706,11 @@ Package pdftex.def Info: ../dolgozat/images/noises.png used on input line 15.
 \tf@snm=\write10
 \openout10 = `prez.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 333.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 333.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 435.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 435.
  (./prez.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 333.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 333.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 435.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 435.
 Package rerunfilecheck Info: File `prez.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1623,37 +1718,40 @@ Package rerunfilecheck Info: File `prez.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 333.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 435.
  ) 
 Here is how much of TeX's memory you used:
- 23899 strings out of 493029
- 453784 string characters out of 6136234
- 542475 words of memory out of 5000000
- 26798 multiletter control sequences out of 15000+600000
- 25115 words of font info for 65 fonts, out of 8000000 for 9000
+ 23954 strings out of 493029
+ 455441 string characters out of 6136234
+ 551495 words of memory out of 5000000
+ 26841 multiletter control sequences out of 15000+600000
+ 25942 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,16n,64p,384b,1193s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont
-/lcircle1.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss0700.pfb></usr/
-share/texmf/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf/fonts/ty
-pe1/public/cm-super/sfss1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sfss1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1200.pfb></usr/s
-hare/texmf/fonts/type1/public/cm-super/sfss1440.pfb></usr/share/texmf/fonts/typ
-e1/public/cm-super/sfsx0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
-fsx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1000.pfb></usr/sh
-are/texmf/fonts/type1/public/cm-super/sfsx1440.pfb>
-Output written on prez.pdf (18 pages, 298955 bytes).
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircl
+e1.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsi1095.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfss0500.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfss0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss080
+0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/te
+xmf/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfss1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1440
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx0600.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfsx0800.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sfsx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1440.
+pfb>
+Output written on prez.pdf (18 pages, 493392 bytes).
 PDF statistics:
- 597 PDF objects out of 1000 (max. 8388607)
- 530 compressed objects within 6 object streams
+ 622 PDF objects out of 1000 (max. 8388607)
+ 539 compressed objects within 6 object streams
  37 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 133 words of extra memory for PDF output out of 10000 (max. 10000000)
 
