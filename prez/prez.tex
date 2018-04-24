@@ -114,8 +114,6 @@ generált minták alapján}
 \item A teljes keretet mindig legvégül kell bezárni.
 \end{enumerate}
 
-
-
 \end{frame}
 
 % --------------------
@@ -124,17 +122,16 @@ generált minták alapján}
 
 \begin{itemize}
 \item Dokumentumok digitalizálása
-\item OCR részei: szekennelő fej + szoftver
-\item Feldolgozási szintek:
+\item OCR részei: szekennelő fej + szoftver [1]
+\item Feldolgozási szintek: [2]
 \begin{itemize}
 	\item Alacsony szintű: zajos kép $\rightarrow$ előfeldolgozás $\rightarrow$ javított kép
 	\item Középső szintű: kép $\rightarrow$ szegmentálás $\rightarrow$ kép jellemzők
 	\item Magas szintű: jellemzők $\rightarrow$ osztályozás $\rightarrow$ osztálycímke
 \end{itemize}
-
-\includegraphics[scale=0.45, center]{ocr}
 \end{itemize}
 
+\includegraphics[scale=0.45, center]{ocr}
 
 % Karakterek részekre bontása, struktúrális elemzése
 
@@ -145,22 +142,17 @@ generált minták alapján}
 % --------------------
 \begin{frame}[fragile]
 \frametitle{OCR megvalósítások}
-\begin{itemize}
-\item OCR típus:
-\begin{itemize}
-	\item Online
-	\item Offline
-\end{itemize}
-\end{itemize}
 
-{\large Kínai karakter felismerés}
-\begin{itemize}
-\item Zaj szűrés: pontszerű, elmosódás, forgatás, kontraszt
-\item Jellemző kivonás
+OCR típusok: \textit{online}, \textit{offline} [3]
 
+\bigskip
+
+{\large Kínai karakter felismerése}
+\begin{itemize}
+\item Zaj szűrés: pontszerű zajok, elmosódás, forgatás, kontraszt
+\item Jellemzők kinyerése
+\end{itemize}
 \includegraphics[scale=0.6, center]{ocr_features}
-\end{itemize}
-
 
 \end{frame}
 
@@ -168,18 +160,18 @@ generált minták alapján}
 \begin{frame}[fragile]
 \frametitle{OCR megvalósítások}
 \begin{tabular}{c c}
-{\large Használt algoritmus} & 
+{\large Egy elterjedt algoritmus [4]} & 
 \includegraphics[scale=0.2, center]{chinese_fonts1}
 \end{tabular}
 \begin{itemize}
-\item Funkció kivonás
+\item Dimenzió redukció
 
 \(d_i = \dfrac{l_i}{\sqrt{\displaystyle \sum_{k=1}^8 l_k^2}}\)
 \begin{tabular}{ c c }
 \includegraphics[scale=0.3]{8direction} & \includegraphics[scale=0.3]{ocr_PDC}
 \end{tabular}
 \item Tanítás
-\item Tesztelés
+\item Tesztelés 
 \begin{table}
 \centering
 \begin{tabular}{ |c|c|c|c|c|}
@@ -198,18 +190,20 @@ Test & 99.71 & 99.50 & 99.80 & 99.09\\
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Minták generálása}
+
 \begin{itemize}
 \item {\large Tanító mintapontok előállítása} (sorrend, vonal vastagság)
 \item Képernyő \begin{lstlisting}
-img = np.zeros((512,512,3),np.uint8)
-img[0:512] = (255,255,255)
+img = np.zeros((512, 512, 3),np.uint8)
+img[0:512] = (255, 255, 255)
 \end{lstlisting} 
 \item Ecset \begin{lstlisting}
-cv2.ellipse(img,center,axes,angle,start_angle,
-end_angle,color,thickness=1,lineType=8,shift=0) 
+cv2.ellipse(img, center, axes, 
+            angle, start_angle, end_angle,
+            color, thickness=1,
+            lineType=8, shift=0) 
 \end{lstlisting}
 \end{itemize}
-
 
 \end{frame}
 
@@ -239,8 +233,9 @@ g(i, j) = \sum_{k, l} f(i + k, j + l) h(k, l)
 $
 \item Forgatás: $
 M = \begin{bmatrix} cos\theta & -sin\theta \\ sin\theta & cos\theta   \end{bmatrix}.
-$ (cv2.getRotationMatrix2D())
-\item Vágás: \lstinline{crop_img} = img[y:y+h, x:x+w]\lstinline{}
+$
+\texttt{cv2.getRotationMatrix2D()}
+\item Vágás: \texttt{crop\_img = img[y:y+h, x:x+w]}
 \item Takarás: festő algoritmus
 \end{enumerate}
 \begin{figure}[h]
@@ -252,19 +247,19 @@ $ (cv2.getRotationMatrix2D())
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Mesterséges neurális hálók}
-% Tanítóalgoritmus, backpropagation
+
+Neurális hálózatok [5]
 \begin{itemize}
-\item Neurális hálózatok
-	\begin{itemize}
-	\item Rétegek
-	\item Elemei
-	\end{itemize}
-\item Backpropagation
-	\begin{itemize}
-	\item Hiba $E_{total} = \sum \dfrac{1}{2}(target - output)^2.$
-	\item Láncszabály $\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} \cdot \frac{\partial out_{o1}}{\partial net_{o1}} \cdot \frac{\partial net_{o1}}{\partial w_{5}}.$
-	\end{itemize}
+\item Rétegek
+\item Elemei
 \end{itemize}
+
+Backpropagation
+\begin{itemize}
+\item Hiba $E_{total} = \sum \dfrac{1}{2}(target - output)^2.$
+\item Láncszabály $\frac{\partial E_{total}}{\partial w_{5}} = \frac{\partial E_{total}}{\partial out_{o1}} \cdot \frac{\partial out_{o1}}{\partial net_{o1}} \cdot \frac{\partial net_{o1}}{\partial w_{5}}.$
+\end{itemize}
+
 \includegraphics[scale=0.4, center]{ANNParts}
 
 \end{frame}
@@ -274,9 +269,8 @@ $ (cv2.getRotationMatrix2D())
 \frametitle{Konvolúciós neurális háló}
 % A hálózat architektúrája, használt topológia
 \begin{itemize}
-\item Bevezetés
-\item Hálózat felépítése (konvolúciós rétegek -> hagyományos ANN)
-\item Bemenet->(\textit{Konvolúció->RELU->POOL})->Kimenet(FC)
+\item Hálózat felépítése (konvolúciós rétegek $\rightarrow$ hagyományos ANN)
+\item Bemenet $\rightarrow$ (\textit{Konvolúció $\rightarrow$ RELU $\rightarrow$ POOL}) $\rightarrow$ Kimenet(FC)
 \end{itemize}
 \begin{tabular}{c c}
 \includegraphics[scale=0.15]{convolution} & \includegraphics[scale=0.2]{maxpool}
@@ -343,19 +337,18 @@ steps_per_epoch=1000, epochs=10)	# Tanitas
 
 \end{frame}
 
-
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Az offline adatbázis}
 
-% Kb. 3x4 karakter az 5.1 ábrából
-\begin{itemize}
-\item Adathalmaz: nyomtatott, kézzel írott, generált
+Adathalmaz: nyomtatott, kézzel írott, generált
 
-\includegraphics[scale=1.0, center]{offline_dataset4x3}
-\item \begin{tabular}{l r}
-Tanító/Teszt(80/20) & \textit{random.shuffle(self.images)}
-\end{tabular}
+\medskip
+
+\includegraphics[scale=1.5, center]{offline_dataset4x3}
+
+\begin{itemize}
+\item Tanító/Teszt(80/20), \texttt{random.shuffle(self.images)}
 \item Tanító minták változatossága
 \item Tesztelés módja
 \item Helyesség ellenőrzése
@@ -413,16 +406,35 @@ Tanító/Teszt(80/20) & \textit{random.shuffle(self.images)}
 
 \end{frame}
 
-
 % --------------------
 \begin{frame}[fragile]
 \frametitle{Hivatkozások}
-\begin{thebibliography}{9}
 
-\bibliography{bibliography}
-\bibliographystyle{acm}
+% \begin{thebibliography}{9}
 
-\end{thebibliography}
+\begin{itemize}
+
+\item[1] Tikk Domonkos: \textit{Optikai karakterfelismerés}, online melléklet, TypoTeX kiadó, 2006.
+
+\smallskip
+
+\item[2] Rövid A., Vámossy Z., Sergyán S.: \textit{A gépi látás és képfeldolgozás párhuzamos modelljei és algoritmusai}, 2014.
+
+\smallskip
+
+\item[3] Liu, Yin, Wang, Wang: \textit{Online and offline handwritten chinese character recognition: benchmarking on new databases}, Pattern Recognition, 2013.
+
+\smallskip
+
+\item[4] X. Wu, M. Wu: \textit{A recognition algorithm for chinese characters in diverse fonts}, Image Processing, 2002.
+
+\smallskip
+
+\item[5] Fazekas István: \textit{Neurális hálózatok}, Debreceni Egyetem, 2013.
+
+\end{itemize}
+
+% \end{thebibliography}
 
 \end{frame}
 
@@ -436,6 +448,4 @@ Tanító/Teszt(80/20) & \textit{random.shuffle(self.images)}
 
 \end{frame}
 
-
 \end{document}
-
